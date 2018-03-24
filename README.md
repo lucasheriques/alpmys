@@ -20,3 +20,7 @@ oriented by teachers [Marcelo Werneck](http://lattes.cnpq.br/7916822169975132) a
 
 Christyan, Felipe and Lucas are students at [PUC Minas](https://www.pucminas.br/Paginas/default.aspx), working on our *Software Engineering* degree. This is a project for one of our classes, *Trabalho Interdisciplinar de Software*, 
 where we built a complete software, from the conceptual phase to the implementation one.
+
+### External references
+
+If there is a file used on the project, but it is not on this repository, we'll present it here.
