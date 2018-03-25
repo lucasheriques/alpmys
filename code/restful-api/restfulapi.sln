@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restful-api", "restful-api\restful-api.csproj", "{393F375B-5B20-4897-B976-39A1C92B12C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restfulapi", "restful-api\restfulapi.csproj", "{393F375B-5B20-4897-B976-39A1C92B12C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A876940-AF81-4231-B91F-62D21C2884D2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
