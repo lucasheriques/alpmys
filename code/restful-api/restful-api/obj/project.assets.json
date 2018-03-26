@@ -2895,6 +2895,22 @@
           "lib/netstandard2.0/Npgsql.dll": {}
         }
       },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/2.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.0.1",
+          "Microsoft.EntityFrameworkCore.Relational": "2.0.1",
+          "Microsoft.Extensions.DependencyInjection": "2.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
+          "Npgsql": "3.2.6"
+        },
+        "compile": {
+          "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
+        }
+      },
       "NSwag.Annotations/11.16.1": {
         "type": "package",
         "dependencies": {
@@ -8231,6 +8247,16 @@
         "npgsql.nuspec"
       ]
     },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/2.0.1": {
+      "sha512": "dKa3U027m5vSrfSTDztZgK5Wv6PoBdUuUfTL+mqMYWXjzYgMANo4x6JsqHvo56FFDjABAzK8pO8oBMWjK2yKDg==",
+      "type": "package",
+      "path": "npgsql.entityframeworkcore.postgresql/2.0.1",
+      "files": [
+        "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+        "npgsql.entityframeworkcore.postgresql.2.0.1.nupkg.sha512",
+        "npgsql.entityframeworkcore.postgresql.nuspec"
+      ]
+    },
     "NSwag.Annotations/11.16.1": {
       "sha512": "wEcyQaAUR7qG9vSsor4leA3qNN8SJKLfbE0U/u2adcyB9JAWkXR6AeKAQfsl2CA6k3+CF5xZi6JHVkUSJgsCXg==",
       "type": "package",
@@ -13480,10 +13506,14 @@
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.ApplicationInsights.AspNetCore >= 2.1.1",
       "Microsoft.AspNetCore.All >= 2.0.6",
+      "Microsoft.EntityFrameworkCore.Design >= 2.0.2",
+      "Microsoft.EntityFrameworkCore.Tools >= 2.0.2",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
       "NSwag.AspNetCore >= 11.16.1",
-      "Npgsql >= 3.2.7"
+      "NSwag.Core >= 11.16.1",
+      "Npgsql >= 3.2.7",
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 2.0.1"
     ]
   },
   "packageFolders": {
@@ -13535,6 +13565,14 @@
             "target": "Package",
             "version": "[2.0.6, )"
           },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "[2.0.0, )",
@@ -13548,9 +13586,17 @@
             "target": "Package",
             "version": "[11.16.1, )"
           },
+          "NSwag.Core": {
+            "target": "Package",
+            "version": "[11.16.1, )"
+          },
           "Npgsql": {
             "target": "Package",
             "version": "[3.2.7, )"
+          },
+          "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           }
         },
         "imports": [

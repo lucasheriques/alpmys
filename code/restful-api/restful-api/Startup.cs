@@ -5,15 +5,27 @@ using restfulapi.Models;
 using NSwag.AspNetCore;
 using System.Reflection;
 using NJsonSchema;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace restful_api
 {
     public class Startup
     {
+        public IHostingEnvironment HostingEnvironment { get; private set; }
+        public IConfiguration Configuration { get; private set; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        {
+            this.HostingEnvironment = env;
+            this.Configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AlpmysContext>(opt => opt.UseInMemoryDatabase("Alpmys"));
+            var connectionString = Configuration.GetConnectionString("AlpmysContext");
+            services.AddEntityFrameworkNpgsql().AddDbContext<AlpmysContext>(options => options.UseNpgsql(connectionString));
             services.AddMvc();
         }
 

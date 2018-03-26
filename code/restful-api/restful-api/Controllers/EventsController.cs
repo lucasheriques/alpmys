@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using restfulapi.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using restfulapi.Models;
 
 namespace restfulapi.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/Events")]
     public class EventsController : Controller
     {
         private readonly AlpmysContext _context;
@@ -13,72 +18,108 @@ namespace restfulapi.Controllers
         public EventsController(AlpmysContext context)
         {
             _context = context;
-
-            if (_context.Events.Count() == 0)
-            {
-                _context.Events.Add(new Event { Name = "Evento 01" });
-                _context.SaveChanges();
-            }
         }
 
-        // IEnumerable automatically serializes the object to JSON into the body of the response message
-        // response code: 200 (success) or 5xx (internal server error - unhandled exceptions)
+        // GET: api/Events
         [HttpGet]
-        public IEnumerable<Event> GetAll()
+        public IEnumerable<Event> GetEvents()
         {
-            return _context.Events.ToList();
+            return _context.Events;
         }
 
-        // return either a 404 error, when no items matches the id, otherwise a 200 with a JSON response body
-        [HttpGet("{id}", Name = "GetEvent")]
-        public IActionResult GetById(long id)
+        // GET: api/Events/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEvent([FromRoute] long id)
         {
-            var item = _context.Events.FirstOrDefault(i => i.Id == id);
-            if (item == null)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+
+            if (@event == null)
+            {
                 return NotFound();
-            return new ObjectResult(item);
+            }
+
+            return Ok(@event);
         }
 
-        // returns the payload of CreatedAtRoute, which returns a 201 response (standard response for HTTP POST that creates a new resource)
-        // also adds the Location header to the response, that specifies the URI of the newly created event, using the GetEvent named route to create the URL
-        [HttpPost]
-        public IActionResult Create([FromBody] Event item)
-        {
-            if (item == null)
-                return BadRequest();
-
-            _context.Events.Add(item);
-            _context.SaveChanges();
-
-            return CreatedAtRoute("GetEvent", new { id = item.Id }, item);
-        }
-
-        // 204 (No Content) response: requires the client to send the entire updated entity
+        // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Event item)
+        public async Task<IActionResult> PutEvent([FromRoute] long id, [FromBody] Event @event)
         {
-            if (item == null || item.Id != id)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != @event.Id)
+            {
                 return BadRequest();
+            }
 
-            var toBeUpdated = _context.Events.FirstOrDefault(i => i.Id == id);
-            toBeUpdated.Description = item.Description;
-            toBeUpdated.Name = item.Name;
+            _context.Entry(@event).State = EntityState.Modified;
 
-            _context.Events.Update(toBeUpdated);
-            _context.SaveChanges();
-            return new NoContentResult();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        // POST: api/Events
+        [HttpPost]
+        public async Task<IActionResult> PostEvent([FromBody] Event @event)
         {
-            var item = _context.Events.FirstOrDefault(i => i.Id == id);
-            if (item == null)
-                return NotFound();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            _context.Events.Remove(item);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _context.Events.Add(@event);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+        }
+
+        // DELETE: api/Events/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEvent([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            _context.Events.Remove(@event);
+            await _context.SaveChangesAsync();
+
+            return Ok(@event);
+        }
+
+        private bool EventExists(long id)
+        {
+            return _context.Events.Any(e => e.Id == id);
         }
     }
 }
