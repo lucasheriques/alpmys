@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace restfulapi.Models
+namespace RestfulApi.Models
 {
     public class User
     {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using restfulapi.Models;
+using RestfulApi.Models;
 
-namespace restfulapi.Controllers
+namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Events")]

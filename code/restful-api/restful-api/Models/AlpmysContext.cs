@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace restfulapi.Models
+namespace RestfulApi.Models
 {
     // this is the main class that coordinates Entity Framework funcionality for our models
     // this is done by deriving from Microsoft.EntityFrameworkCore.DbContext

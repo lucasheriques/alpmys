@@ -13523,9 +13523,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Projects\\alpmys\\code\\restful-api\\restful-api\\restfulapi.csproj",
-      "projectName": "restfulapi",
-      "projectPath": "G:\\Projects\\alpmys\\code\\restful-api\\restful-api\\restfulapi.csproj",
+      "projectUniqueName": "G:\\Projects\\alpmys\\code\\restful-api\\restful-api\\RestfulApi.csproj",
+      "projectName": "RestfulApi",
+      "projectPath": "G:\\Projects\\alpmys\\code\\restful-api\\restful-api\\RestfulApi.csproj",
       "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
       "outputPath": "G:\\Projects\\alpmys\\code\\restful-api\\restful-api\\obj\\",
       "projectStyle": "PackageReference",

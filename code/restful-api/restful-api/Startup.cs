@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using restfulapi.Models;
+using RestfulApi.Models;
 using NSwag.AspNetCore;
 using System.Reflection;
 using NJsonSchema;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace restful_api
+namespace RestfulApi
 {
     public class Startup
     {

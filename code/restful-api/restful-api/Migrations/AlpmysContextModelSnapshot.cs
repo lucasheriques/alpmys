@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using restfulapi.Models;
+using RestfulApi.Models;
 using System;
 
-namespace restfulapi.Migrations
+namespace RestfulApi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
     partial class AlpmysContextModelSnapshot : ModelSnapshot
