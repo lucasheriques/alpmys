@@ -24,3 +24,7 @@ Also, please provide any necessary info about the solution you choose that you f
 ## Naming Conventions
 
 Branches should be all lowercase, separeted with hifens, like this: collaboration-guide, work-breakdown-structure.
+
+Commits should be clear about what they change. Example: "Changing class diagram structure" and not "Updating class diagram".
+
+This file can be changed at any moment according to necessity. Be sure to check if you see any commit regarding this file.
