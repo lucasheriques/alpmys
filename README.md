@@ -5,7 +5,7 @@ Hello, and welcome to our project: Alpmys!
 This repository contains all files related to the project. Following, we describe the directory structure:
 
 - **/code**: contains all the application coding, frontend and backend
-- **/database**: contains the DB model and necessary scripts
+- **/deliverables**: each subdirectory on this marks the end of a sprint (look for the commit). On each directory, we put all files that we need to deliver on Edmodo for our teachers.
 - **/documentation**: contains all documentation files (system architecture, requeriments, user stories...)
 - **/project-management**: contains all information related to the project management (scope definition, WBS, schedule...)
 - **/study-material**: contains references to all study materials that we used in the making of this project
