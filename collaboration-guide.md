@@ -19,7 +19,7 @@ All PRs must have the issue it solves in the description, written exactly like t
 
 `Resolves #{ISSUE_ID}`
 
-Also, please provide any necessary info about the solution you choose that you feel is relevant to the reviewers.
+Also, please provide any necessary info about the solution you choose that you feel is relevant to the reviewers. When approved, selecte the option `Squash and Merge` before merging it with master.
 
 ## Naming Conventions
 
