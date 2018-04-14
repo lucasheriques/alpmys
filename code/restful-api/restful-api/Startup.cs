@@ -25,7 +25,7 @@ namespace RestfulApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("AlpmysContext");
-            services.AddEntityFrameworkNpgsql().AddDbContext<AlpmysContext>(options => options.UseNpgsql(connectionString));
+            services.AddEntityFrameworkNpgsql().AddDbContext<AlpmysContext>(options => options.UseMySQL(connectionString));
             services.AddMvc();
         }
 
