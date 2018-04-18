@@ -11,9 +11,10 @@ using System;
 namespace restfulapi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
-    partial class AlpmysContextModelSnapshot : ModelSnapshot
+    [Migration("20180418005834_PrimeiraVersao")]
+    partial class PrimeiraVersao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +33,8 @@ namespace restfulapi.Migrations
                     b.Property<string>("Nome");
 
                     b.Property<string>("Senha");
+
+                    b.Property<string>("Sobrenome");
 
                     b.HasKey("Id");
 

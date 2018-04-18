@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestfulApi.Models;
@@ -10,57 +8,57 @@ using RestfulApi.Models;
 namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Events")]
-    public class EventsController : Controller
+    [Route("api/usuarios")]
+    public class UsuariosController : Controller
     {
         private readonly AlpmysContext _context;
 
-        public EventsController(AlpmysContext context)
+        public UsuariosController(AlpmysContext context)
         {
             _context = context;
         }
 
-        // GET: api/Events
+        // GET: api/Usuarios
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<Usuario> GetUsuarios()
         {
-            return _context.Events;
+            return _context.Usuarios;
         }
 
-        // GET: api/Events/5
+        // GET: api/Usuarios/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetEvent([FromRoute] long id)
+        public async Task<IActionResult> GetUser([FromRoute] long id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+            var user = await _context.Usuarios.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (@event == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(@event);
+            return Ok(user);
         }
 
-        // PUT: api/Events/5
+        // PUT: api/Usuarios/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent([FromRoute] long id, [FromBody] Event @event)
+        public async Task<IActionResult> PutUser([FromRoute] long id, [FromBody] Usuario user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@event).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +66,7 @@ namespace RestfulApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +79,48 @@ namespace RestfulApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Events
+        // POST: api/Usuarios
         [HttpPost]
-        public async Task<IActionResult> PostEvent([FromBody] Event @event)
+        public async Task<IActionResult> PostUser([FromBody] Usuario user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Events.Add(@event);
+            _context.Usuarios.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Events/5
+        // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEvent([FromRoute] long id)
+        public async Task<IActionResult> DeleteUser([FromRoute] long id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            var user = await _context.Usuarios.SingleOrDefaultAsync(m => m.Id == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Events.Remove(@event);
+            _context.Usuarios.Remove(user);
             await _context.SaveChangesAsync();
 
-            return Ok(@event);
+            return Ok(user);
         }
 
-        private bool EventExists(long id)
+        // POST: api/Usuarios/search/email@email.com
+        [HttpPost()]
+
+        private bool UserExists(long id)
         {
-            return _context.Events.Any(e => e.Id == id);
+            return _context.Usuarios.Any(e => e.Id == id);
         }
     }
 }
