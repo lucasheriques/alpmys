@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.pucminas.alpmysapp">
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +24,7 @@
             android:name=".CadastroEventoActivity"
             android:label="@string/title_activity_cadastro_evento"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CadastroUsuarioActivity"></activity>
     </application>
 
 </manifest>
