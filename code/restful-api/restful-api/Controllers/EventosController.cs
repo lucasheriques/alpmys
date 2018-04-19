@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,8 +37,8 @@ namespace RestfulApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var evento = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
 
+            var evento = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
                 return NotFound();
@@ -91,6 +92,7 @@ namespace RestfulApi.Controllers
             }
 
             _context.Evento.Add(evento);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEvento", new { id = evento.Id }, evento);
@@ -104,12 +106,12 @@ namespace RestfulApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var evento = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
                 return NotFound();
             }
+
 
             _context.Evento.Remove(evento);
             await _context.SaveChangesAsync();
@@ -120,6 +122,7 @@ namespace RestfulApi.Controllers
         private bool EventoExists(long id)
         {
             return _context.Evento.Any(e => e.Id == id);
+
         }
     }
 }

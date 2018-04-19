@@ -13,12 +13,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewNome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="9dp"
             android:text="@string/lbl_nome"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,112 +26,126 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextNome"
+            android:id="@+id/editTextNomeEvento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Pagode do Werneck"
             android:inputType="textPersonName"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            tools:text="@string/edt_nome" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewNome"
+            app:layout_constraintStart_toStartOf="@+id/textViewNome"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textViewData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:text="@string/lbl_data"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNome"
-            app:layout_constraintStart_toStartOf="@+id/editTextNome"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextNomeEvento"
+            app:layout_constraintStart_toStartOf="@+id/editTextNomeEvento"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNomeEvento" />
 
-        <EditText
-            android:id="@+id/editText13"
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/editTextData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="date"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="@+id/textViewData"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            tools:text="@string/edt_data" />
+            app:layout_constraintStart_toStartOf="@+id/textViewData"
+            app:layout_constraintTop_toBottomOf="@+id/textViewData"
+            app:mask="##/##/##" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textViewHoraInicio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lbl_horario_inicio"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editText13"
+            app:layout_constraintEnd_toEndOf="@+id/editTextData"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editText13"
-            app:layout_constraintTop_toBottomOf="@+id/editText13" />
+            app:layout_constraintStart_toStartOf="@+id/editTextData"
+            app:layout_constraintTop_toBottomOf="@+id/editTextData" />
 
-        <EditText
-            android:id="@+id/editText14"
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/editTextHoraInicio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/textViewHoraInicio"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            tools:text="@string/edt_hora_inicio" />
+            app:layout_constraintStart_toStartOf="@+id/textViewHoraInicio"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHoraInicio"
+            app:mask="##:##" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textViewHoraTermino"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lbl_horario_termino"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editText14"
-            app:layout_constraintStart_toStartOf="@+id/editText14"
-            app:layout_constraintTop_toBottomOf="@+id/editText14" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextHoraInicio"
+            app:layout_constraintStart_toStartOf="@+id/editTextHoraInicio"
+            app:layout_constraintTop_toBottomOf="@+id/editTextHoraInicio" />
 
-        <EditText
-            android:id="@+id/editText16"
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/editTextHoraTermino"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textView9"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView9"
-            tools:text="@string/edt_hora_termino" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewHoraTermino"
+            app:layout_constraintStart_toStartOf="@+id/textViewHoraTermino"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHoraTermino"
+            app:mask="##:##" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textViewDescricao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lbl_descricao"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editText16"
-            app:layout_constraintStart_toStartOf="@+id/editText16"
-            app:layout_constraintTop_toBottomOf="@+id/editText16" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextHoraTermino"
+            app:layout_constraintStart_toStartOf="@+id/editTextHoraTermino"
+            app:layout_constraintTop_toBottomOf="@+id/editTextHoraTermino" />
 
         <EditText
-            android:id="@+id/editText17"
+            android:id="@+id/editTextDescricao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:ems="10"
+            android:hint="o evento contara com a presença do ilustre Marcelo Werneck..."
             android:inputType="textMultiLine"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            tools:text="@string/edt_descricao" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewDescricao"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescricao" />
+
+        <Button
+            android:id="@+id/buttonCadastroEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Button"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/editTextDescricao"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescricao" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

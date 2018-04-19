@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using System;
+=======
+using System;
+>>>>>>> Adding code for consuming the RESTful api
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,5 +24,5 @@ namespace RestfulApi.Models
         public Organizador Organizador { get; set; }
         public long TipoDeEventoId { get; set; }
         public TipoDeEvento TipoDeEvento { get; set; }
-}
+   }
 }
