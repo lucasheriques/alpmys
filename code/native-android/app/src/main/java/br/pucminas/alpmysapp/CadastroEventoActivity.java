@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import api.APIServices;
 import api.RetrofitClient;
@@ -64,6 +66,24 @@ public class CadastroEventoActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 if (medtData.getText().toString().isEmpty()) {
                     medtData.setError(getBaseContext().getString(R.string.errorDataVazio));
+                }else{
+
+                        String[] dataString=medtData.getText().toString().split("/");
+                        if(!diaValido(Integer.parseInt(dataString[0]))){
+                            medtData.setError("por  favor digite um dia valido");
+                        }else{
+                            if(!mesValido(Integer.parseInt(dataString[1]))){
+                                medtData.setError("por  favor digite um mes valido");
+                            }else{
+                                if(!anoValido(Integer.parseInt(dataString[2]))){
+                                    medtData.setError("por  favor digite um ano valido");
+                                }
+                            }
+                        }
+
+
+
+
                 }
             }
         });
@@ -72,6 +92,15 @@ public class CadastroEventoActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 if (medtHoraInicio.getText().toString().isEmpty()) {
                     medtHoraInicio.setError(getBaseContext().getString(R.string.errorHoraInicioVazio));
+                }else{
+                    String[] dataString=medtHoraInicio.getText().toString().split(":");
+                    if(!horaValida(Integer.parseInt(dataString[0]))){
+                        medtHoraInicio.setError("por  favor digite uma hora valida");
+                    }else{
+                        if(!minutosValido(Integer.parseInt(dataString[1]))){
+                           medtHoraInicio.setError("por  favor digite  um minuto valido");
+                        }
+                    }
                 }
             }
         });
@@ -80,6 +109,15 @@ public class CadastroEventoActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 if (medtHoraTermino.getText().toString().isEmpty()) {
                     medtHoraTermino.setError(getBaseContext().getString(R.string.errorHoraTerminoVazio));
+                }else{
+                    String[] dataString=medtHoraTermino.getText().toString().split(":");
+                    if(!horaValida(Integer.parseInt(dataString[0]))){
+                        medtHoraTermino.setError("por  favor digite uma hora valida");
+                    }else{
+                        if(!minutosValido(Integer.parseInt(dataString[1]))){
+                            medtHoraTermino.setError("por  favor digite um minuto valido");
+                        }
+                    }
                 }
             }
         });
@@ -99,16 +137,17 @@ public class CadastroEventoActivity extends AppCompatActivity {
                evento=new Evento();
                evento.setDescricao(edtDescricao.getText().toString());
                evento.setNome(edtNomeEvento.getText().toString());
-               evento.setHorarioTermino("2018-04-19T13:19:03.090Z");
-               evento.setHorarioInicio("2018-04-19T13:19:03.090Z");
-               evento.setLinkPagina("gooogle.com");
+               evento.setData(formataData(medtData.getText().toString())+formataHora(medtHoraInicio.getText().toString()));
+               evento.setHorarioTermino(formataData(medtData.getText().toString())+formataHora(medtHoraTermino.getText().toString()));
+               evento.setHorarioInicio(formataData(medtData.getText().toString()+formataHora(medtHoraInicio.getText().toString())));
+              // evento.setLinkPagina("gooogle.com");
                 mAPIServices= RetrofitClient.getAPIService();
                 mAPIServices.createEvento(evento).enqueue(new Callback<Evento>() {
                     @Override
                     public void onResponse(Call<Evento> call, Response<Evento> response) {
                         if (response.isSuccessful()) {
                             Log.i("SUCESSO", "post submitted to API." + response.body().toString());
-                            edtDescricao.setText("deu camarada");
+
                         }else{
                             try {
                                 edtDescricao.setText(response.errorBody().string());
@@ -135,5 +174,46 @@ public class CadastroEventoActivity extends AppCompatActivity {
         }
         return false;
     }
-
+    /*GAMBIARRA A GENTE ACEITA*/
+    public String formataHora(String hora){
+       hora= hora.replace(":","-");
+        return hora+":03.090Z";
+    }
+    /*GAMBIARRA A GENTE ACEITA*/
+    public String formataData(String data){
+        String [] dataFormatada=data.split("/");
+        return dataFormatada[2]+"-"+dataFormatada[1]+"-"+dataFormatada[0]+"T";
+    }
+    //GAMBIARRA A GENTE ACEITA
+    public boolean diaValido(int dia){
+        if(dia<=0||dia>31)
+            return false;
+        return true;
+    }
+    //GAMBIARRA A GENTE ACEITA
+    public boolean mesValido(int mes){
+        if(mes<=0||mes>12)
+            return false;
+        return true;
+    }
+    //GAMBIARRA A GENTE ACEITA
+    public boolean anoValido(int ano){
+        if(ano<=2017)
+            return false;
+        return true;
+    }
+    //GAMBIARRA A GENTE ACEITA
+    public boolean horaValida(int hora){
+        if(hora<0||hora>23){
+            return false;
+        }
+        return true;
+    }
+    //GAMBIARRA A GENTE ACEITA
+    public boolean minutosValido(int minutos){
+        if(minutos<0||minutos>59){
+            return false;
+        }
+        return true;
+    }
 }

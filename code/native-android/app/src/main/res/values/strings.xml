@@ -105,8 +105,14 @@
     <string name="edt_hora_termino">Hora de Término</string>
     <string name="lbl_descricao">Descrição</string>
     <string name="edt_descricao">Descricao</string>
-    <string name="errorNomeEventoVazio">por favor digite um nome para seu evento</string>
-    <string name="errorDataVazio">por favor digite uma data</string>
-    <string name="errorHoraInicioVazio">por favor digite uma hora de inicio</string>
-    <string name="errorHoraTerminoVazio">por favor digite uma hora de termino</string>
+    <string name="errorNomeEventoVazio">Por favor digite um nome para seu evento</string>
+    <string name="errorDataVazio">Por favor digite uma data</string>
+    <string name="errorHoraInicioVazio">Por favor digite uma hora de inicio</string>
+    <string name="errorHoraTerminoVazio">Por favor digite uma hora de termino</string>
+    <string name="erroDiaInvalido">Por favor digite um dia valido</string>
+    <string name="erroMesInvalido">Por favor digite um mes valido</string>
+    <string name="erroAnoInvalido">Por favor digite um ano valido</string>
+    <string name="erroHoraInvalido">Por favor digite uma hora valido</string>
+    <string name="erroMinutoInvalido">Por favor digite um minuto valido</string>
+    
 </resources>
