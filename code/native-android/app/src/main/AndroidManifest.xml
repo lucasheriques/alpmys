@@ -21,7 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroUsuarioActivity"></activity>
+        <activity android:name=".CadastroUsuarioActivity" />
+        <activity android:name=".list_itemActivity" />
+        <activity
+            android:name=".ListEventsActivity"
+            android:label="@string/title_activity_list_events"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
