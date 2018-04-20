@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_cadastro_evento">Cadastro de Evento</string>
+    <string name="title_activity_list_events">ListEventsActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -101,5 +102,4 @@
     <string name="tiedt_vazio">Por favor preencha o campo</string>
     <string name="tiedt_link_pagina">Link da Página</string>
     <string name="button_cadastro">Cadastro</string>
-
 </resources>
