@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RestfulApi.Models
 {
-    public class Participa
+    public class UsuarioSorteio
     {
         public long Id { get; set; }
 

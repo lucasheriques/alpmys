@@ -26,10 +26,6 @@ namespace RestfulApi.Models
 
         public Pontos Pontos { get; set; }
 
-        public long Historico_EventosId { get; set; }
-
-        public Historico_Eventos Historico_Eventos { get; set; }
-
         public WishList WishList { get; set; }
 
         public long WishListId { get; set; }

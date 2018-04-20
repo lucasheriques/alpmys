@@ -15,10 +15,6 @@ namespace RestfulApi.Models
 
         public string Email { get; set; }
 
-        public Historico_Eventos Historico_EventosId { get; set; }
-
-        public Historico_Eventos Historico_Eventos { get; set; }
-
         public long TipoIngressoId { get; set; }
 
         public TipoIngresso TipoIngresso { get; set; }

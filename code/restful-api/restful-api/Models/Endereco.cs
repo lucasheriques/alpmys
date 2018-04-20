@@ -19,10 +19,6 @@ namespace RestfulApi.Models
 
         public string Cep { get; set; }
 
-        public long LocalId { get; set; }
-
-        public Local Local { get; set; }
-
         public long UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }

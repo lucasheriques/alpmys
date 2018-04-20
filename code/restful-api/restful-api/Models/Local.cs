@@ -11,6 +11,10 @@ namespace RestfulApi.Models
 
         public string Descricao { get; set; }
 
+        public long EnderecoId { get; set; }
+
+        public Endereco Endereco { get; set; }
+
     }
 }
 

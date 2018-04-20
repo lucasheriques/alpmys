@@ -16,19 +16,17 @@ namespace RestfulApi.Models
         public DbSet<Conquistas> Conquistas { get; set; }
         public DbSet<ContaBancaria> ContaBancaria { get; set; }
         public DbSet<Contato> Contato { get; set; }
-        public DbSet<Contem> Contem { get; set; }
-        public DbSet<Cria> Cria { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Evento> Evento { get; set; }
-        public DbSet<Historico_Eventos> Historico_Eventos { get; set; }
+
         public DbSet<Ingresso> Ingresso { get; set; }
         //        public DbSet<IPaypal> IPaypal { get; set; }
         //      public DbSet<IRedesSociais> IRedesSociais { get; set; }
         public DbSet<Local> Local { get; set; }
         public DbSet<Organizador> Organizador { get; set; }
-        public DbSet<Participa> Participa { get; set; }
+        public DbSet<UsuarioSorteio> Participa { get; set; }
         public DbSet<Pontos> Pontos { get; set; }
-        public DbSet<Possui> Possui { get; set; }
+        public DbSet<UsuarioCartaoDeCredito> Possui { get; set; }
         public DbSet<Promocao> Promocao { get; set; }
         public DbSet<Sorteio> Sorteio { get; set; }
         public DbSet<Telefone> Telefone { get; set; }

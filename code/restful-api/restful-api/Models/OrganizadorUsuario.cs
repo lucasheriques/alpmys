@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace RestfulApi.Models
 {
-    public class Possui
+    public class OrganizadorUsuario
     {
-        public long Id { get; set; }
-        
-        public CartaoDeCredito CartaoDeCredito { get; set; }
+        public long OrganizadorId { get; set; }
+
+        public Organizador Organizador { get; set; }
+
+        public long UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }
     }
