@@ -11,9 +11,9 @@ namespace RestfulApi.Models
 
         public String CodigoPromocional { get; set; }
 
-        public long OrganizadorId { get; set; }
+        public long EventoId { get; set; }
 
-        public Organizador Organizador { get; set; }
+        public Evento Evento { get; set; }
     }
 }
 

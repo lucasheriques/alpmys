@@ -12,11 +12,7 @@ namespace RestfulApi.Models
 
         public DateTime Validade { get; set; }
 
-        public char CodigoDeSeguranca { get; set; }
-
-        public long CompraID { get; set; }
-
-        public Compra Compra { get; set; }
+        public int CodigoDeSeguranca { get; set; }
 
     }
 }

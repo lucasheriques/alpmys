@@ -11,8 +11,6 @@ namespace RestfulApi.Models
 
         public int QuantidadeIngressos { get; set; }
 
-        public float ValorUnitario { get; set; }
-
         public DateTime DataCompra { get; set; }
 
         public DateTime DataVencimento { get; set; }
@@ -21,9 +19,6 @@ namespace RestfulApi.Models
 
         public string Status { get; set; }
 
-        public long IngressoId { get; set; }
-
-        public Ingresso Ingresso { get; set; }
         public long UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }

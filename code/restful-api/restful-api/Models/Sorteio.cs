@@ -26,7 +26,7 @@ namespace RestfulApi.Models
 
         public Organizador Organizador { get; set; }
 
-        public Usuario[] Usuario { get; set; }
+        
 
     }
 

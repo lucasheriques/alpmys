@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\EventoesController.cs" />
+    <Compile Remove="Models\Realiza.cs" />
   </ItemGroup>
 
   <ItemGroup>
