@@ -7,8 +7,6 @@ namespace RestfulApi.Models
     public class AlpmysContext : DbContext
     {
         public AlpmysContext(DbContextOptions<AlpmysContext> options) : base(options) { }
-
-        public DbSet<Event> Events { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

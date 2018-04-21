@@ -4,5 +4,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="signup_button">Cadastro</string>
+    <string name="login_button">Login</string>
+    <string name="lbl_name">Nome</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_password">Senha</string>
+    <string name="lbl_submit">Enviar</string>
+    <string name="lbl_cpf">CPF</string>
+    <string name="lbl_confirm_password">Confirmar senha</string>
 </resources>
