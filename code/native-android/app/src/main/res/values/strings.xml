@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">AlpmysApp</string>
-
+    <string name="app_name">Alpmys</string>
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">fechar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_cadastro_evento">Cadastro de Evento</string>
     <string name="title_activity_list_events">ListEventsActivity</string>
+    <string name="title_activity_list_events">Listar Eventos</string>
+    <string name="app_label">Procurar</string>
+    <string name="search_hint">Localizar</string>
+
     <string name="large_text">
+
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."

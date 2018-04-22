@@ -10,10 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -40,6 +43,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
     private static final String KEY_HORARIOTERMINO = "horarioTermino";
     private static final String KEY_LINKPAGINA = "linkPagina";
 
+    private ListView lblEventos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +67,14 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        lblEventos = (ListView) findViewById(R.id.list_view);
+
         listaEventos();
+
     }
 
     @Override
@@ -149,7 +158,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
     }
 
     private void exibeEventos(List<Evento> listEvento){
-        ListView lblEventos = (ListView) findViewById(R.id.list_view);
+
         if (lblEventos.getVisibility() == View.GONE)
             lblEventos.setVisibility(View.VISIBLE);
 
@@ -168,17 +177,17 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         for(Evento evento: listEvento){
             HashMap<String, String> map = new HashMap<>();
 
-            map.put(KEY_NOME, evento.getNome());
+            map.put(KEY_NOME, "Nome: " + evento.getNome());
 
-            map.put(KEY_DATA, evento.getData());
+            map.put(KEY_DATA, "Data: " + evento.getData());
 
-            map.put(KEY_DESCRICAO, evento.getDescricao());
+            map.put(KEY_DESCRICAO, "Descrição: " + evento.getDescricao());
 
-            map.put(KEY_HORARIOINICIO, evento.getHorarioInicio());
+            map.put(KEY_HORARIOINICIO, "Horário de Inicio do Evento: " +  evento.getHorarioInicio());
 
-            map.put(KEY_HORARIOTERMINO, evento.getHorarioTermino());
+            map.put(KEY_HORARIOTERMINO, "Horário de Término do Evento: " +   evento.getHorarioTermino());
 
-            map.put(KEY_LINKPAGINA, evento.getLinkPagina());
+            map.put(KEY_LINKPAGINA, "Link da Página: " + evento.getLinkPagina());
 
             mAndroidMapList.add(map);
         }
