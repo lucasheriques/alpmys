@@ -14,9 +14,6 @@ public class Evento {
     @SerializedName("descricao")
     @Expose
     private String descricao;
-    @SerializedName("data")
-    @Expose
-    private String data;
     @SerializedName("horarioInicio")
     @Expose
     private String horarioInicio;
@@ -49,7 +46,6 @@ public class Evento {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.data = data;
         this.horarioInicio = horarioInicio;
         this.horarioTermino = horarioTermino;
         this.linkPagina = linkPagina;
@@ -68,6 +64,9 @@ public class Evento {
     }
 
     public void setNome(String nome) {
+        if(nome.isEmpty())
+            throw new IllegalArgumentException();
+        else
         this.nome = nome;
     }
 
@@ -76,15 +75,10 @@ public class Evento {
     }
 
     public void setDescricao(String descricao) {
+        if(descricao.isEmpty())
+            throw new IllegalArgumentException();
+        else
         this.descricao = descricao;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public String getHorarioInicio() {

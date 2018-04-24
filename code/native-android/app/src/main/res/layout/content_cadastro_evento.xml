@@ -12,140 +12,104 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewNome"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLinkPagina"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilHorarioTermino"
+            app:layout_constraintStart_toStartOf="@+id/tilHorarioTermino"
+            app:layout_constraintTop_toBottomOf="@+id/tilHorarioTermino">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtLinkPagina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_link_pagina" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilNomeEvento"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="9dp"
-            android:text="@string/lbl_nome"
-            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/editTextNomeEvento"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Pagode do Werneck"
-            android:inputType="textPersonName"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textViewNome"
-            app:layout_constraintStart_toStartOf="@+id/textViewNome"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtNomeEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_nome_evento"
+                android:maxLength="40" />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewData"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilDescricao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/lbl_data"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNomeEvento"
-            app:layout_constraintStart_toStartOf="@+id/editTextNomeEvento"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNomeEvento" />
+            app:layout_constraintEnd_toEndOf="@+id/tilNomeEvento"
+            app:layout_constraintStart_toStartOf="@+id/tilNomeEvento"
+            app:layout_constraintTop_toBottomOf="@+id/tilNomeEvento">
 
-        <br.com.sapereaude.maskedEditText.MaskedEditText
-            android:id="@+id/editTextData"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textViewData"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewData"
-            app:layout_constraintTop_toBottomOf="@+id/textViewData"
-            app:mask="##/##/####" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_descricao"
+                android:inputType="textMultiLine"
+                android:maxLength="500" />
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewHoraInicio"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHoraInicio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/lbl_horario_inicio"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editTextData"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextData"
-            app:layout_constraintTop_toBottomOf="@+id/editTextData" />
+            app:layout_constraintEnd_toEndOf="@+id/tilDescricao"
+            app:layout_constraintStart_toStartOf="@+id/tilDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/tilDescricao">
 
-        <br.com.sapereaude.maskedEditText.MaskedEditText
-            android:id="@+id/editTextHoraInicio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textViewHoraInicio"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewHoraInicio"
-            app:layout_constraintTop_toBottomOf="@+id/textViewHoraInicio"
-            app:mask="##:##" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtHorarioInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_horario_inicio"
+                android:inputType="datetime" />
 
-        <TextView
-            android:id="@+id/textViewHoraTermino"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHorarioTermino"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/lbl_horario_termino"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editTextHoraInicio"
-            app:layout_constraintStart_toStartOf="@+id/editTextHoraInicio"
-            app:layout_constraintTop_toBottomOf="@+id/editTextHoraInicio" />
+            app:layout_constraintEnd_toEndOf="@+id/tilHoraInicio"
+            app:layout_constraintStart_toStartOf="@+id/tilHoraInicio"
+            app:layout_constraintTop_toBottomOf="@+id/tilHoraInicio">
 
-        <br.com.sapereaude.maskedEditText.MaskedEditText
-            android:id="@+id/editTextHoraTermino"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textViewHoraTermino"
-            app:layout_constraintStart_toStartOf="@+id/textViewHoraTermino"
-            app:layout_constraintTop_toBottomOf="@+id/textViewHoraTermino"
-            app:mask="##:##" />
-
-        <TextView
-            android:id="@+id/textViewDescricao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/lbl_descricao"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editTextHoraTermino"
-            app:layout_constraintStart_toStartOf="@+id/editTextHoraTermino"
-            app:layout_constraintTop_toBottomOf="@+id/editTextHoraTermino" />
-
-        <EditText
-            android:id="@+id/editTextDescricao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="o evento contara com a presença do ilustre Marcelo Werneck..."
-            android:inputType="textMultiLine"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/textViewDescricao"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewDescricao"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDescricao" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtHorarioTermino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_horario_termino" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/buttonCadastroEvento"
+            android:id="@+id/buttonCadastro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
-            android:text="Button"
+            android:text="@string/button_cadastro"
             android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="@+id/editTextDescricao"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextDescricao"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDescricao" />
+            app:layout_constraintEnd_toEndOf="@+id/tilLinkPagina"
+            app:layout_constraintStart_toStartOf="@+id/tilLinkPagina"
+            app:layout_constraintTop_toBottomOf="@+id/tilLinkPagina" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

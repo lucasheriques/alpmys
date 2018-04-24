@@ -1,40 +1,55 @@
 package br.pucminas.alpmysapp;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.TimePicker;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.net.URISyntaxException;
+import java.util.Calendar;
 
 import api.APIServices;
+
 import api.RetrofitClient;
-import br.com.sapereaude.maskedEditText.MaskedEditText;
 import models.Evento;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class CadastroEventoActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private Toolbar toolbar;
-    private EditText edtNomeEvento, edtDescricao;
-    private MaskedEditText medtData, medtHoraInicio, medtHoraTermino;
+    private TextInputEditText tiedtNomeEvento, tiedtDescricao,tiedtHoraInicio,tiedtHoraTermino,tiedtLinkPagina;
     private Button buttonCadastro;
     private APIServices mAPIServices;
-    private Evento evento = new Evento();
-
+    private Evento evento=new Evento();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_cadastro_evento);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,113 +59,126 @@ public class CadastroEventoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-        });
-        edtNomeEvento = (EditText) findViewById(R.id.editTextNomeEvento);
-        medtData = (MaskedEditText) findViewById(R.id.editTextData);
-        medtHoraInicio = (MaskedEditText) findViewById(R.id.editTextHoraInicio);
-        medtHoraTermino = (MaskedEditText) findViewById(R.id.editTextHoraTermino);
-        edtDescricao = (EditText) findViewById(R.id.editTextDescricao);
-        buttonCadastro = (Button) findViewById(R.id.buttonCadastroEvento);
-        edtNomeEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (edtNomeEvento.getText().toString().isEmpty()) {
-                    edtNomeEvento.setError(getBaseContext().getString(R.string.errorNomeEventoVazio));
-                }
-
-            }
-        });
-        medtData.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (medtData.getText().toString().isEmpty()) {
-                    medtData.setError(getBaseContext().getString(R.string.errorDataVazio));
-                }else{
-
-                        String[] dataString=medtData.getText().toString().split("/");
-                        if(!diaValido(Integer.parseInt(dataString[0]))){
-                            medtData.setError("por  favor digite um dia valido");
-                        }else{
-                            if(!mesValido(Integer.parseInt(dataString[1]))){
-                                medtData.setError("por  favor digite um mes valido");
-                            }else{
-                                if(!anoValido(Integer.parseInt(dataString[2]))){
-                                    medtData.setError("por  favor digite um ano valido");
-                                }
-                            }
-                        }
-
-
-
-
-                }
-            }
-        });
-        medtHoraInicio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (medtHoraInicio.getText().toString().isEmpty()) {
-                    medtHoraInicio.setError(getBaseContext().getString(R.string.errorHoraInicioVazio));
-                }else{
-                    String[] dataString=medtHoraInicio.getText().toString().split(":");
-                    if(!horaValida(Integer.parseInt(dataString[0]))){
-                        medtHoraInicio.setError("por  favor digite uma hora valida");
-                    }else{
-                        if(!minutosValido(Integer.parseInt(dataString[1]))){
-                           medtHoraInicio.setError("por  favor digite  um minuto valido");
-                        }
+                final AlertDialog.Builder dialog = new  AlertDialog.Builder(CadastroEventoActivity.this);
+                final EditText input=new EditText(CadastroEventoActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT );
+                dialog.setView(input);
+                dialog.setTitle("Url Imagem");
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adicionarImagem(input.getText().toString());
                     }
-                }
-            }
-        });
-        medtHoraTermino.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (medtHoraTermino.getText().toString().isEmpty()) {
-                    medtHoraTermino.setError(getBaseContext().getString(R.string.errorHoraTerminoVazio));
-                }else{
-                    String[] dataString=medtHoraTermino.getText().toString().split(":");
-                    if(!horaValida(Integer.parseInt(dataString[0]))){
-                        medtHoraTermino.setError("por  favor digite uma hora valida");
-                    }else{
-                        if(!minutosValido(Integer.parseInt(dataString[1]))){
-                            medtHoraTermino.setError("por  favor digite um minuto valido");
-                        }
+                });
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
                     }
+                });
+                dialog.show();
+            }
+        });
+
+        tiedtNomeEvento = (TextInputEditText) findViewById(R.id.tiedtNomeEvento);
+        tiedtDescricao = (TextInputEditText) findViewById(R.id.tiedtDescricao);
+        tiedtHoraInicio=(TextInputEditText) findViewById(R.id.tiedtHorarioInicio);
+        tiedtHoraTermino=(TextInputEditText) findViewById(R.id.tiedtHorarioTermino);
+        tiedtLinkPagina=(TextInputEditText) findViewById(R.id.tiedtLinkPagina);
+        buttonCadastro=(Button) findViewById(R.id.buttonCadastro);
+
+        tiedtHoraInicio.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar=Calendar.getInstance();
+                int ano=calendar.get(Calendar.YEAR);
+                int mes=calendar.get(Calendar.MONTH);
+                int dia=calendar.get(Calendar.DAY_OF_MONTH);
+                int hora=calendar.get(Calendar.HOUR_OF_DAY);
+                int minuto=calendar.get(Calendar.MINUTE);
+                final TimePickerDialog timePickerDialog2=new TimePickerDialog(CadastroEventoActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
+                        tiedtHoraInicio.setText(hora+":"+minuto+" do dia "+tiedtHoraInicio.getText().toString());
+                    }
+                },hora,minuto,true);
+                DatePickerDialog datePickerDialog=new DatePickerDialog(CadastroEventoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+                        timePickerDialog2.show();
+                        tiedtHoraInicio.setText(+dia+"/"+mes+"/"+ano);
+                    }
+                },ano,mes,dia);
+                datePickerDialog.show();
+            }
+        });
+        tiedtHoraTermino.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar=Calendar.getInstance();
+                int ano=calendar.get(Calendar.YEAR);
+                int mes=calendar.get(Calendar.MONTH);
+                int dia=calendar.get(Calendar.DAY_OF_MONTH);
+                int hora=calendar.get(Calendar.HOUR_OF_DAY);
+                int minuto=calendar.get(Calendar.MINUTE);
+                final TimePickerDialog timePickerDialog=new TimePickerDialog(CadastroEventoActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
+                        tiedtHoraTermino.setText(hora+":"+minuto+" do dia "+tiedtHoraTermino.getText().toString());
+                    }
+                },hora,minuto,true);
+                DatePickerDialog datePickerDialog=new DatePickerDialog(CadastroEventoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+                        timePickerDialog.show();
+                        tiedtHoraTermino.setText(+dia+"/"+mes+"/"+ano);
+                    }
+                },ano,mes,dia);
+                datePickerDialog.show();
+            }
+        });
+        tiedtNomeEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                try{
+                    evento.setNome(tiedtNomeEvento.getText().toString());
+                }catch (IllegalArgumentException iae){
+                    tiedtNomeEvento.setError(getBaseContext().getString(R.string.tiedt_vazio));
+                }
+
+            }
+        });
+        tiedtDescricao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                try{
+                    evento.setDescricao(tiedtDescricao.getText().toString());
+                }catch (IllegalArgumentException iae){
+                    tiedtDescricao.setError(getBaseContext().getString(R.string.tiedt_vazio));
                 }
             }
         });
-        edtDescricao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        tiedtLinkPagina.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (edtDescricao.getText().toString().isEmpty()) {
-                    edtDescricao.setError(getBaseContext().getString(R.string.errorNomeEventoVazio));
-                } else {
 
-                }
             }
         });
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               evento=new Evento();
-               evento.setDescricao(edtDescricao.getText().toString());
-               evento.setNome(edtNomeEvento.getText().toString());
-               evento.setData(formataData(medtData.getText().toString())+formataHora(medtHoraInicio.getText().toString()));
-               evento.setHorarioTermino(formataData(medtData.getText().toString())+formataHora(medtHoraTermino.getText().toString()));
-               evento.setHorarioInicio(formataData(medtData.getText().toString()+formataHora(medtHoraInicio.getText().toString())));
-              // evento.setLinkPagina("gooogle.com");
                 mAPIServices= RetrofitClient.getAPIService();
                 mAPIServices.createEvento(evento).enqueue(new Callback<Evento>() {
                     @Override
                     public void onResponse(Call<Evento> call, Response<Evento> response) {
                         if (response.isSuccessful()) {
                             Log.i("SUCESSO", "post submitted to API." + response.body().toString());
-
+                            startActivity(new Intent(CadastroEventoActivity.this,AlpmysMainActivity.class));
                         }else{
                             try {
-                                edtDescricao.setText(response.errorBody().string());
+                                tiedtDescricao.setText(response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -161,6 +189,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<Evento> call, Throwable t) {
                         Log.e("ERROR", "Unable to submit post to API.");
+                        tiedtDescricao.setText("falhow");
                     }
                 });
 
@@ -168,52 +197,16 @@ public class CadastroEventoActivity extends AppCompatActivity {
         });
     }
 
-    public boolean validaForm() {
-        if (!edtNomeEvento.getText().toString().isEmpty() && !medtData.getText().toString().isEmpty() && !medtHoraInicio.getText().toString().isEmpty() && !medtHoraTermino.getText().toString().isEmpty() && !edtDescricao.getText().toString().isEmpty()) {
-            return true;
+    public void adicionarImagem(String link){
+        try {
+            Uri uri = Uri.parse(link);
+            SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.image_view_evento);
+            draweeView.setImageURI(uri);
+        }catch (Exception e){
+            Log.i("ERRO","sintaxe errada");
+            e.printStackTrace();
         }
-        return false;
     }
-    /*GAMBIARRA A GENTE ACEITA*/
-    public String formataHora(String hora){
-       hora= hora.replace(":","-");
-        return hora+":03.090Z";
-    }
-    /*GAMBIARRA A GENTE ACEITA*/
-    public String formataData(String data){
-        String [] dataFormatada=data.split("/");
-        return dataFormatada[2]+"-"+dataFormatada[1]+"-"+dataFormatada[0]+"T";
-    }
-    //GAMBIARRA A GENTE ACEITA
-    public boolean diaValido(int dia){
-        if(dia<=0||dia>31)
-            return false;
-        return true;
-    }
-    //GAMBIARRA A GENTE ACEITA
-    public boolean mesValido(int mes){
-        if(mes<=0||mes>12)
-            return false;
-        return true;
-    }
-    //GAMBIARRA A GENTE ACEITA
-    public boolean anoValido(int ano){
-        if(ano<=2017)
-            return false;
-        return true;
-    }
-    //GAMBIARRA A GENTE ACEITA
-    public boolean horaValida(int hora){
-        if(hora<0||hora>23){
-            return false;
-        }
-        return true;
-    }
-    //GAMBIARRA A GENTE ACEITA
-    public boolean minutosValido(int minutos){
-        if(minutos<0||minutos>59){
-            return false;
-        }
-        return true;
-    }
+
+
 }

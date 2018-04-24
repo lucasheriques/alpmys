@@ -3,7 +3,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
     <string name="title_activity_cadastro_evento">Cadastro de Evento</string>
     <string name="large_text">
@@ -95,24 +94,12 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="lbl_nome">Nome</string>
-    <string name="edt_nome">Nome</string>
-    <string name="lbl_data">Data</string>
-    <string name="edt_data">Data</string>
-    <string name="lbl_horario_inicio">Horário de Início</string>
-    <string name="lbl_horario_termino">Horário de Término</string>
-    <string name="edt_hora_inicio">Hora de Início</string>
-    <string name="edt_hora_termino">Hora de Término</string>
-    <string name="lbl_descricao">Descrição</string>
-    <string name="edt_descricao">Descricao</string>
-    <string name="errorNomeEventoVazio">Por favor digite um nome para seu evento</string>
-    <string name="errorDataVazio">Por favor digite uma data</string>
-    <string name="errorHoraInicioVazio">Por favor digite uma hora de inicio</string>
-    <string name="errorHoraTerminoVazio">Por favor digite uma hora de termino</string>
-    <string name="erroDiaInvalido">Por favor digite um dia valido</string>
-    <string name="erroMesInvalido">Por favor digite um mes valido</string>
-    <string name="erroAnoInvalido">Por favor digite um ano valido</string>
-    <string name="erroHoraInvalido">Por favor digite uma hora valido</string>
-    <string name="erroMinutoInvalido">Por favor digite um minuto valido</string>
-    
+    <string name="tiedt_nome_evento">Nome Evento</string>
+    <string name="tiedt_descricao">Descrição</string>
+    <string name="tiedt_horario_inicio">Horário de Início</string>
+    <string name="tiedt_horario_termino">Horário de Término</string>
+    <string name="tiedt_vazio">Por favor preencha o campo</string>
+    <string name="tiedt_link_pagina">Link da Página</string>
+    <string name="button_cadastro">Cadastro</string>
+
 </resources>
