@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,10 +17,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +48,10 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
     private static final String KEY_LINKPAGINA = "linkPagina";
 
     private ListView lblEventos;
+    private ArrayAdapter<Evento> listAdapter;
+
+    private Evento[] listViewAdapterContent;
+    private final List<Evento> listEvento = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +83,42 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
         listaEventos();
 
+        listViewAdapterContent = listEvento.toArray(new Evento[listEvento.size()]);
+
+        //friendListAdapter = new FriendListAdapter(this, null);
+
+        listAdapter = new ArrayAdapter<Evento>(this, R.layout.activity_list_events, R.id.inputSearch, listViewAdapterContent);
+        EditText filterText;
+
+        lblEventos.setAdapter(listAdapter);
+
+        lblEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // make Toast when click
+                Toast.makeText(getApplicationContext(), "Position " + position, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        filterText = (EditText)findViewById(R.id.inputSearch);
+
+        filterText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i("Info", s.toString());
+                //ListEventsActivity.this.listAdapter.getItem(1).getNome().get
+                ListEventsActivity.this.listAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     @Override
@@ -133,15 +177,16 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
     public void listaEventos() {
 
-        final List<Evento> listEvento = new ArrayList<>();
-
         mAPIServices = RetrofitClient.getAPIService();
 
         mAPIServices.getEventos().enqueue(new Callback<List<Evento>>() {
             @Override
             public void onResponse(Call<List<Evento>> call, Response<List<Evento>> response) {
+                Log.i("info", "Teste: "+response.toString());
                 if (response.isSuccessful()) {
                     listEvento.addAll(response.body());
+
+                    //getEvento(listEvento);
 
                     exibeEventos(listEvento);
 
@@ -152,7 +197,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
             @Override
             public void onFailure(Call<List<Evento>> call, Throwable t) {
-                Log.e("ERROR", "Unable to submit post to API.");
+                Log.e("ERROR", "Can not query get for API.");
             }
         });
     }
@@ -194,4 +239,15 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
         return mAndroidMapList;
     }
+
+    private void getEvento(List<Evento> listEvento){
+        int i = 0;
+        Log.i("info", "Inicio getEvento()");
+
+        for(Evento evento : listEvento){
+            listViewAdapterContent[i] = evento;
+        }
+
+    }
+
 }

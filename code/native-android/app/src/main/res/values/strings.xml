@@ -108,4 +108,5 @@
     <string name="tiedt_vazio">Por favor preencha o campo</string>
     <string name="tiedt_link_pagina">Link da Página</string>
     <string name="button_cadastro">Cadastro</string>
+    <string name="title_activity_alpmys_principal">activity_alpmys_principal</string>
 </resources>
