@@ -9,8 +9,6 @@ namespace RestfulApi.Models
     {
         public AlpmysContext(DbContextOptions<AlpmysContext> options) : base(options) { }
 
-        public DbSet<Event> Events { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<CartaoDeCredito> CartaoDeCredito { get; set; }
         public DbSet<Compra> Compra { get; set; }
         public DbSet<Conquistas> Conquistas { get; set; }
@@ -34,7 +32,5 @@ namespace RestfulApi.Models
         public DbSet<TipoIngresso> TipoIngresso { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<WishList> WishList { get; set; }
-
-
     }
 }

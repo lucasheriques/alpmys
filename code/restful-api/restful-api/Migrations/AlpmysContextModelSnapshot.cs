@@ -18,7 +18,7 @@ namespace restfulapi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("RestfulApi.Models.CartaoDeCredito", b =>
@@ -28,9 +28,7 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("Bandeira");
 
-                    b.Property<char>("CodigoDeSeguranca");
-
-                    b.Property<long>("CompraID");
+                    b.Property<int>("CodigoDeSeguranca");
 
                     b.Property<string>("NomeImpressoCartao");
 
@@ -41,8 +39,6 @@ namespace restfulapi.Migrations
                     b.Property<DateTime>("Validade");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompraID");
 
                     b.HasIndex("UsuarioId");
 
@@ -60,8 +56,6 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("FormaPagamento");
 
-                    b.Property<long>("IngressoId");
-
                     b.Property<int>("QuantidadeIngressos");
 
                     b.Property<string>("Status");
@@ -70,11 +64,7 @@ namespace restfulapi.Migrations
 
                     b.Property<float>("ValorCompra");
 
-                    b.Property<float>("ValorUnitario");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("IngressoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -143,42 +133,6 @@ namespace restfulapi.Migrations
                     b.ToTable("Contato");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Contem", b =>
-                {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("IngressoId");
-
-                    b.Property<long>("PromocaoId");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("IngressoId");
-
-                    b.HasIndex("PromocaoId");
-
-                    b.ToTable("Contem");
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Cria", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("OrganizadorId");
-
-                    b.Property<long>("UsuarioId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizadorId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Cria");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Endereco", b =>
                 {
                     b.Property<long>("Id")
@@ -192,8 +146,6 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("Complemento");
 
-                    b.Property<long>("LocalId");
-
                     b.Property<string>("Logradouro");
 
                     b.Property<int>("Numero");
@@ -204,29 +156,9 @@ namespace restfulapi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocalId");
-
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Endereco");
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Event", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.Property<long>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("RestfulApi.Models.Evento", b =>
@@ -263,18 +195,6 @@ namespace restfulapi.Migrations
                     b.ToTable("Evento");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Historico_Eventos", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DataEvento");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Historico_Eventos");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Ingresso", b =>
                 {
                     b.Property<long>("Id")
@@ -285,10 +205,6 @@ namespace restfulapi.Migrations
                     b.Property<string>("Email");
 
                     b.Property<long>("EventoID");
-
-                    b.Property<long?>("Historico_EventosId1");
-
-                    b.Property<long?>("Historico_EventosIdId");
 
                     b.Property<string>("Nome");
 
@@ -305,10 +221,6 @@ namespace restfulapi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EventoID");
-
-                    b.HasIndex("Historico_EventosId1");
-
-                    b.HasIndex("Historico_EventosIdId");
 
                     b.HasIndex("OrganizadorId");
 
@@ -328,29 +240,15 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("Descricao");
 
+                    b.Property<long>("EnderecoId");
+
                     b.Property<string>("Nome");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EnderecoId");
+
                     b.ToTable("Local");
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Participa", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("SorteioId");
-
-                    b.Property<long>("UsuarioId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SorteioId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Participa");
                 });
 
             modelBuilder.Entity("RestfulApi.Models.Pontos", b =>
@@ -369,16 +267,6 @@ namespace restfulapi.Migrations
                     b.ToTable("Pontos");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Possui", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Possui");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Promocao", b =>
                 {
                     b.Property<long>("Id")
@@ -386,7 +274,7 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("CodigoPromocional");
 
-                    b.Property<long>("OrganizadorId");
+                    b.Property<long>("EventoId");
 
                     b.Property<int>("PorcentagemDeDesconto");
 
@@ -394,7 +282,7 @@ namespace restfulapi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizadorId");
+                    b.HasIndex("EventoId");
 
                     b.ToTable("Promocao");
                 });
@@ -483,20 +371,6 @@ namespace restfulapi.Migrations
                     b.ToTable("TipoIngresso");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.User", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Usuario", b =>
                 {
                     b.Property<long>("Id")
@@ -511,8 +385,6 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<long>("Historico_EventosId");
-
                     b.Property<string>("Nome");
 
                     b.Property<bool>("Organizador");
@@ -523,23 +395,53 @@ namespace restfulapi.Migrations
 
                     b.Property<string>("Sobrenome");
 
-                    b.Property<long?>("SorteioId");
-
                     b.Property<long>("WishListId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Historico_EventosId");
-
                     b.HasIndex("PontosId");
-
-                    b.HasIndex("SorteioId");
 
                     b.HasIndex("WishListId");
 
                     b.ToTable("Usuario");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+                });
+
+            modelBuilder.Entity("RestfulApi.Models.UsuarioCartaoDeCredito", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long?>("CartaoDeCreditoId");
+
+                    b.Property<long?>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartaoDeCreditoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Possui");
+                });
+
+            modelBuilder.Entity("RestfulApi.Models.UsuarioSorteio", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("SorteioId");
+
+                    b.Property<long>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SorteioId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Participa");
                 });
 
             modelBuilder.Entity("WishList", b =>
@@ -573,11 +475,6 @@ namespace restfulapi.Migrations
 
             modelBuilder.Entity("RestfulApi.Models.CartaoDeCredito", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Compra", "Compra")
-                        .WithMany()
-                        .HasForeignKey("CompraID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("RestfulApi.Models.Usuario")
                         .WithMany("CartaoDeCredito")
                         .HasForeignKey("UsuarioId");
@@ -585,11 +482,6 @@ namespace restfulapi.Migrations
 
             modelBuilder.Entity("RestfulApi.Models.Compra", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Ingresso", "Ingresso")
-                        .WithMany()
-                        .HasForeignKey("IngressoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("RestfulApi.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
@@ -612,50 +504,11 @@ namespace restfulapi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Contem", b =>
-                {
-                    b.HasOne("RestfulApi.Models.Ingresso", "Ingresso")
-                        .WithMany()
-                        .HasForeignKey("IngressoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RestfulApi.Models.Promocao", "Promocao")
-                        .WithMany()
-                        .HasForeignKey("PromocaoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Cria", b =>
-                {
-                    b.HasOne("RestfulApi.Models.Organizador", "Organizador")
-                        .WithMany()
-                        .HasForeignKey("OrganizadorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RestfulApi.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Endereco", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Local", "Local")
-                        .WithMany()
-                        .HasForeignKey("LocalId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("RestfulApi.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Event", b =>
-                {
-                    b.HasOne("RestfulApi.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -684,14 +537,6 @@ namespace restfulapi.Migrations
                         .HasForeignKey("EventoID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestfulApi.Models.Historico_Eventos", "Historico_Eventos")
-                        .WithMany()
-                        .HasForeignKey("Historico_EventosId1");
-
-                    b.HasOne("RestfulApi.Models.Historico_Eventos", "Historico_EventosId")
-                        .WithMany()
-                        .HasForeignKey("Historico_EventosIdId");
-
                     b.HasOne("RestfulApi.Models.Organizador", "Organizador")
                         .WithMany()
                         .HasForeignKey("OrganizadorId")
@@ -708,24 +553,19 @@ namespace restfulapi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Participa", b =>
+            modelBuilder.Entity("RestfulApi.Models.Local", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Sorteio", "Sorteio")
+                    b.HasOne("RestfulApi.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("SorteioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RestfulApi.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RestfulApi.Models.Promocao", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Organizador", "Organizador")
+                    b.HasOne("RestfulApi.Models.Evento", "Evento")
                         .WithMany()
-                        .HasForeignKey("OrganizadorId")
+                        .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -747,23 +587,38 @@ namespace restfulapi.Migrations
 
             modelBuilder.Entity("RestfulApi.Models.Usuario", b =>
                 {
-                    b.HasOne("RestfulApi.Models.Historico_Eventos", "Historico_Eventos")
-                        .WithMany()
-                        .HasForeignKey("Historico_EventosId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("RestfulApi.Models.Pontos", "Pontos")
                         .WithMany()
                         .HasForeignKey("PontosId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RestfulApi.Models.Sorteio")
-                        .WithMany("Usuario")
-                        .HasForeignKey("SorteioId");
-
                     b.HasOne("WishList", "WishList")
                         .WithMany()
                         .HasForeignKey("WishListId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RestfulApi.Models.UsuarioCartaoDeCredito", b =>
+                {
+                    b.HasOne("RestfulApi.Models.CartaoDeCredito", "CartaoDeCredito")
+                        .WithMany()
+                        .HasForeignKey("CartaoDeCreditoId");
+
+                    b.HasOne("RestfulApi.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+                });
+
+            modelBuilder.Entity("RestfulApi.Models.UsuarioSorteio", b =>
+                {
+                    b.HasOne("RestfulApi.Models.Sorteio", "Sorteio")
+                        .WithMany()
+                        .HasForeignKey("SorteioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RestfulApi.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

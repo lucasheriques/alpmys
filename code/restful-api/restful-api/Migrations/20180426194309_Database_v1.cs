@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Avaliacao = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     OrganizadorId = table.Column<long>(nullable: false)
@@ -28,7 +29,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataVencimento = table.Column<DateTime>(nullable: false),
                     PontosAExpirar = table.Column<float>(nullable: false),
                     Valor = table.Column<float>(nullable: false)
@@ -43,7 +44,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Tipo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -56,7 +57,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     IngressosRestante = table.Column<int>(nullable: false),
                     NumeroLote = table.Column<int>(nullable: false),
@@ -71,51 +72,16 @@ namespace restfulapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Email = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "WishList",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WishList", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Events_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,7 +93,7 @@ namespace restfulapi.Migrations
                     Responsavel = table.Column<string>(nullable: true),
                     UrlSite = table.Column<string>(nullable: true),
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Cpf = table.Column<string>(nullable: true),
                     DataNascimento = table.Column<DateTime>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
@@ -161,7 +127,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Bandeira = table.Column<string>(nullable: true),
                     CodigoDeSeguranca = table.Column<int>(nullable: false),
                     NomeImpressoCartao = table.Column<string>(nullable: true),
@@ -185,7 +151,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataCompra = table.Column<DateTime>(nullable: false),
                     DataVencimento = table.Column<DateTime>(nullable: false),
                     FormaPagamento = table.Column<string>(nullable: true),
@@ -210,7 +176,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Agencia = table.Column<string>(nullable: true),
                     Banco = table.Column<string>(nullable: true),
                     Cnpj = table.Column<int>(nullable: false),
@@ -236,7 +202,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     OrganizadorId = table.Column<long>(nullable: false),
                     Responsavel = table.Column<string>(nullable: true),
                     tipoContato = table.Column<string>(nullable: true)
@@ -257,7 +223,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Bairro = table.Column<string>(nullable: true),
                     Cep = table.Column<string>(nullable: true),
                     Cidade = table.Column<string>(nullable: true),
@@ -283,7 +249,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataFim = table.Column<DateTime>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     HorarioFim = table.Column<DateTime>(nullable: false),
@@ -310,7 +276,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CartaoDeCreditoId = table.Column<long>(nullable: true),
                     UsuarioId = table.Column<long>(nullable: true)
                 },
@@ -336,7 +302,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ContatoId = table.Column<long>(nullable: false),
                     Ddd = table.Column<string>(nullable: true),
                     NumeroTelefone = table.Column<string>(nullable: true)
@@ -357,7 +323,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CapacidadeDePessoas = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     EnderecoId = table.Column<long>(nullable: false),
@@ -379,7 +345,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SorteioId = table.Column<long>(nullable: false),
                     UsuarioId = table.Column<long>(nullable: false)
                 },
@@ -405,7 +371,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Data = table.Column<DateTime>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     HorarioInicio = table.Column<DateTime>(nullable: false),
@@ -444,7 +410,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CodigoPromocional = table.Column<string>(nullable: true),
                     EventoId = table.Column<long>(nullable: false),
                     PorcentagemDeDesconto = table.Column<int>(nullable: false),
@@ -466,7 +432,7 @@ namespace restfulapi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Celular = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     EventoID = table.Column<long>(nullable: false),
@@ -545,11 +511,6 @@ namespace restfulapi.Migrations
                 name: "IX_Evento_TipoDeEventoId",
                 table: "Evento",
                 column: "TipoDeEventoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_UserId",
-                table: "Events",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingresso_EventoID",
@@ -634,9 +595,6 @@ namespace restfulapi.Migrations
                 name: "ContaBancaria");
 
             migrationBuilder.DropTable(
-                name: "Events");
-
-            migrationBuilder.DropTable(
                 name: "Ingresso");
 
             migrationBuilder.DropTable(
@@ -647,9 +605,6 @@ namespace restfulapi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Telefone");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Promocao");

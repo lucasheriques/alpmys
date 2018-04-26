@@ -3,21 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
-using MySql.Data.EntityFrameworkCore.Storage.Internal;
 using RestfulApi.Models;
 using System;
 
 namespace restfulapi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
-    [Migration("20180421170651_Database_v1")]
+    [Migration("20180426194309_Database_v1")]
     partial class Database_v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("RestfulApi.Models.CartaoDeCredito", b =>
@@ -158,24 +160,6 @@ namespace restfulapi.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Endereco");
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Event", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.Property<long>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("RestfulApi.Models.Evento", b =>
@@ -388,20 +372,6 @@ namespace restfulapi.Migrations
                     b.ToTable("TipoIngresso");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.User", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Usuario", b =>
                 {
                     b.Property<long>("Id")
@@ -540,14 +510,6 @@ namespace restfulapi.Migrations
                     b.HasOne("RestfulApi.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Event", b =>
-                {
-                    b.HasOne("RestfulApi.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
