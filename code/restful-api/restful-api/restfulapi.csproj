@@ -5,13 +5,6 @@
     <ApplicationInsightsAnnotationResourceId>/subscriptions/5f74136d-abc1-4178-96b2-8533b782a0cd/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/restfulapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\EventoesController.cs" />
-    <Compile Remove="Models\Contem.cs" />
-    <Compile Remove="Models\InstituicaoFinanceira.cs" />
-    <Compile Remove="Models\Realiza.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
