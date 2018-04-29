@@ -88,7 +88,8 @@ public class activity_alpmys_principal extends AppCompatActivity
             startActivity(listEventActivity);
         }
         else if(id == R.id.nav_principal){
-
+            Intent mainsActivity = new Intent(this, AlpmysMainActivity.class);
+            startActivity(mainsActivity);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
