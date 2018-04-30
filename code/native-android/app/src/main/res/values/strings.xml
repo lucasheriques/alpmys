@@ -6,7 +6,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_cadastro_evento">Cadastro de Evento</string>
-    <string name="title_activity_list_events">ListEventsActivity</string>
     <string name="title_activity_list_events">Listar Eventos</string>
     <string name="app_label">Procurar</string>
     <string name="search_hint">Localizar</string>

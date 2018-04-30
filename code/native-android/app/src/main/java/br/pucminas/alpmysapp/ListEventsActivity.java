@@ -25,7 +25,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -113,6 +116,9 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 Log.i("Info", s.toString());
                 //ListEventsActivity.this.listAdapter.getItem(1).getNome().get
                 ListEventsActivity.this.listAdapter.getFilter().filter(s);
+
+                ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
+                ListEventsActivity.this.lblEventos.setFilterText(s.toString());
             }
 
             @Override
@@ -186,6 +192,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 if (response.isSuccessful()) {
                     listEvento.addAll(response.body());
 
+                    formataData();
+
                     //getEvento(listEvento);
 
                     exibeEventos(listEvento);
@@ -200,6 +208,33 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 Log.e("ERROR", "Can not query get for API.");
             }
         });
+    }
+
+    private void formataData(){
+        for(Evento evento : listEvento){
+            SimpleDateFormat sdfSource = new SimpleDateFormat(
+                    "dd-MM-yyyy");
+
+            SimpleDateFormat sdfSourceHour = new SimpleDateFormat(
+                    "h:mm a");
+
+            // parse the string into Date object
+            try {
+                Date date = sdfSource.parse(evento.getData());
+                evento.setData(sdfSource.format(date));
+
+                String strHora = evento.getHorarioInicio().substring(11, 19);
+
+                evento.setHorarioInicio(strHora);
+
+                strHora = evento.getHorarioTermino().substring(11, 19);
+
+                evento.setHorarioTermino(strHora);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void exibeEventos(List<Evento> listEvento){

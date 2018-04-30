@@ -27,4 +27,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\EventoesController.cs" />
+  </ItemGroup>
 </Project>

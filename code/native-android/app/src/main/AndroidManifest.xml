@@ -30,7 +30,11 @@
         <activity
             android:name=".activity_alpmys_principal"
             android:label="@string/title_activity_alpmys_principal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".CadastroEventoActivity"
+            android:label="@string/title_activity_cadastro_evento"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
