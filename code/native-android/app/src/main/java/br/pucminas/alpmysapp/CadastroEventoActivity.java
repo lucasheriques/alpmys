@@ -1,13 +1,16 @@
 package br.pucminas.alpmysapp;
 
+
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -15,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,8 +28,12 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 
 import api.APIServices;
 
@@ -37,6 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.time.LocalDateTime.of;
+
 
 public class CadastroEventoActivity extends AppCompatActivity {
     private FloatingActionButton fab;
@@ -45,6 +53,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
     private Button buttonCadastro;
     private APIServices mAPIServices;
     private Evento evento=new Evento();
+    private String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -86,7 +95,12 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtHoraTermino=(TextInputEditText) findViewById(R.id.tiedtHorarioTermino);
         tiedtLinkPagina=(TextInputEditText) findViewById(R.id.tiedtLinkPagina);
         buttonCadastro=(Button) findViewById(R.id.buttonCadastro);
-
+        tiedtHoraInicio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                buttonCadastro.setEnabled(validaForm());
+            }
+        });
         tiedtHoraInicio.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -96,21 +110,43 @@ public class CadastroEventoActivity extends AppCompatActivity {
                 int mes=calendar.get(Calendar.MONTH);
                 int dia=calendar.get(Calendar.DAY_OF_MONTH);
                 int hora=calendar.get(Calendar.HOUR_OF_DAY);
-                int minuto=calendar.get(Calendar.MINUTE);
+                final int minuto=calendar.get(Calendar.MINUTE);
                 final TimePickerDialog timePickerDialog2=new TimePickerDialog(CadastroEventoActivity.this, new TimePickerDialog.OnTimeSetListener() {
+
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
-                        tiedtHoraInicio.setText(hora+":"+minuto+" do dia "+tiedtHoraInicio.getText().toString());
+                        calendar.set(Calendar.HOUR_OF_DAY,hora);
+                        calendar.set(Calendar.MINUTE,minuto);
+                        SimpleDateFormat simpleDateFormat= new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+                        Date data=calendar.getTime();
+                        simpleDateFormat.format(data);
+                        tiedtHoraInicio.setText(simpleDateFormat.format(data));
+                        String dataText [] =simpleDateFormat.format(data).split(" ");
+                        evento.setHorarioInicio(dataText[0]+"T"+dataText[1]+".00Z");
+
+
+
                     }
                 },hora,minuto,true);
                 DatePickerDialog datePickerDialog=new DatePickerDialog(CadastroEventoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                         timePickerDialog2.show();
-                        tiedtHoraInicio.setText(+dia+"/"+mes+"/"+ano);
+                        calendar.set(Calendar.YEAR, ano);
+                        calendar.set(Calendar.MONTH, mes);
+                        calendar.set(Calendar.DAY_OF_MONTH, dia);
+
                     }
                 },ano,mes,dia);
                 datePickerDialog.show();
+
+
+            }
+        });
+        tiedtHoraTermino.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                buttonCadastro.setEnabled(validaForm());
             }
         });
         tiedtHoraTermino.setOnClickListener(new View.OnClickListener() {
@@ -126,22 +162,33 @@ public class CadastroEventoActivity extends AppCompatActivity {
                 final TimePickerDialog timePickerDialog=new TimePickerDialog(CadastroEventoActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
-                        tiedtHoraTermino.setText(hora+":"+minuto+" do dia "+tiedtHoraTermino.getText().toString());
+                        calendar.set(Calendar.HOUR_OF_DAY,hora);
+                        calendar.set(Calendar.MINUTE,minuto);
+                        SimpleDateFormat simpleDateFormat= new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+                        Date data=calendar.getTime();
+                        tiedtHoraTermino.setText(simpleDateFormat.format(data));
+                        String dataText [] =simpleDateFormat.format(data).split(" ");
+                        evento.setHorarioTermino(dataText[0]+"T"+dataText[1]+".00Z");
+
                     }
                 },hora,minuto,true);
                 DatePickerDialog datePickerDialog=new DatePickerDialog(CadastroEventoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                         timePickerDialog.show();
-                        tiedtHoraTermino.setText(+dia+"/"+mes+"/"+ano);
+                        calendar.set(Calendar.YEAR, ano);
+                        calendar.set(Calendar.MONTH, mes);
+                        calendar.set(Calendar.DAY_OF_MONTH, dia);
                     }
                 },ano,mes,dia);
                 datePickerDialog.show();
+
             }
         });
         tiedtNomeEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                buttonCadastro.setEnabled(validaForm());
                 try{
                     evento.setNome(tiedtNomeEvento.getText().toString());
                 }catch (IllegalArgumentException iae){
@@ -153,6 +200,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtDescricao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                buttonCadastro.setEnabled(validaForm());
                 try{
                     evento.setDescricao(tiedtDescricao.getText().toString());
                 }catch (IllegalArgumentException iae){
@@ -163,7 +211,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtLinkPagina.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                buttonCadastro.setEnabled(validaForm());
             }
         });
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
@@ -189,14 +237,18 @@ public class CadastroEventoActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<Evento> call, Throwable t) {
                         Log.e("ERROR", "Unable to submit post to API.");
-                        tiedtDescricao.setText("falhow");
                     }
                 });
 
             }
         });
     }
-
+    public boolean validaForm(){
+        if(tiedtNomeEvento.getText().toString().isEmpty()&&tiedtHoraTermino.getText().toString().isEmpty()&&tiedtHoraInicio.getText().toString().isEmpty()&&tiedtLinkPagina.getText().toString().isEmpty()&&tiedtDescricao.getText().toString().isEmpty()){
+            return false;
+        }
+        return true;
+    }
     public void adicionarImagem(String link){
         try {
             Uri uri = Uri.parse(link);
