@@ -58,7 +58,10 @@ public class Evento {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        if(nome.isEmpty())
+            throw new IllegalArgumentException();
+        else
+            this.nome = nome;
     }
 
     public String getDescricao() {
@@ -66,7 +69,10 @@ public class Evento {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        if(descricao.isEmpty())
+            throw new IllegalArgumentException();
+        else
+            this.descricao = descricao;
     }
 
     public String getData() {
