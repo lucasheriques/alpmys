@@ -1,12 +1,14 @@
 package api;
-import models.Evento;
+
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
+import java.util.List;
+import br.pucminas.alpmysapp.models.*;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-import java.util.List;
 
 public interface APIServices {
     @GET("eventos")
@@ -14,4 +16,10 @@ public interface APIServices {
 
     @POST("eventos")
     Call<Evento> createEvento(@Body Evento evento);
+
+    @GET("usuarios")
+    Call<List<Usuario>> getUsuarios();
+
+    @POST("usuarios")
+    Call<Usuario> createUsuario(@Body Usuario user);
 }

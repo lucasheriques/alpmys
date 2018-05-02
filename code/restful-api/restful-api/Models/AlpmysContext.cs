@@ -33,7 +33,5 @@ namespace RestfulApi.Models
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<WishList> WishList { get; set; }
         public DbSet<Evento> Eventos { get; set;}
-        public DbSet<Event> Events { get; set; }
-        public DbSet<User> Users { get; set; }
     }
 }

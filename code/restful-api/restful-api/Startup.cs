@@ -25,8 +25,7 @@ namespace RestfulApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("AlpmysContext");
-           services.AddDbContext<AlpmysContext>(options => options.UseMySql(connectionString));
-
+        	services.AddDbContext<AlpmysContext>(options => options.UseMySql(connectionString));
             services.AddMvc();
         }
 

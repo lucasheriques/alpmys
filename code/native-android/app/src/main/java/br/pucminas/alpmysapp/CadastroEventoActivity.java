@@ -40,7 +40,7 @@ import java.util.Date;
 import api.APIServices;
 
 import api.RetrofitClient;
-import models.Evento;
+import br.pucminas.alpmysapp.models.Evento;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

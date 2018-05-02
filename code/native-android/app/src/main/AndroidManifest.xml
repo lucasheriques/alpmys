@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.pucminas.alpmysapp">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,10 +21,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CadastroUsuarioActivity" />
+        <activity android:name=".list_itemActivity" />
+        <activity
+            android:name=".ListEventsActivity"
+            android:label="@string/title_activity_list_events"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_alpmys_principal"
+            android:label="@string/title_activity_alpmys_principal"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".CadastroEventoActivity"
             android:label="@string/title_activity_cadastro_evento"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
