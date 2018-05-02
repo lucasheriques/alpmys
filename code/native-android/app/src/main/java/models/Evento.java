@@ -102,6 +102,10 @@ public class Evento {
     }
 
     public void setLinkPagina(String linkPagina) {
+        if(linkPagina.isEmpty())
+            throw  new IllegalArgumentException();
+        else
+
         this.linkPagina = linkPagina;
     }
 

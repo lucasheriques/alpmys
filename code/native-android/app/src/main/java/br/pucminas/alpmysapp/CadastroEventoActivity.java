@@ -16,7 +16,9 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -95,10 +97,28 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtHoraTermino=(TextInputEditText) findViewById(R.id.tiedtHorarioTermino);
         tiedtLinkPagina=(TextInputEditText) findViewById(R.id.tiedtLinkPagina);
         buttonCadastro=(Button) findViewById(R.id.buttonCadastro);
+        tiedtHoraInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                buttonCadastro.setEnabled(validaForm());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         tiedtHoraInicio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                buttonCadastro.setEnabled(validaForm());
+                if(tiedtHoraInicio.getText().toString().isEmpty()){
+                    tiedtHoraInicio.setError(getBaseContext().getString(R.string.tiedt_vazio));
+                }
             }
         });
         tiedtHoraInicio.setOnClickListener(new View.OnClickListener(){
@@ -110,7 +130,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
                 int mes=calendar.get(Calendar.MONTH);
                 int dia=calendar.get(Calendar.DAY_OF_MONTH);
                 int hora=calendar.get(Calendar.HOUR_OF_DAY);
-                final int minuto=calendar.get(Calendar.MINUTE);
+                int minuto=calendar.get(Calendar.MINUTE);
                 final TimePickerDialog timePickerDialog2=new TimePickerDialog(CadastroEventoActivity.this, new TimePickerDialog.OnTimeSetListener() {
 
                     @Override
@@ -146,7 +166,25 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtHoraTermino.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                if(tiedtHoraTermino.getText().toString().isEmpty()){
+                    tiedtHoraTermino.setError(getBaseContext().getString(R.string.tiedt_vazio));
+                }
+            }
+        });
+        tiedtHoraTermino.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 buttonCadastro.setEnabled(validaForm());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
         tiedtHoraTermino.setOnClickListener(new View.OnClickListener() {
@@ -188,30 +226,59 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtNomeEvento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                if(tiedtNomeEvento.getText().toString().isEmpty()){
+                    tiedtNomeEvento.setError(getBaseContext().getString(R.string.tiedt_vazio));
+                }
+            }
+        });
+        tiedtNomeEvento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 buttonCadastro.setEnabled(validaForm());
                 try{
                     evento.setNome(tiedtNomeEvento.getText().toString());
                 }catch (IllegalArgumentException iae){
                     tiedtNomeEvento.setError(getBaseContext().getString(R.string.tiedt_vazio));
                 }
+                buttonCadastro.setEnabled(validaForm());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
         tiedtDescricao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                buttonCadastro.setEnabled(validaForm());
+                if(tiedtDescricao.getText().toString().isEmpty()){
+                    tiedtDescricao.setError(getBaseContext().getString(R.string.tiedt_vazio));
+                }
+            }
+        });
+        tiedtDescricao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 try{
                     evento.setDescricao(tiedtDescricao.getText().toString());
                 }catch (IllegalArgumentException iae){
                     tiedtDescricao.setError(getBaseContext().getString(R.string.tiedt_vazio));
                 }
-            }
-        });
-        tiedtLinkPagina.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
                 buttonCadastro.setEnabled(validaForm());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +311,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         });
     }
     public boolean validaForm(){
-        if(tiedtNomeEvento.getText().toString().isEmpty()&&tiedtHoraTermino.getText().toString().isEmpty()&&tiedtHoraInicio.getText().toString().isEmpty()&&tiedtLinkPagina.getText().toString().isEmpty()&&tiedtDescricao.getText().toString().isEmpty()){
+        if(tiedtNomeEvento.getText().toString().isEmpty()||tiedtHoraTermino.getText().toString().isEmpty()||tiedtHoraInicio.getText().toString().isEmpty()||tiedtDescricao.getText().toString().isEmpty()){
             return false;
         }
         return true;
