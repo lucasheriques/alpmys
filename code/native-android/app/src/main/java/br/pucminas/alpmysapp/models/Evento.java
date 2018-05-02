@@ -44,6 +44,18 @@ public class Evento {
     @SerializedName("tipoDeEvento")
     @Expose
     private TipoDeEvento tipoDeEvento;
+    @SerializedName("cidade")
+    @Expose
+    private String cidade;
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
 
     public Integer getId() {
         return id;
