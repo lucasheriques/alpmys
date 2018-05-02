@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\code",
+    "\\code\\restful-api",
+    "\\code\\restful-api\\restful-api",
+    "\\code\\restful-api\\restful-api\\Connected Services",
+    "\\code\\restful-api\\restful-api\\Controllers",
+    "\\code\\restful-api\\restful-api\\Migrations",
+    "\\code\\restful-api\\restful-api\\Models",
+    "\\code\\restful-api\\restful-api\\Properties"
+  ],
+  "SelectedNode": "\\code\\restful-api\\restful-api\\Models\\Evento.cs",
+  "PreviewInSolutionExplorer": false
+}
