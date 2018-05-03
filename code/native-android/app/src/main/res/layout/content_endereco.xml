@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".EnderecoActivity"
+    tools:showIn="@layout/activity_endereco">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonContinuar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="@+id/tilCEP"
+            app:layout_constraintStart_toStartOf="@+id/tilCEP"
+            app:layout_constraintTop_toBottomOf="@+id/tilCEP" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLogradouro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtLogradouro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_logradouro" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilNumero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilLogradouro"
+            app:layout_constraintStart_toStartOf="@+id/tilLogradouro"
+            app:layout_constraintTop_toBottomOf="@+id/tilLogradouro">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtNumero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_numero" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilComplemento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilNumero"
+            app:layout_constraintStart_toStartOf="@+id/tilNumero"
+            app:layout_constraintTop_toBottomOf="@+id/tilNumero">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtComplemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_complemento" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tielBairro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilComplemento"
+            app:layout_constraintStart_toStartOf="@+id/tilComplemento"
+            app:layout_constraintTop_toBottomOf="@+id/tilComplemento">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtBairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_bairro" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilCidade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tielBairro"
+            app:layout_constraintStart_toStartOf="@+id/tielBairro"
+            app:layout_constraintTop_toBottomOf="@+id/tielBairro">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtCidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_cidade" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilUF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilCidade"
+            app:layout_constraintStart_toStartOf="@+id/tilCidade"
+            app:layout_constraintTop_toBottomOf="@+id/tilCidade">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtUf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_uf" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilCEP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilUF"
+            app:layout_constraintStart_toStartOf="@+id/tilUF"
+            app:layout_constraintTop_toBottomOf="@+id/tilUF">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtCep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_cep" />
+        </android.support.design.widget.TextInputLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
