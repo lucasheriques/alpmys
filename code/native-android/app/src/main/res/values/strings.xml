@@ -130,6 +130,7 @@
     <string name="error_invalid_password">Senha muito pequena</string>
     <string name="error_incorrect_password">Senha incorreta</string>
     <string name="error_field_required">Campo obrigatório</string>
+    <string name="incorrect_passwords">Senhas diferentes</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

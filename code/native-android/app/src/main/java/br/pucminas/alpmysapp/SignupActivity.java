@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,6 +70,7 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private EditText mConfirmPassView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -91,6 +93,7 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
                 return false;
             }
         });
+        mConfirmPassView = findViewById(R.id.confirmPassword);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -161,18 +164,38 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mConfirmPassView.setError(null);
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String confirmPass = mConfirmPassView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(confirmPass)) {
+            mConfirmPassView.setError(getString(R.string.error_field_required));
+            focusView = mConfirmPassView;
+            cancel = true;
+        }
+
+        if (!confirmPass.equals(password)) {
+            mConfirmPassView.setError(getString(R.string.incorrect_passwords));
+            focusView = mConfirmPassView;
             cancel = true;
         }
 
@@ -186,6 +209,8 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
             focusView = mEmailView;
             cancel = true;
         }
+
+        Log.e("passowrd", ": " + cancel);
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -229,7 +254,7 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
     public void successfulLogin() {
-        Intent listEventActivity = new Intent(this, ListEventsActivity.class);
+        Intent listEventActivity = new Intent(this, AlpmysMainActivity.class);
         startActivity(listEventActivity);
     }
 
