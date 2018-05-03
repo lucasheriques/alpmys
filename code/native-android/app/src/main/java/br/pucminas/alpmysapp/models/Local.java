@@ -19,7 +19,12 @@ public class Local implements Serializable{
     @SerializedName("descricao")
     @Expose
     private String descricao;
-
+    @SerializedName("enderecoId")
+    @Expose
+    private Integer enderecoId;
+    @SerializedName("endereco")
+    @Expose
+    private Endereco endereco;
     public Integer getId() {
         return id;
     }
@@ -58,4 +63,19 @@ public class Local implements Serializable{
         this.descricao = descricao;
     }
 
+    public Integer getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(Integer enderecoId) {
+        this.enderecoId = enderecoId;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }

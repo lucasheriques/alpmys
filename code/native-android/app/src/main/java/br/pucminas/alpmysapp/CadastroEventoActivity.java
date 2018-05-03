@@ -98,6 +98,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtHoraTermino=(TextInputEditText) findViewById(R.id.tiedtHorarioTermino);
         tiedtLinkPagina=(TextInputEditText) findViewById(R.id.tiedtLinkPagina);
         buttonCadastro=(Button) findViewById(R.id.buttonCadastro);
+        buttonCadastro.setEnabled(false);
         tiedtHoraInicio.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
