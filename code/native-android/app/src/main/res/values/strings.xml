@@ -108,7 +108,7 @@
     <string name="tiedt_link_pagina">Link da Página</string>
     <string name="button_cadastro">Cadastro</string>
     <string name="title_activity_alpmys_principal">activity_alpmys_principal</string>
-    <string name="title_activity_endereco">EnderecoActivity</string>
+    <string name="title_activity_endereco">Cadastro de Endereço</string>
     <string name="tiedt_nome_local">Nome do local</string>
     <string name="tiedt_capacidade_pessoas">Capacidade de pessoas</string>
     <string name="tiedt_logradouro">Logradouro</string>
@@ -119,4 +119,19 @@
     <string name="tiedt_uf">Uf</string>
     <string name="tiedt_cep">Cep</string>
 
+    <string name="title_activity_login">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Cadastre-se</string>
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_invalid_password">Senha muito pequena</string>
+    <string name="error_incorrect_password">Senha incorreta</string>
+    <string name="error_field_required">Campo obrigatório</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="google_client_id">19663019060-7suio6botpdv9j1dc6emkai43apem1b4.apps.googleusercontent.com</string>
 </resources>
