@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -17,7 +18,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".LoginActivity">
+        tools:context=".SignupActivity">
 
         <!-- Login progress -->
         <ProgressBar
@@ -44,7 +45,7 @@
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-                        android:id="@+id/email"
+                        android:id="@+id/signin_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_email"
@@ -59,7 +60,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/signin_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
@@ -76,16 +77,33 @@
                     android:id="@+id/email_sign_in_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_in"
+                    android:background="@color/colorPrimary"
+                    android:onClick="formSignIn"
+                    android:text="@string/title_activity_login"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/sign_in_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.gms.common.SignInButton>
+
+                <Button
+                    android:id="@+id/btn_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@color/colorAccent"
+                    android:onClick="formSignUp"
+                    android:text="Cadastre-se"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package br.pucminas.alpmysapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -32,12 +33,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.APIServices;
+import api.RetrofitClient;
+import br.pucminas.alpmysapp.models.Usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class SignupActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    private APIServices mAPIServices;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -65,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -185,6 +195,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+            Usuario user = new Usuario(email, password);
+            mAPIServices = RetrofitClient.getAPIService();
+
+            mAPIServices.createUsuario(user).enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    if (response.isSuccessful())
+                        successfulLogin();
+
+                    else
+                        showSnackbar(findViewById(R.id.login_layout), "Falha na criação do usuário", 3000);
+                }
+
+                @Override
+                public void onFailure(Call<Usuario> call, Throwable t) {
+                    showSnackbar(findViewById(R.id.login_layout), "Falha na conexão com a API", 3000);
+                }
+            });
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
@@ -197,7 +225,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 2;
+    }
+
+    public void successfulLogin() {
+        Intent listEventActivity = new Intent(this, ListEventsActivity.class);
+        startActivity(listEventActivity);
     }
 
     /**
@@ -273,7 +306,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(SignupActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -345,6 +378,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
+
     }
+    public void showSnackbar(View view, String message, int duration) {
+            // Create snackbar
+            final Snackbar snackbar = Snackbar.make(view, message, duration);
+
+            // Set an action on it, and a handler
+            snackbar.setAction("DISMISS", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    snackbar.dismiss();
+                }
+            });
+
+            snackbar.show();
+        }
 }
 

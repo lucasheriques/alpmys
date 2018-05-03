@@ -45,6 +45,29 @@ namespace RestfulApi.Controllers
 
             return Ok(usuario);
         }
+        
+        [HttpPost("search")]
+        public async Task<IActionResult> GetUsuarioByEmail([FromBody] Usuario user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Email == user.Email);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            if (user.Senha != null && usuario.Senha != user.Senha)
+            {
+                return NotFound();
+            }
+
+            return Ok(usuario);
+        }
 
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]

@@ -46,7 +46,7 @@
             android:label="@string/title_activity_endereco"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".SignupActivity"
             android:label="@string/title_activity_login"></activity>
     </application>
 
