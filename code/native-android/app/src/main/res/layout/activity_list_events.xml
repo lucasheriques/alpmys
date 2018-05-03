@@ -29,7 +29,20 @@
             android:hint="Procurar eventos.."
             android:inputType="textVisiblePassword"
             />
-
+        <EditText android:id="@+id/inputSearchCity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="Procurar por Cidade.."
+            android:inputType="textVisiblePassword"
+            />
+        <EditText android:id="@+id/inputSearchDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:hint="Filtrar por data (dd-mm-yyyy).."
+            android:inputType="textVisiblePassword"
+            />
         <ListView
             android:id="@+id/list_view"
             android:layout_width="wrap_content"

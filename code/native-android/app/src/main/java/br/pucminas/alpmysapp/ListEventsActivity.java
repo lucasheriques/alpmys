@@ -45,6 +45,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
     private static final String KEY_NOME = "nome";
     private static final String KEY_DATA = "data";
+    private static final String KEY_CIDADE = "cidade";
     private static final String KEY_DESCRICAO = "descricao";
     private static final String KEY_HORARIOINICIO = "horarioInicio";
     private static final String KEY_HORARIOTERMINO = "horarioTermino";
@@ -84,14 +85,17 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
         lblEventos = (ListView) findViewById(R.id.list_view);
 
-        listaEventos();
+        listaEventos(false);
 
         listViewAdapterContent = listEvento.toArray(new Evento[listEvento.size()]);
 
         //friendListAdapter = new FriendListAdapter(this, null);
 
         listAdapter = new ArrayAdapter<Evento>(this, R.layout.activity_list_events, R.id.inputSearch, listViewAdapterContent);
+
         EditText filterText;
+        EditText filterTextCity;
+        EditText filterTextDate;
 
         lblEventos.setAdapter(listAdapter);
 
@@ -114,11 +118,71 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.i("Info", s.toString());
-                //ListEventsActivity.this.listAdapter.getItem(1).getNome().get
-                ListEventsActivity.this.listAdapter.getFilter().filter(s);
+                if(s.toString().isEmpty()){
+                    listaEventos(true);
+                }
+                else{
+                    ListEventsActivity.this.listAdapter.getFilter().filter(s);
 
-                ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
-                ListEventsActivity.this.lblEventos.setFilterText(s.toString());
+                    ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
+                    ListEventsActivity.this.lblEventos.setFilterText(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        filterTextCity = (EditText)findViewById(R.id.inputSearchCity);
+
+        filterTextCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
+                    listaEventos(true);
+                }
+                else {
+
+                    Log.i("Info", s.toString());
+                    //ListEventsActivity.this.listAdapter.getItem(1).getNome().get
+                    ListEventsActivity.this.listAdapter.getFilter().filter(s);
+
+                    ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
+                    ListEventsActivity.this.lblEventos.setFilterText(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        filterTextDate = (EditText)findViewById(R.id.inputSearchDate);
+
+        filterTextDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().isEmpty()){
+                    listaEventos(true);
+                }
+                else {
+
+                    Log.i("Info", s.toString());
+                    //ListEventsActivity.this.listAdapter.getItem(1).getNome().get
+                    ListEventsActivity.this.listAdapter.getFilter().filter(s);
+
+                    ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
+                    ListEventsActivity.this.lblEventos.setFilterText(s.toString());
+                }
             }
 
             @Override
@@ -181,7 +245,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
     }
 
 
-    public void listaEventos() {
+    public void listaEventos(final Boolean reload) {
 
         mAPIServices = RetrofitClient.getAPIService();
 
@@ -190,9 +254,10 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
             public void onResponse(Call<List<Evento>> call, Response<List<Evento>> response) {
                 Log.i("info", "Teste: "+response.toString());
                 if (response.isSuccessful()) {
+                    int i = 0;
                     listEvento.addAll(response.body());
 
-                    formataData();
+                    formataData(reload);
 
                     //getEvento(listEvento);
 
@@ -210,29 +275,31 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         });
     }
 
-    private void formataData(){
-        for(Evento evento : listEvento){
-            SimpleDateFormat sdfSource = new SimpleDateFormat(
-                    "dd-MM-yyyy");
+    private void formataData(Boolean reload){
+        if(!reload){
+            for(Evento evento : listEvento){
+                SimpleDateFormat sdfSource = new SimpleDateFormat(
+                        "dd-MM-yyyy");
 
-            SimpleDateFormat sdfSourceHour = new SimpleDateFormat(
-                    "h:mm a");
+                SimpleDateFormat sdfSourceHour = new SimpleDateFormat(
+                        "h:mm a");
 
-            // parse the string into Date object
-            try {
-                Date date = sdfSource.parse(evento.getData());
-                evento.setData(sdfSource.format(date));
+                // parse the string into Date object
+                try {
+                    Date date = sdfSource.parse(evento.getData());
+                    evento.setData(sdfSource.format(date));
 
-                String strHora = evento.getHorarioInicio().substring(11, 19);
+                    String strHora = evento.getHorarioInicio().substring(11, 19);
 
-                evento.setHorarioInicio(strHora);
+                    evento.setHorarioInicio(strHora);
 
-                strHora = evento.getHorarioTermino().substring(11, 19);
+                    strHora = evento.getHorarioTermino().substring(11, 19);
 
-                evento.setHorarioTermino(strHora);
+                    evento.setHorarioTermino(strHora);
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -245,8 +312,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         List<HashMap<String, String>> mapEvento = listToHash(listEvento);
 
         ListAdapter adapter = new SimpleAdapter(ListEventsActivity.this, mapEvento, R.layout.activity_list_item,
-                new String[] { KEY_NOME, KEY_DATA, KEY_DESCRICAO, KEY_HORARIOINICIO, KEY_HORARIOTERMINO, KEY_LINKPAGINA },
-                new int[] { R.id.nome,R.id.data, R.id.descricao, R.id.horarioInicio, R.id.horarioTermino, R.id.linkPagina });
+                new String[] { KEY_NOME, KEY_CIDADE, KEY_DATA, KEY_DESCRICAO, KEY_HORARIOINICIO, KEY_HORARIOTERMINO, KEY_LINKPAGINA },
+                new int[] { R.id.nome,R.id.cidade, R.id.data, R.id.descricao, R.id.horarioInicio, R.id.horarioTermino, R.id.linkPagina });
 
         lblEventos.setAdapter(adapter);
     }
@@ -258,6 +325,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
             HashMap<String, String> map = new HashMap<>();
 
             map.put(KEY_NOME, "Nome: " + evento.getNome());
+
+            map.put(KEY_CIDADE, "Cidade: " + evento.getCidade());
 
             map.put(KEY_DATA, "Data: " + evento.getData());
 

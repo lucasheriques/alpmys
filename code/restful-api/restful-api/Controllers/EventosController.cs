@@ -21,11 +21,49 @@ namespace RestfulApi.Controllers
             _context = context;
         }
 
-        // GET: api/Eventos
+/*        // GET: api/Eventos
         [HttpGet]
         public IEnumerable<Evento> GetEvento()
         {
             return _context.Evento;
+        }
+*/
+
+        // GET: api/Eventos
+        [HttpGet]
+        public async Task<IActionResult> GetEvento()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            long id = 1;
+            var evento2 = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
+
+            var eventoEndereco = (from evento in _context.Evento
+                                  join local in _context.Local
+                                  on evento.LocalId equals local.Id
+                                  join endereco in _context.Endereco
+                                  on local.EnderecoId equals endereco.Id
+                                  select new
+                                  {
+                                      Nome = evento.Nome,
+                                      Data = evento.Data,
+                                      Descricao = evento.Descricao,
+                                      Cidade = endereco.Cidade,
+                                      HorarioInicio = evento.HorarioInicio,
+                                      HorarioTermino = evento.HorarioTermino,
+                                      LinkPagina = evento.LinkPagina
+                                  });
+
+            var eventoEnderecoList = eventoEndereco.ToList();
+
+            if (eventoEnderecoList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(eventoEnderecoList);
         }
 
         // GET: api/Eventos/5
