@@ -22,4 +22,7 @@ public interface APIServices {
 
     @POST("usuarios")
     Call<Usuario> createUsuario(@Body Usuario user);
+
+    @POST("usuarios/search")
+    Call<Usuario> getUsuarioByEmail(@Body Usuario user);
 }
