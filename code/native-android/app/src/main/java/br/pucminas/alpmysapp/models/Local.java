@@ -3,7 +3,9 @@ package br.pucminas.alpmysapp.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Local {
+import java.io.Serializable;
+
+public class Local implements Serializable{
 
     @SerializedName("id")
     @Expose
@@ -17,7 +19,12 @@ public class Local {
     @SerializedName("descricao")
     @Expose
     private String descricao;
-
+    @SerializedName("enderecoId")
+    @Expose
+    private Integer enderecoId;
+    @SerializedName("endereco")
+    @Expose
+    private Endereco endereco;
     public Integer getId() {
         return id;
     }
@@ -31,6 +38,9 @@ public class Local {
     }
 
     public void setNome(String nome) {
+        if(nome.isEmpty())
+            throw new IllegalArgumentException();
+        else
         this.nome = nome;
     }
 
@@ -47,7 +57,25 @@ public class Local {
     }
 
     public void setDescricao(String descricao) {
+        if(descricao.isEmpty())
+            throw new IllegalArgumentException();
+        else
         this.descricao = descricao;
     }
 
+    public Integer getEnderecoId() {
+        return enderecoId;
+    }
+
+    public void setEnderecoId(Integer enderecoId) {
+        this.enderecoId = enderecoId;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }

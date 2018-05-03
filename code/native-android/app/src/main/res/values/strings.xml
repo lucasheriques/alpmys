@@ -108,4 +108,15 @@
     <string name="tiedt_link_pagina">Link da Página</string>
     <string name="button_cadastro">Cadastro</string>
     <string name="title_activity_alpmys_principal">activity_alpmys_principal</string>
+    <string name="title_activity_endereco">EnderecoActivity</string>
+    <string name="tiedt_nome_local">Nome do local</string>
+    <string name="tiedt_capacidade_pessoas">Capacidade de pessoas</string>
+    <string name="tiedt_logradouro">Logradouro</string>
+    <string name="tiedt_numero">Número</string>
+    <string name="tiedt_complemento">Complemento</string>
+    <string name="tiedt_bairro">Bairro</string>
+    <string name="tiedt_cidade">Cidade</string>
+    <string name="tiedt_uf">Uf</string>
+    <string name="tiedt_cep">Cep</string>
+
 </resources>

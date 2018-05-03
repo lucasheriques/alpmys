@@ -31,6 +31,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -97,6 +98,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         tiedtHoraTermino=(TextInputEditText) findViewById(R.id.tiedtHorarioTermino);
         tiedtLinkPagina=(TextInputEditText) findViewById(R.id.tiedtLinkPagina);
         buttonCadastro=(Button) findViewById(R.id.buttonCadastro);
+        buttonCadastro.setEnabled(false);
         tiedtHoraInicio.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -284,7 +286,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAPIServices= RetrofitClient.getAPIService();
+               /* mAPIServices= RetrofitClient.getAPIService();
                 mAPIServices.createEvento(evento).enqueue(new Callback<Evento>() {
                     @Override
                     public void onResponse(Call<Evento> call, Response<Evento> response) {
@@ -305,8 +307,10 @@ public class CadastroEventoActivity extends AppCompatActivity {
                     public void onFailure(Call<Evento> call, Throwable t) {
                         Log.e("ERROR", "Unable to submit post to API.");
                     }
-                });
-
+                });*/
+                Intent intent=new Intent(CadastroEventoActivity.this,LocalActivity.class);
+                intent.putExtra("evento",  evento);
+                startActivity(intent);
             }
         });
     }
