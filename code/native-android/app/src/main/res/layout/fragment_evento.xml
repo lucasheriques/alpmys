@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventoFragment">
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CadastroEventoActivity"
+    tools:showIn="@layout/activity_cadastro_evento">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLinkPagina"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilHorarioTermino"
+            app:layout_constraintStart_toStartOf="@+id/tilHorarioTermino"
+            app:layout_constraintTop_toBottomOf="@+id/tilHorarioTermino">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtLinkPagina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_link_pagina" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilNomeEvento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtNomeEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_nome_evento"
+                android:maxLength="40" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilDescricao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilNomeEvento"
+            app:layout_constraintStart_toStartOf="@+id/tilNomeEvento"
+            app:layout_constraintTop_toBottomOf="@+id/tilNomeEvento">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_descricao"
+                android:inputType="textMultiLine"
+                android:maxLength="500" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHoraInicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilDescricao"
+            app:layout_constraintStart_toStartOf="@+id/tilDescricao"
+            app:layout_constraintTop_toBottomOf="@+id/tilDescricao">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtHorarioInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_horario_inicio"
+                android:inputType="datetime" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilHorarioTermino"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tilHoraInicio"
+            app:layout_constraintStart_toStartOf="@+id/tilHoraInicio"
+            app:layout_constraintTop_toBottomOf="@+id/tilHoraInicio">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/tiedtHorarioTermino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tiedt_horario_termino" />
+        </android.support.design.widget.TextInputLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>
