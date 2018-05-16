@@ -1,0 +1,8 @@
+<root>
+    <item name='android.support.design.widget.TabLayout'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+    <item name='android.support.design.widget.TabLayout.OnTabSelectedListener'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>
