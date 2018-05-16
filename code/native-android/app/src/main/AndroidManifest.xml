@@ -40,11 +40,6 @@
             android:name=".CadastroEventoActivity"
             android:label="@string/title_activity_cadastro_evento"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LocalActivity" />
-        <activity
-            android:name=".EnderecoActivity"
-            android:label="@string/title_activity_endereco"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignupActivity"
             android:label="@string/title_activity_login" />

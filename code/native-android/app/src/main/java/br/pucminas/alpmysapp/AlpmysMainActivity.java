@@ -45,14 +45,14 @@ public class AlpmysMainActivity extends AppCompatActivity
         TextView emailNav = findViewById(R.id.lbl_email_nav);
         TextView welcome = findViewById(R.id.lbl_welcome);
 
-        if (email.equals("none")) {
+        /*if (email.equals("none")) {
             Intent loginActivity = new Intent(this, UserLogin.class);
             startActivity(loginActivity);
         }
 
         else {
             welcome.setText("Bem vindo, " + email);
-        }
+        }*/
 
 
         Log.e("userInfo", sharedPreferences.getString("email", "hmm"));

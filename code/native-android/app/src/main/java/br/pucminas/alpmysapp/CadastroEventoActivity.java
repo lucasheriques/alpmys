@@ -59,6 +59,7 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
     private FloatingActionButton fab;
     private Toolbar toolbar;
     private TextInputEditText tiedtNomeEvento, tiedtDescricao,tiedtHoraInicio,tiedtHoraTermino,tiedtLinkPagina;
+    private   SimpleDraweeView draweeView;
     private TabLayout tabLayout;
     private Button buttonCadastro;
     private APIServices mAPIServices;
@@ -76,6 +77,38 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
         setSupportActionBar(toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mAPIServices= RetrofitClient.getAPIService();
+                mAPIServices.createEvento(evento).enqueue(new Callback<Evento>() {
+                    @Override
+                    public void onResponse(Call<Evento> call, Response<Evento> response) {
+                        if (response.isSuccessful()) {
+                            Log.i("SUCESSO", "post submitted to API." + response.body().toString());
+                            Intent intent=new Intent(CadastroEventoActivity.this,AlpmysMainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Log.i("ERRO",response.body().toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Evento> call, Throwable t) {
+                        Log.e("ERROR", "Unable to submit post to API.");
+                    }
+                });
+
+            }
+        });
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Evento"));
+        tabLayout.addTab(tabLayout.newTab().setText("Local"));
+        tabLayout.addTab(tabLayout.newTab().setText("Endereço"));
+        tabLayout.setTabGravity(GRAVITY_FILL);
+        draweeView = (SimpleDraweeView) findViewById(R.id.image_view_evento);
+        draweeView.setOnClickListener(new OnClickListener(){
+
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -100,11 +133,6 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
                 dialog.show();
             }
         });
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Evento"));
-        tabLayout.addTab(tabLayout.newTab().setText("Local"));
-        tabLayout.addTab(tabLayout.newTab().setText("Endereço"));
-        tabLayout.setTabGravity(GRAVITY_FILL);
         Log.i("EVENTO", evento.toString());
         final ViewPager viewPager = findViewById(R.id.viewpager);
         final PagerAdapter pagerAdapter = new PageAdapterEvento(getSupportFragmentManager(), evento);
@@ -130,7 +158,6 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
     public void adicionarImagem(String link){
         try {
             Uri uri = Uri.parse(link);
-            SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.image_view_evento);
             draweeView.setImageURI(uri);
         }catch (Exception e){
             Log.i("ERRO","sintaxe errada");
