@@ -54,10 +54,7 @@ public class AlpmysMainActivity extends AppCompatActivity
             welcome.setText("Bem vindo, " + email);
         }
 
-
         Log.e("userInfo", sharedPreferences.getString("email", "hmm"));
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,10 +69,15 @@ public class AlpmysMainActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    public void logout(View v) {
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("email");
         editor.commit();
+        Intent loginActivity = new Intent(this, UserLogin.class);
+        startActivity(loginActivity);
     }
 
     @Override
