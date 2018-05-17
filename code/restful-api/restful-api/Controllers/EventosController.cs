@@ -33,13 +33,6 @@ namespace RestfulApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvento()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            long id = 1;
-            var evento2 = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
-
             var eventoEndereco = (from evento in _context.Evento
                                   join local in _context.Local
                                   on evento.LocalId equals local.Id
@@ -57,11 +50,6 @@ namespace RestfulApi.Controllers
                                   });
 
             var eventoEnderecoList = eventoEndereco.ToList();
-
-            if (eventoEnderecoList == null)
-            {
-                return NotFound();
-            }
 
             return Ok(eventoEnderecoList);
         }

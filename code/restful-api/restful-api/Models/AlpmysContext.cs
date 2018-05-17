@@ -32,7 +32,6 @@ namespace RestfulApi.Models
         public DbSet<TipoIngresso> TipoIngresso { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<WishList> WishList { get; set; }
-        public DbSet<Evento> Eventos { get; set;}
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
