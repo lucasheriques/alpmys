@@ -43,7 +43,11 @@
         <activity
             android:name=".SignupActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".UserLogin"></activity>
+        <activity android:name=".UserLogin" />
+        <activity
+            android:name=".EventDetailsActivity"
+            android:label="@string/title_activity_event_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

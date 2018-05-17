@@ -27,8 +27,7 @@ namespace RestfulApi.Controllers
         {
             return _context.Evento;
         }
-*/
-
+        */
         // GET: api/Eventos
         [HttpGet]
         public async Task<IActionResult> GetEvento()
@@ -48,6 +47,48 @@ namespace RestfulApi.Controllers
                                       HorarioTermino = evento.HorarioTermino,
                                       LinkPagina = evento.LinkPagina
                                   });
+
+
+            var eventoEnderecoList = eventoEndereco.ToList();
+
+            if (eventoEnderecoList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(eventoEnderecoList);
+        }
+
+        [HttpPost("nome")]
+        public async Task<IActionResult> GetEventosByName([FromBody] Evento eventos)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            long id = 1;
+            var evento2 = await _context.Evento.SingleOrDefaultAsync(m => m.Id == id);
+
+            var eventoEndereco = (from evento in _context.Evento
+                                  join local in _context.Local
+                                  on evento.LocalId equals local.Id
+                                  join endereco in _context.Endereco
+                                  on local.EnderecoId equals endereco.Id
+                                  where evento.Nome == eventos.Nome
+                                  select new
+                                  {
+                                      evento.Nome,
+                                      evento.Data,
+                                      evento.Descricao,
+                                      NomeLocal = local.Nome,
+                                      EnderecoCompleto = (endereco.Logradouro + ", " + endereco.Numero + " " + endereco.Bairro + " " + endereco.Complemento),
+                                      endereco.Cidade,
+                                      endereco.Uf,
+                                      evento.HorarioInicio,
+                                      evento.HorarioTermino,
+                                      evento.LinkPagina
+                                  });
+
 
             var eventoEnderecoList = eventoEndereco.ToList();
 

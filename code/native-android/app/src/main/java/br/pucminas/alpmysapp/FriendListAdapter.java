@@ -85,8 +85,8 @@ public class FriendListAdapter extends BaseAdapter implements Filterable {
             LayoutInflater layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.activity_list_item, parent, false);
             holder = new ViewHolder();
-            holder.iconText = (TextView) view.findViewById(R.id.list_view);
-            holder.name = (TextView) view.findViewById(R.id.list_view);
+            holder.iconText = (TextView) view.findViewById(R.id.listView);
+            holder.name = (TextView) view.findViewById(R.id.listView);
             holder.iconText.setTypeface(typeface, Typeface.BOLD);
             holder.iconText.setTextColor(activity.getResources().getColor(R.color.colorPrimaryDark));
             holder.name.setTypeface(typeface, Typeface.NORMAL);

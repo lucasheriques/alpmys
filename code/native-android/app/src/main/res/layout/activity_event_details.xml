@@ -23,32 +23,11 @@
             android:hint="Procurar eventos.."
             android:inputType="textVisiblePassword"
             />
-        <EditText android:id="@+id/inputSearch"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:hint="Procurar eventos.."
-            android:inputType="textVisiblePassword"
-            />
-        <EditText android:id="@+id/inputSearchCity"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:hint="Procurar por Cidade.."
-            android:inputType="textVisiblePassword"
-            />
-        <EditText android:id="@+id/inputSearchDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:hint="Filtrar por data (dd-mm-yyyy).."
-            android:inputType="textVisiblePassword"
-            />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
+            android:id="@+id/listViewDetails"
             android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

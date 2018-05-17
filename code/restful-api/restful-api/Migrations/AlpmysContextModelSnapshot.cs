@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 using RestfulApi.Models;
 using System;
 
-namespace restfulapi.Migrations
+namespace RestfulApi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
     partial class AlpmysContextModelSnapshot : ModelSnapshot
@@ -398,6 +398,9 @@ namespace restfulapi.Migrations
                     b.Property<long>("WishListId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("PontosId");
 

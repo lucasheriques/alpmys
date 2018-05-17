@@ -1,6 +1,8 @@
 package br.pucminas.alpmysapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -38,6 +41,7 @@ import br.pucminas.alpmysapp.models.Evento;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ListEventsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private APIServices mAPIServices;
@@ -83,7 +87,36 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        lblEventos = (ListView) findViewById(R.id.list_view);
+        lblEventos = (ListView) findViewById(R.id.listView);
+
+        lblEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] dadosEvento = lblEventos.getItemAtPosition(i).toString().split("=");
+
+                int pos = 4;
+                for(int j = 0; j < dadosEvento.length; j++){
+                    if(dadosEvento[j].contains("nome:")){
+                        pos = j;
+                        j = dadosEvento.length;
+                    }
+                }
+
+                String nomeEvento = dadosEvento[pos];
+                nomeEvento = nomeEvento.substring(6, nomeEvento.lastIndexOf(","));
+
+                String MyPREFERENCES = "MyPrefs";
+
+                SharedPreferences sharedPreferences;
+                sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("nomeEvento", nomeEvento);
+                editor.apply();
+
+                Intent eventDetailsActivity = new Intent(ListEventsActivity.this, EventDetailsActivity.class);
+                startActivity(eventDetailsActivity);
+            }
+        });
 
         listaEventos(false);
 
@@ -96,17 +129,6 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
         EditText filterText;
         EditText filterTextCity;
         EditText filterTextDate;
-
-        lblEventos.setAdapter(listAdapter);
-
-        lblEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // make Toast when click
-                Toast.makeText(getApplicationContext(), "Position " + position, Toast.LENGTH_LONG).show();
-            }
-        });
 
         filterText = (EditText)findViewById(R.id.inputSearch);
 
@@ -121,8 +143,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 if(s.toString().isEmpty()){
                     listaEventos(true);
                 }
-                else{
-                    ListEventsActivity.this.listAdapter.getFilter().filter(s);
+                else if(s.length() > 1){
+                    //ListEventsActivity.this.listAdapter.getFilter().filter(s);
 
                     ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
                     ListEventsActivity.this.lblEventos.setFilterText(s.toString());
@@ -255,6 +277,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 Log.i("info", "Teste: "+response.toString());
                 if (response.isSuccessful()) {
                     int i = 0;
+                    listEvento.clear();
                     listEvento.addAll(response.body());
 
                     formataData(reload);
@@ -352,6 +375,10 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
             listViewAdapterContent[i] = evento;
         }
 
+    }
+
+    private void teste(String selectedItem){
+        Log.i("INFO", selectedItem);
     }
 
 }

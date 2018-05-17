@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace restfulapi.Migrations
+namespace RestfulApi.Migrations
 {
-    public partial class Database_v1 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -571,6 +571,12 @@ namespace restfulapi.Migrations
                 name: "IX_Telefone_ContatoId",
                 table: "Telefone",
                 column: "ContatoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuario_Email",
+                table: "Usuario",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuario_PontosId",

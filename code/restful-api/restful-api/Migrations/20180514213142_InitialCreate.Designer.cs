@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 using RestfulApi.Models;
 using System;
 
-namespace restfulapi.Migrations
+namespace RestfulApi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
-    [Migration("20180426194309_Database_v1")]
-    partial class Database_v1
+    [Migration("20180514213142_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -399,6 +399,9 @@ namespace restfulapi.Migrations
                     b.Property<long>("WishListId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("PontosId");
 
