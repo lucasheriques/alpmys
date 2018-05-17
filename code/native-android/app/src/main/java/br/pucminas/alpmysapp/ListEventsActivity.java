@@ -143,8 +143,8 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 if(s.toString().isEmpty()){
                     listaEventos(true);
                 }
-                else{
-                    ListEventsActivity.this.listAdapter.getFilter().filter(s);
+                else if(s.length() > 1){
+                    //ListEventsActivity.this.listAdapter.getFilter().filter(s);
 
                     ListEventsActivity.this.lblEventos.setTextFilterEnabled(true);
                     ListEventsActivity.this.lblEventos.setFilterText(s.toString());
@@ -277,6 +277,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
                 Log.i("info", "Teste: "+response.toString());
                 if (response.isSuccessful()) {
                     int i = 0;
+                    listEvento.clear();
                     listEvento.addAll(response.body());
 
                     formataData(reload);
