@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace RestfulApi.Models
 {
     public class TipoIngresso
@@ -18,6 +20,8 @@ namespace RestfulApi.Models
         public DateTime DataInicio { get; set; }
 
         public int IngressosRestante { get; set; }
-
+        public long EventoId { get; set; }
+        public Evento Evento { get; set; }
+        public List<Ingresso> Ingressos {get;set;}
     }
 }

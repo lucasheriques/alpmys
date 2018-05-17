@@ -25,6 +25,9 @@ public class PageAdapterEvento extends FragmentStatePagerAdapter{
             case 2:
                 EnderecoFragment enderecoFragment=new EnderecoFragment(evento);
                 return enderecoFragment;
+            case  3:
+                IngressoFragment ingressoFragment=new IngressoFragment (evento);
+                return ingressoFragment;
             default:
             return  null;
         }
@@ -32,6 +35,6 @@ public class PageAdapterEvento extends FragmentStatePagerAdapter{
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

@@ -55,7 +55,7 @@ import static android.support.design.widget.TabLayout.*;
 import static java.time.LocalDateTime.of;
 
 
-public class CadastroEventoActivity extends AppCompatActivity implements LocalFragment.OnFragmentInteractionListener,EventoFragment.OnFragmentInteractionListener,EnderecoFragment.OnFragmentInteractionListener{
+public class CadastroEventoActivity extends AppCompatActivity implements LocalFragment.OnFragmentInteractionListener,EventoFragment.OnFragmentInteractionListener,EnderecoFragment.OnFragmentInteractionListener,IngressoFragment.OnFragmentInteractionListener{
     private FloatingActionButton fab;
     private Toolbar toolbar;
     private TextInputEditText tiedtNomeEvento, tiedtDescricao,tiedtHoraInicio,tiedtHoraTermino,tiedtLinkPagina;
@@ -105,6 +105,7 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
         tabLayout.addTab(tabLayout.newTab().setText("Evento"));
         tabLayout.addTab(tabLayout.newTab().setText("Local"));
         tabLayout.addTab(tabLayout.newTab().setText("Endereço"));
+        tabLayout.addTab(tabLayout.newTab().setText("Ingresso"));
         tabLayout.setTabGravity(GRAVITY_FILL);
         draweeView = (SimpleDraweeView) findViewById(R.id.image_view_evento);
         draweeView.setOnClickListener(new OnClickListener(){

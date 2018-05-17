@@ -326,7 +326,7 @@ public class ListEventsActivity extends AppCompatActivity implements NavigationV
 
             map.put(KEY_NOME, "Nome: " + evento.getNome());
 
-            map.put(KEY_CIDADE, "Cidade: " + evento.getCidade());
+            map.put(KEY_CIDADE, "Cidade: " + evento.getLocal().getEndereco().getCidade());
 
             map.put(KEY_DATA, "Data: " + evento.getData());
 

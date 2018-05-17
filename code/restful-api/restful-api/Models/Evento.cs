@@ -20,5 +20,6 @@ namespace RestfulApi.Models
         public Organizador Organizador { get; set; }
         public long TipoDeEventoId { get; set; }
         public TipoDeEvento TipoDeEvento { get; set; }
+        public List<TipoIngresso> TipoIngressos { get; set; }
    }
 }

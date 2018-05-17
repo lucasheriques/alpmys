@@ -2,96 +2,130 @@ package br.pucminas.alpmysapp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class TipoIngresso {
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("valor")
-    @Expose
-    private Integer valor;
-    @SerializedName("tipo")
-    @Expose
-    private String tipo;
-    @SerializedName("taxa")
-    @Expose
-    private Integer taxa;
-    @SerializedName("quantidade")
-    @Expose
-    private Integer quantidade;
-    @SerializedName("numeroLote")
-    @Expose
-    private Integer numeroLote;
-    @SerializedName("dataInicio")
-    @Expose
-    private String dataInicio;
-    @SerializedName("ingressosRestante")
-    @Expose
-    private Integer ingressosRestante;
+@SerializedName("id")
+@Expose
+private Long id;
+@SerializedName("valor")
+@Expose
+private Long valor;
+@SerializedName("tipo")
+@Expose
+private String tipo;
+@SerializedName("taxa")
+@Expose
+private Long taxa;
+@SerializedName("quantidade")
+@Expose
+private Long quantidade;
+@SerializedName("numeroLote")
+@Expose
+private Long numeroLote;
+@SerializedName("dataInicio")
+@Expose
+private String dataInicio;
+@SerializedName("ingressosRestante")
+@Expose
+private Long ingressosRestante;
+@SerializedName("eventoId")
+@Expose
+private Long eventoId;
+@SerializedName("evento")
+@Expose
+private Evento evento;
+@SerializedName("ingressos")
+@Expose
+private List<Ingresso> ingressos = null;
 
-    public Integer getId() {
-        return id;
-    }
+public Long getId() {
+return id;
+}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+public void setId(Long id) {
+this.id = id;
+}
 
-    public Integer getValor() {
-        return valor;
-    }
+public Long getValor() {
+return valor;
+}
 
-    public void setValor(Integer valor) {
-        this.valor = valor;
-    }
+public void setValor(Long valor) {
+this.valor = valor;
+}
 
-    public String getTipo() {
-        return tipo;
-    }
+public String getTipo() {
+return tipo;
+}
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+public void setTipo(String tipo) {
+this.tipo = tipo;
+}
 
-    public Integer getTaxa() {
-        return taxa;
-    }
+public Long getTaxa() {
+return taxa;
+}
 
-    public void setTaxa(Integer taxa) {
-        this.taxa = taxa;
-    }
+public void setTaxa(Long taxa) {
+this.taxa = taxa;
+}
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
+public Long getQuantidade() {
+return quantidade;
+}
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
+public void setQuantidade(Long quantidade) {
+this.quantidade = quantidade;
+}
 
-    public Integer getNumeroLote() {
-        return numeroLote;
-    }
+public Long getNumeroLote() {
+return numeroLote;
+}
 
-    public void setNumeroLote(Integer numeroLote) {
-        this.numeroLote = numeroLote;
-    }
+public void setNumeroLote(Long numeroLote) {
+this.numeroLote = numeroLote;
+}
 
-    public String getDataInicio() {
-        return dataInicio;
-    }
+public String getDataInicio() {
+return dataInicio;
+}
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
-    }
+public void setDataInicio(String dataInicio) {
+this.dataInicio = dataInicio;
+}
 
-    public Integer getIngressosRestante() {
-        return ingressosRestante;
-    }
+public Long getIngressosRestante() {
+return ingressosRestante;
+}
 
-    public void setIngressosRestante(Integer ingressosRestante) {
-        this.ingressosRestante = ingressosRestante;
-    }
+public void setIngressosRestante(Long ingressosRestante) {
+this.ingressosRestante = ingressosRestante;
+}
+
+public Long getEventoId() {
+return eventoId;
+}
+
+public void setEventoId(Long eventoId) {
+this.eventoId = eventoId;
+}
+
+public Evento getEvento() {
+return evento;
+}
+
+public void setEvento(Evento evento) {
+this.evento = evento;
+}
+
+public List<Ingresso> getIngressos() {
+return ingressos;
+}
+
+public void setIngressos(List<Ingresso> ingressos) {
+this.ingressos = ingressos;
+}
 
 }

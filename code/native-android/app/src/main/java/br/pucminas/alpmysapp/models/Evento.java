@@ -2,171 +2,164 @@ package br.pucminas.alpmysapp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+import java.util.List;
 import java.io.Serializable;
 
 public class Evento implements Serializable{
 
     @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("nome")
-    @Expose
-    private String nome;
-    @SerializedName("descricao")
-    @Expose
-    private String descricao;
-    @SerializedName("data")
-    @Expose
-    private String data;
-    @SerializedName("horarioInicio")
-    @Expose
-    private String horarioInicio;
-    @SerializedName("horarioTermino")
-    @Expose
-    private String horarioTermino;
-    @SerializedName("linkPagina")
-    @Expose
-    private String linkPagina;
-    @SerializedName("localId")
-    @Expose
-    private Integer localId;
-    @SerializedName("local")
-    @Expose
-    private Local local;
-    @SerializedName("organizadorId")
-    @Expose
-    private Integer organizadorId;
-    @SerializedName("organizador")
-    @Expose
-    private Organizador organizador;
-    @SerializedName("tipoDeEventoId")
-    @Expose
-    private Integer tipoDeEventoId;
-    @SerializedName("tipoDeEvento")
-    @Expose
-    private TipoDeEvento tipoDeEvento;
-    @SerializedName("cidade")
-    @Expose
-    private String cidade;
+@Expose
+private Long id;
+@SerializedName("nome")
+@Expose
+private String nome;
+@SerializedName("descricao")
+@Expose
+private String descricao;
+@SerializedName("data")
+@Expose
+private String data;
+@SerializedName("horarioInicio")
+@Expose
+private String horarioInicio;
+@SerializedName("horarioTermino")
+@Expose
+private String horarioTermino;
+@SerializedName("linkPagina")
+@Expose
+private String linkPagina;
+@SerializedName("localId")
+@Expose
+private Long localId;
+@SerializedName("local")
+@Expose
+private Local local;
+@SerializedName("organizadorId")
+@Expose
+private Long organizadorId;
+@SerializedName("organizador")
+@Expose
+private Organizador organizador;
+@SerializedName("tipoDeEventoId")
+@Expose
+private Long tipoDeEventoId;
+@SerializedName("tipoDeEvento")
+@Expose
+private TipoDeEvento tipoDeEvento;
+@SerializedName("tipoIngressos")
+@Expose
+private List<TipoIngresso> tipoIngressos = null;
 
-    public String getCidade() {
-        return cidade;
-    }
+public Long getId() {
+return id;
+}
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+public void setId(Long id) {
+this.id = id;
+}
 
+public String getNome() {
+return nome;
+}
 
-    public Integer getId() {
-        return id;
-    }
+public void setNome(String nome) {
+this.nome = nome;
+}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+public String getDescricao() {
+return descricao;
+}
 
-    public String getNome() {
-        return nome;
-    }
+public void setDescricao(String descricao) {
+this.descricao = descricao;
+}
 
-    public void setNome(String nome) {
-        if(nome.isEmpty())
-            throw new IllegalArgumentException();
-        else
-            this.nome = nome;
-    }
+public String getData() {
+return data;
+}
 
-    public String getDescricao() {
-        return descricao;
-    }
+public void setData(String data) {
+this.data = data;
+}
 
-    public void setDescricao(String descricao) {
-        if(descricao.isEmpty())
-            throw new IllegalArgumentException();
-        else
-            this.descricao = descricao;
-    }
+public String getHorarioInicio() {
+return horarioInicio;
+}
 
-    public String getData() {
-        return data;
-    }
+public void setHorarioInicio(String horarioInicio) {
+this.horarioInicio = horarioInicio;
+}
 
-    public void setData(String data) {
-        this.data = data;
-    }
+public String getHorarioTermino() {
+return horarioTermino;
+}
 
-    public String getHorarioInicio() {
-        return horarioInicio;
-    }
+public void setHorarioTermino(String horarioTermino) {
+this.horarioTermino = horarioTermino;
+}
 
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
+public String getLinkPagina() {
+return linkPagina;
+}
 
-    public String getHorarioTermino() {
-        return horarioTermino;
-    }
+public void setLinkPagina(String linkPagina) {
+this.linkPagina = linkPagina;
+}
 
-    public void setHorarioTermino(String horarioTermino) {
-        this.horarioTermino = horarioTermino;
-    }
+public Long getLocalId() {
+return localId;
+}
 
-    public String getLinkPagina() {
-        return linkPagina;
-    }
+public void setLocalId(Long localId) {
+this.localId = localId;
+}
 
-    public void setLinkPagina(String linkPagina) {
-        this.linkPagina = linkPagina;
-    }
+public Local getLocal() {
+return local;
+}
 
-    public Integer getLocalId() {
-        return localId;
-    }
+public void setLocal(Local local) {
+this.local = local;
+}
 
-    public void setLocalId(Integer localId) {
-        this.localId = localId;
-    }
+public Long getOrganizadorId() {
+return organizadorId;
+}
 
-    public Local getLocal() {
-        return local;
-    }
+public void setOrganizadorId(Long organizadorId) {
+this.organizadorId = organizadorId;
+}
 
-    public void setLocal(Local local) {
-        this.local = local;
-    }
+public Organizador getOrganizador() {
+return organizador;
+}
 
-    public Integer getOrganizadorId() {
-        return organizadorId;
-    }
+public void setOrganizador(Organizador organizador) {
+this.organizador = organizador;
+}
 
-    public void setOrganizadorId(Integer organizadorId) {
-        this.organizadorId = organizadorId;
-    }
+public Long getTipoDeEventoId() {
+return tipoDeEventoId;
+}
 
-    public Organizador getOrganizador() {
-        return organizador;
-    }
+public void setTipoDeEventoId(Long tipoDeEventoId) {
+this.tipoDeEventoId = tipoDeEventoId;
+}
 
-    public void setOrganizador(Organizador organizador) {
-        this.organizador = organizador;
-    }
+public TipoDeEvento getTipoDeEvento() {
+return tipoDeEvento;
+}
 
-    public Integer getTipoDeEventoId() {
-        return tipoDeEventoId;
-    }
+public void setTipoDeEvento(TipoDeEvento tipoDeEvento) {
+this.tipoDeEvento = tipoDeEvento;
+}
 
-    public void setTipoDeEventoId(Integer tipoDeEventoId) {
-        this.tipoDeEventoId = tipoDeEventoId;
-    }
+public List<TipoIngresso> getTipoIngressos() {
+return tipoIngressos;
+}
 
-    public TipoDeEvento getTipoDeEvento() {
-        return tipoDeEvento;
-    }
-
-    public void setTipoDeEvento(TipoDeEvento tipoDeEvento) {
-        this.tipoDeEvento = tipoDeEvento;
-    }
+public void setTipoIngressos(List<TipoIngresso> tipoIngressos) {
+this.tipoIngressos = tipoIngressos;
+}
 
 }
