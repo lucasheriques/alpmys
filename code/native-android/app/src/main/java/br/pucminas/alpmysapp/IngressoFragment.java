@@ -59,8 +59,9 @@ public class IngressoFragment extends Fragment {
         tipoIngresso.setQuantidade((long) 123);
         tipoIngresso.setValor((long) 12331);
         arrayList.add(tipoIngresso);
-        ArrayAdapter adapter= new IngressoAdapter(view.getContext(),arrayList);
+        ArrayAdapter adapter= new IngressoAdapter(view.getContext(),arrayList,evento);
         listview.setAdapter(adapter);
+
         return view;
     }
 

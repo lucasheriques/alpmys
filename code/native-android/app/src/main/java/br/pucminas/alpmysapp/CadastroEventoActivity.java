@@ -38,8 +38,10 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import api.APIServices;
 
@@ -47,6 +49,7 @@ import api.RetrofitClient;
 import br.pucminas.alpmysapp.models.Endereco;
 import br.pucminas.alpmysapp.models.Evento;
 import br.pucminas.alpmysapp.models.Local;
+import br.pucminas.alpmysapp.models.TipoIngresso;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,6 +74,7 @@ public class CadastroEventoActivity extends AppCompatActivity implements LocalFr
         super.onCreate(savedInstanceState);
         evento.setLocal(new Local());
         evento.getLocal().setEndereco(new Endereco());
+        evento.setTipoIngressos(new ArrayList<TipoIngresso>());
         Fresco.initialize(this);
         setContentView(R.layout.activity_cadastro_evento);
         toolbar = (Toolbar) findViewById(R.id.toolbar);

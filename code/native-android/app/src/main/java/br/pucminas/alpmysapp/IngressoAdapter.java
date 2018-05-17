@@ -22,10 +22,14 @@ import br.pucminas.alpmysapp.models.TipoIngresso;
 public class IngressoAdapter extends ArrayAdapter<TipoIngresso> {
     private final Context context;
     private final ArrayList<TipoIngresso> elementos;
-    public IngressoAdapter(Context context,ArrayList<TipoIngresso> objects) {
+    private Button button;
+    private TextInputEditText tedtTipoIngresso, tedtQuantidade, tedtValor;
+    private Evento evento;
+    public IngressoAdapter(Context context,ArrayList<TipoIngresso> objects,Evento evento) {
         super(context, R.layout.tipo_ingresso_item, objects);
         this.context = context;
         this.elementos=objects;
+        this.evento=evento;
     }
 
     @NonNull
@@ -36,7 +40,7 @@ public class IngressoAdapter extends ArrayAdapter<TipoIngresso> {
         final TextInputEditText tedtTipoIngresso=(TextInputEditText) rowView.findViewById(R.id.tedtTipoIngresso);
         final TextInputEditText tedtValor=(TextInputEditText) rowView.findViewById(R.id.tedtValor);
         final TextInputEditText tedtQuantidade=(TextInputEditText) rowView.findViewById(R.id.tedtQuantidade);
-        Button button= (Button) rowView.findViewById(R.id.buttonIngresso);
+        button= (Button) rowView.findViewById(R.id.buttonIngresso);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,8 +57,9 @@ public class IngressoAdapter extends ArrayAdapter<TipoIngresso> {
                 }
 
                 tipoIngresso.setIngressos(ingressos);
-
+                evento.getTipoIngressos().add(tipoIngresso);
                 Log.i("Ingresso","ingressos adicionados");
+                Log.i("Ingresso",evento.getTipoIngressos().toString());
 
             }
         });
