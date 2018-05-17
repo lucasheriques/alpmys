@@ -22,9 +22,9 @@ namespace RestfulApi.Controllers
 
         // GET: api/Usuarios
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuario()
+        public async Task<IActionResult> GetUsuario()
         {
-            return _context.Usuario;
+            return Ok(_context.Usuario);
         }
 
         // GET: api/Usuarios/5

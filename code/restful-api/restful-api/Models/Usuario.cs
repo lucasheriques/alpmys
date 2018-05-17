@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestfulApi.Models
 {
@@ -10,6 +11,8 @@ namespace RestfulApi.Models
 
         public string Sobrenome { get; set; }
 
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         public string Senha { get; set; }

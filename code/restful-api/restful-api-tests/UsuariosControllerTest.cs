@@ -13,51 +13,51 @@ using Xunit;
 
 namespace RestfulApiTests
 {
-    public class EventosControllerTest
+    public class UsuarioControllerTest
     {
         [Fact]
         public async void ValidPost()
         {
             // Arrange
             var options = new DbContextOptionsBuilder<AlpmysContext>()
-                .UseInMemoryDatabase("CreateNewEvent")
+                .UseInMemoryDatabase("CreateNewUser")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            EventosController controller = new EventosController(context);
-            Evento e = new Evento();
-            e.Nome = "Evento!";
+            UsuariosController controller = new UsuariosController(context);
+            Usuario u = new Usuario();
+            u.Email = "teste@teste.com";
             
             // Act
-            await controller.PostEvento(e);
-            
+            await controller.PostUsuario(u);
+                
             // Assert
-            Assert.Equal(1, context.Evento.Count());
+            Assert.Equal(1, context.Usuario.Count());
         }
         
         [Fact]
-        public async void GetEventos()
+        public async void GetUsuarios()
         {
             // Arrange
             var options = new DbContextOptionsBuilder<AlpmysContext>()
                 .UseInMemoryDatabase("GetTest")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            Evento e = new Evento();
-            e.Nome = "Evento!";
-            Evento e2 = new Evento();
-            e2.Nome = "Evento2";
+            Usuario u = new Usuario();
+            u.Email = "e@e.com";
+            Usuario u2 = new Usuario();
+            u2.Email = "e2@e.com";
 
-            context.Evento.Add(e);
-            context.Evento.Add(e2);
+            context.Usuario.Add(u);
+            context.Usuario.Add(u2);
             await context.SaveChangesAsync();
-            EventosController controller = new EventosController(context);
+            UsuariosController controller = new UsuariosController(context);
 
             // Act
-            var result = await controller.GetEvento();
-
+            var result = await controller.GetUsuario();
+            
             // Assert
             Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(2, context.Evento.Count());
+            Assert.Equal(2, context.Usuario.Count());
         }
         
         [Fact]
@@ -68,13 +68,11 @@ namespace RestfulApiTests
                 .UseInMemoryDatabase("FailToCreate")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            EventosController controller = new EventosController(context);
+            UsuariosController controller = new UsuariosController(context);
             controller.ModelState.AddModelError("error", "invalid model");
-            Evento e = new Evento();
-            e.Nome = null;
             
             // Act
-            var result = await controller.PostEvento(null);
+            var result = await controller.PostUsuario(null);
             
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -88,14 +86,14 @@ namespace RestfulApiTests
                 .UseInMemoryDatabase("DeleteEvent")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            EventosController controller = new EventosController(context);
-            Evento e = new Evento();
-            e.Id = 9;
-            e.Nome = "Evento!";
+            UsuariosController controller = new UsuariosController(context);
+            Usuario u = new Usuario();
+            u.Id = 9;
+            u.Email = "a@a.com";
             
             // Act
-            await controller.PostEvento(e);
-            await controller.DeleteEvento(9);
+            await controller.PostUsuario(u);
+            await controller.DeleteUsuario(9);
             
             // Assert
             Assert.Equal(0, context.Evento.Count());
@@ -109,13 +107,10 @@ namespace RestfulApiTests
                 .UseInMemoryDatabase("FailDeleteEvent")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            EventosController controller = new EventosController(context);
-            Evento e = new Evento();
-            e.Nome = "Evento!";
+            UsuariosController controller = new UsuariosController(context);
             
             // Act
-            await controller.PostEvento(e);
-            var result = await controller.DeleteEvento(10);
+            var result = await controller.DeleteUsuario(10);
             
             // Assert
             Assert.IsType<NotFoundResult>(result);
@@ -129,14 +124,14 @@ namespace RestfulApiTests
                 .UseInMemoryDatabase("UpdateEvent")
                 .Options;
             AlpmysContext context = new AlpmysContext(options);
-            EventosController controller = new EventosController(context);
-            Evento e = new Evento();
-            e.Id = 5;
-            e.Nome = "Evento!";
-            await controller.PostEvento(e);
+            UsuariosController controller = new UsuariosController(context);
+            Usuario u = new Usuario();
+            u.Id = 5;
+            u.Email = "a@a.com";
+            await controller.PostUsuario(u);
 
             // Act
-            var result = await controller.GetEvento(5);
+            var result = await controller.GetUsuario(5);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
