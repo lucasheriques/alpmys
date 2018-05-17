@@ -49,6 +49,39 @@ public class Evento implements Serializable{
     @SerializedName("cidade")
     @Expose
     private String cidade;
+    @SerializedName("enderecoCompleto")
+    @Expose
+    private String EnderecoCompleto;
+    @SerializedName("nomeLocal")
+    @Expose
+    private String NomeLocal;
+    @SerializedName("uf")
+    @Expose
+    private String estado;
+
+    public String getEnderecoCompleto() {
+        return EnderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        EnderecoCompleto = enderecoCompleto;
+    }
+
+    public String getNomeLocal() {
+        return NomeLocal;
+    }
+
+    public void setNomeLocal(String nomeLocal) {
+        NomeLocal = nomeLocal;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public String getCidade() {
         return cidade;
