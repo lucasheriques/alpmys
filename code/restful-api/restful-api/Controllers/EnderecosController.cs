@@ -10,57 +10,57 @@ using RestfulApi.Models;
 namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Usuarios")]
-    public class UsuariosController : Controller
+    [Route("api/Enderecos")]
+    public class EnderecosController : Controller
     {
         private readonly AlpmysContext _context;
 
-        public UsuariosController(AlpmysContext context)
+        public EnderecosController(AlpmysContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Enderecos
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuario()
+        public IEnumerable<Endereco> GetEndereco()
         {
-            return _context.Usuario;
+            return _context.Endereco;
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Enderecos/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUsuario([FromRoute] long id)
+        public async Task<IActionResult> GetEndereco([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
+            var endereco = await _context.Endereco.SingleOrDefaultAsync(m => m.LocalId == id);
 
-            if (usuario == null)
+            if (endereco == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(endereco);
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Enderecos/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario([FromRoute] long id, [FromBody] Usuario usuario)
+        public async Task<IActionResult> PutEndereco([FromRoute] int id, [FromBody] Endereco endereco)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.Id)
+            if (id != endereco.LocalId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(endereco).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace RestfulApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!EnderecoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace RestfulApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Enderecos
         [HttpPost]
-        public async Task<IActionResult> PostUsuario([FromBody] Usuario usuario)
+        public async Task<IActionResult> PostEndereco([FromBody] Endereco endereco)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Usuario.Add(usuario);
+            _context.Endereco.Add(endereco);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetEndereco", new { id = endereco.LocalId }, endereco);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Enderecos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario([FromRoute] long id)
+        public async Task<IActionResult> DeleteEndereco([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            var endereco = await _context.Endereco.SingleOrDefaultAsync(m => m.LocalId == id);
+            if (endereco == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Endereco.Remove(endereco);
             await _context.SaveChangesAsync();
 
-            return Ok(usuario);
+            return Ok(endereco);
         }
 
-        private bool UsuarioExists(long id)
+        private bool EnderecoExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Endereco.Any(e => e.LocalId == id);
         }
     }
 }

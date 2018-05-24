@@ -1,26 +1,34 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestfulApi.Models
 {
     public class Evento
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
+
         [Required]
-        public String Nome { get; set; }
-        public String Descricao { get; set; }
+        public string Nome { get; set; }
+
+        [Required]
+        public string Descricao { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [Required]
         public DateTime Data { get; set; }
-        public DateTime HorarioInicio { get; set; }
-        public DateTime HorarioTermino { get; set; }
-        public String LinkPagina { get; set; }
-        public long LocalId { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        [Required]
+        public DateTime HoraInicio { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        [Required]
+        public DateTime HoraFim { get; set; }
+
+        public int UsuarioId { get; set; }
+        public Usuario Organizador;
+
+        public int LocalId { get; set; }
         public Local Local { get; set; }
-        public long OrganizadorId { get; set; }
-        public Organizador Organizador { get; set; }
-        public long TipoDeEventoId { get; set; }
-        public TipoDeEvento TipoDeEvento { get; set; }
-   }
+    }
 }
