@@ -14,5 +14,8 @@ namespace RestfulApi.Models
 
         public int IngressoId { get; set; }
         public Ingresso Ingresso { get; set; }
+        
+        public int UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

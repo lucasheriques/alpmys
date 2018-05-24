@@ -23,6 +23,6 @@ namespace RestfulApi.Models
 
         public ICollection<Evento> Eventos { get; set; }
 
-        public ICollection<Ingresso> Ingressos { get; set; }
+        public ICollection<Compra> Compras { get; set; }
     }
 }

@@ -11,11 +11,11 @@ namespace RestfulApi.Models
         public bool Disponivel { get; set; }
 
         public double Valor { get; set; }
+        
+        [Required]
+        public string TipoIngreso { get; set; }
 
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
-
-        public int EventoID { get; set; }
+        public int EventoId { get; set; }
         public Evento Evento { get; set; }
 
         public Compra Compra { get; set; }
