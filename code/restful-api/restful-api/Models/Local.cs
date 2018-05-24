@@ -9,7 +9,6 @@ namespace RestfulApi.Models
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string Nome { get; set; }
 
         public string Descricao { get; set; }

@@ -12,6 +12,8 @@ namespace RestfulApi.Models
         public DbSet<RestfulApi.Models.Usuario> Usuario { get; set; }
         public DbSet<RestfulApi.Models.Local> Local { get; set; }
         public DbSet<RestfulApi.Models.Evento> Evento { get; set; }
+        public DbSet<RestfulApi.Models.Ingresso> Ingresso { get; set; }
+        public DbSet<RestfulApi.Models.Compra> Compra { get; set; }
 
     }
 }
