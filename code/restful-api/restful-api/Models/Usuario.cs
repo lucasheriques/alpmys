@@ -1,36 +1,27 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RestfulApi.Models
 {
-    public class Usuario : IRedesSociais
+    public class Usuario
     {
-        public long Id { get; set; }
-
-        public string Nome { get; set; }
-
-        public string Sobrenome { get; set; }
+        public int Id { get; set; }
 
         [Required]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        public string Nome { get; set; }
+
         [EmailAddress]
+        [Required]
+        [StringLength(254)]
         public string Email { get; set; }
 
+        [Required]
         public string Senha { get; set; }
 
-        public Boolean Organizador { get; set; }
+        public string Celular { get; set; }
 
-        public string Cpf { get; set; }
-
-        public DateTime DataNascimento { get; set; }
-
-        public CartaoDeCredito[] CartaoDeCredito { get; set; }
-
-        public long PontosId { get; set; }
-
-        public Pontos Pontos { get; set; }
-
-        public WishList WishList { get; set; }
-
-        public long WishListId { get; set; }
+        public ICollection<Evento> Eventos { get; set; }
     }
 }
