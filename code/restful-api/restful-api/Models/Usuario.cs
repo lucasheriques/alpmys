@@ -9,7 +9,6 @@ namespace RestfulApi.Models
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string Nome { get; set; }
 
         [EmailAddress]
@@ -23,5 +22,7 @@ namespace RestfulApi.Models
         public string Celular { get; set; }
 
         public ICollection<Evento> Eventos { get; set; }
+
+        public ICollection<Ingresso> Ingressos { get; set; }
     }
 }

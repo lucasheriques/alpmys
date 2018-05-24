@@ -10,57 +10,57 @@ using RestfulApi.Models;
 namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Usuarios")]
-    public class UsuariosController : Controller
+    [Route("api/Compras")]
+    public class ComprasController : Controller
     {
         private readonly AlpmysContext _context;
 
-        public UsuariosController(AlpmysContext context)
+        public ComprasController(AlpmysContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Compras
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuario()
+        public IEnumerable<Compra> GetCompra()
         {
-            return _context.Usuario;
+            return _context.Compra;
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Compras/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUsuario([FromRoute] int id)
+        public async Task<IActionResult> GetCompra([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
+            var compra = await _context.Compra.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (usuario == null)
+            if (compra == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(compra);
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Compras/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)
+        public async Task<IActionResult> PutCompra([FromRoute] int id, [FromBody] Compra compra)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.Id)
+            if (id != compra.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(compra).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace RestfulApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!CompraExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace RestfulApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Compras
         [HttpPost]
-        public async Task<IActionResult> PostUsuario([FromBody] Usuario usuario)
+        public async Task<IActionResult> PostCompra([FromBody] Compra compra)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Usuario.Add(usuario);
+            _context.Compra.Add(compra);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetCompra", new { id = compra.Id }, compra);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Compras/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        public async Task<IActionResult> DeleteCompra([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            var compra = await _context.Compra.SingleOrDefaultAsync(m => m.Id == id);
+            if (compra == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Compra.Remove(compra);
             await _context.SaveChangesAsync();
 
-            return Ok(usuario);
+            return Ok(compra);
         }
 
-        private bool UsuarioExists(int id)
+        private bool CompraExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Compra.Any(e => e.Id == id);
         }
     }
 }

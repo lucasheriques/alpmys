@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RestfulApi.Models
@@ -25,10 +26,20 @@ namespace RestfulApi.Models
         [Required]
         public DateTime HoraFim { get; set; }
 
+        [Required]
+        [Url]
+        public string Imagem { get; set; }
+
+        [Url]
+        public string LinkPagina { get; set; }
+
+
         public int UsuarioId { get; set; }
         public Usuario Organizador;
 
         public int LocalId { get; set; }
         public Local Local { get; set; }
+
+        public ICollection<Ingresso> Ingressos { get; set; }
     }
 }
