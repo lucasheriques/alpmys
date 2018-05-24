@@ -14,21 +14,14 @@ namespace RestfulApi.Models
         [Required]
         public string Descricao { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Required]
         public DateTime Data { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
-        [Required]
-        public DateTime HoraInicio { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
-        [Required]
-        public DateTime HoraFim { get; set; }
+        public string Duracao { get; set; }
 
         [Required]
         [Url]
-        public string Imagem { get; set; }
+        public string LinkImagem { get; set; }
 
         [Url]
         public string LinkPagina { get; set; }
