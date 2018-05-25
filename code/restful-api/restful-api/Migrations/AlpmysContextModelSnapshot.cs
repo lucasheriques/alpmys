@@ -41,37 +41,6 @@ namespace restfulapi.Migrations
                     b.ToTable("Compra");
                 });
 
-            modelBuilder.Entity("RestfulApi.Models.Endereco", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Cep")
-                        .IsRequired();
-
-                    b.Property<string>("Cidade")
-                        .IsRequired();
-
-                    b.Property<string>("Complemento");
-
-                    b.Property<int>("LocalId");
-
-                    b.Property<int>("Numero");
-
-                    b.Property<string>("Rua")
-                        .IsRequired();
-
-                    b.Property<string>("Uf")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocalId")
-                        .IsUnique();
-
-                    b.ToTable("Endereco");
-                });
-
             modelBuilder.Entity("RestfulApi.Models.Evento", b =>
                 {
                     b.Property<int>("Id")
@@ -131,9 +100,25 @@ namespace restfulapi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Cep")
+                        .IsRequired();
+
+                    b.Property<string>("Cidade")
+                        .IsRequired();
+
+                    b.Property<string>("Complemento");
+
                     b.Property<string>("Descricao");
 
                     b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<int>("Numero");
+
+                    b.Property<string>("Rua")
+                        .IsRequired();
+
+                    b.Property<string>("Uf")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -173,14 +158,6 @@ namespace restfulapi.Migrations
                     b.HasOne("RestfulApi.Models.Usuario", "Usuario")
                         .WithMany("Compras")
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("RestfulApi.Models.Endereco", b =>
-                {
-                    b.HasOne("RestfulApi.Models.Local", "Local")
-                        .WithOne("Endereco")
-                        .HasForeignKey("RestfulApi.Models.Endereco", "LocalId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -8,7 +8,6 @@ namespace RestfulApi.Models
     public class AlpmysContext : DbContext
     {
         public AlpmysContext(DbContextOptions<AlpmysContext> options) : base(options) { }
-        public DbSet<RestfulApi.Models.Endereco> Endereco { get; set; }
         public DbSet<RestfulApi.Models.Usuario> Usuario { get; set; }
         public DbSet<RestfulApi.Models.Local> Local { get; set; }
         public DbSet<RestfulApi.Models.Evento> Evento { get; set; }

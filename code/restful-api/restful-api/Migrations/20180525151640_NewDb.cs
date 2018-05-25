@@ -14,8 +14,14 @@ namespace restfulapi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
+                    Cep = table.Column<string>(nullable: false),
+                    Cidade = table.Column<string>(nullable: false),
+                    Complemento = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: false)
+                    Nome = table.Column<string>(nullable: false),
+                    Numero = table.Column<int>(nullable: false),
+                    Rua = table.Column<string>(nullable: false),
+                    Uf = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,31 +42,6 @@ namespace restfulapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuario", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Endereco",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Cep = table.Column<string>(nullable: false),
-                    Cidade = table.Column<string>(nullable: false),
-                    Complemento = table.Column<string>(nullable: true),
-                    LocalId = table.Column<int>(nullable: false),
-                    Numero = table.Column<int>(nullable: false),
-                    Rua = table.Column<string>(nullable: false),
-                    Uf = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Endereco", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Endereco_Local_LocalId",
-                        column: x => x.LocalId,
-                        principalTable: "Local",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,12 +138,6 @@ namespace restfulapi.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Endereco_LocalId",
-                table: "Endereco",
-                column: "LocalId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Evento_LocalId",
                 table: "Evento",
                 column: "LocalId");
@@ -182,9 +157,6 @@ namespace restfulapi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Compra");
-
-            migrationBuilder.DropTable(
-                name: "Endereco");
 
             migrationBuilder.DropTable(
                 name: "Ingresso");
