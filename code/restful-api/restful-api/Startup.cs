@@ -7,6 +7,8 @@ using System.Reflection;
 using NJsonSchema;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace RestfulApi
 {
@@ -24,6 +26,10 @@ namespace RestfulApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             var connectionString = Configuration.GetConnectionString("AlpmysContext");
         	services.AddDbContext<AlpmysContext>(options => options.UseMySQL(connectionString));
             services.AddMvc();
