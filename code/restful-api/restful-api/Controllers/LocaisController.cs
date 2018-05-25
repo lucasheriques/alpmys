@@ -10,57 +10,57 @@ using RestfulApi.Models;
 namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Usuarios")]
-    public class UsuariosController : Controller
+    [Route("api/Locais")]
+    public class LocaisController : Controller
     {
         private readonly AlpmysContext _context;
 
-        public UsuariosController(AlpmysContext context)
+        public LocaisController(AlpmysContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Locais
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuario()
+        public IEnumerable<Local> GetLocal()
         {
-            return _context.Usuario;
+            return _context.Local;
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Locais/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUsuario([FromRoute] int id)
+        public async Task<IActionResult> GetLocal([FromRoute] long id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
+            var local = await _context.Local.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (usuario == null)
+            if (local == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(local);
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Locais/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)
+        public async Task<IActionResult> PutLocal([FromRoute] long id, [FromBody] Local local)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.Id)
+            if (id != local.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(local).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace RestfulApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!LocalExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace RestfulApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Locais
         [HttpPost]
-        public async Task<IActionResult> PostUsuario([FromBody] Usuario usuario)
+        public async Task<IActionResult> PostLocal([FromBody] Local local)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Usuario.Add(usuario);
+            _context.Local.Add(local);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetLocal", new { id = local.Id }, local);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Locais/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        public async Task<IActionResult> DeleteLocal([FromRoute] long id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            var local = await _context.Local.SingleOrDefaultAsync(m => m.Id == id);
+            if (local == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Local.Remove(local);
             await _context.SaveChangesAsync();
 
-            return Ok(usuario);
+            return Ok(local);
         }
 
-        private bool UsuarioExists(int id)
+        private bool LocalExists(long id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Local.Any(e => e.Id == id);
         }
     }
 }

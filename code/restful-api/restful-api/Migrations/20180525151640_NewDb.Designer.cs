@@ -10,9 +10,10 @@ using System;
 namespace restfulapi.Migrations
 {
     [DbContext(typeof(AlpmysContext))]
-    partial class AlpmysContextModelSnapshot : ModelSnapshot
+    [Migration("20180525151640_NewDb")]
+    partial class NewDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

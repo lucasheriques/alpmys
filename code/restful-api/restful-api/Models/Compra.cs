@@ -1,27 +1,21 @@
-using System;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestfulApi.Models
 {
-
-    public class Compra : IPaypal
+    public class Compra
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
-        public float ValorCompra { get; set; }
+        public double Valor { get; set; }
 
-        public int QuantidadeIngressos { get; set; }
-
+        [Required]
         public DateTime DataCompra { get; set; }
 
-        public DateTime DataVencimento { get; set; }
-
-        public string FormaPagamento { get; set; }
-
-        public string Status { get; set; }
-
-        public long UsuarioId { get; set; }
-
+        public int IngressoId { get; set; }
+        public Ingresso Ingresso { get; set; }
+        
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-
     }
 }

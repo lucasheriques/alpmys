@@ -10,57 +10,57 @@ using RestfulApi.Models;
 namespace RestfulApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Usuarios")]
-    public class UsuariosController : Controller
+    [Route("api/Ingressos")]
+    public class IngressosController : Controller
     {
         private readonly AlpmysContext _context;
 
-        public UsuariosController(AlpmysContext context)
+        public IngressosController(AlpmysContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Ingressos
         [HttpGet]
-        public IEnumerable<Usuario> GetUsuario()
+        public IEnumerable<Ingresso> GetIngresso()
         {
-            return _context.Usuario;
+            return _context.Ingresso;
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Ingressos/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUsuario([FromRoute] int id)
+        public async Task<IActionResult> GetIngresso([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
+            var ingresso = await _context.Ingresso.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (usuario == null)
+            if (ingresso == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(ingresso);
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Ingressos/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)
+        public async Task<IActionResult> PutIngresso([FromRoute] int id, [FromBody] Ingresso ingresso)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.Id)
+            if (id != ingresso.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(ingresso).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace RestfulApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!IngressoExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace RestfulApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Ingressos
         [HttpPost]
-        public async Task<IActionResult> PostUsuario([FromBody] Usuario usuario)
+        public async Task<IActionResult> PostIngresso([FromBody] Ingresso ingresso)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Usuario.Add(usuario);
+            _context.Ingresso.Add(ingresso);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetIngresso", new { id = ingresso.Id }, ingresso);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Ingressos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
+        public async Task<IActionResult> DeleteIngresso([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            var ingresso = await _context.Ingresso.SingleOrDefaultAsync(m => m.Id == id);
+            if (ingresso == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Ingresso.Remove(ingresso);
             await _context.SaveChangesAsync();
 
-            return Ok(usuario);
+            return Ok(ingresso);
         }
 
-        private bool UsuarioExists(int id)
+        private bool IngressoExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Ingresso.Any(e => e.Id == id);
         }
     }
 }
