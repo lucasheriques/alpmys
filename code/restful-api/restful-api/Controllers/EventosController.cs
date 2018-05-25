@@ -22,9 +22,15 @@ namespace RestfulApi.Controllers
 
         // GET: api/Eventos
         [HttpGet]
-        public IEnumerable<Evento> GetEvento()
+        public async Task<IActionResult> GetEvento()
         {
-            return _context.Evento;
+            var evento = from e in _context.Evento join l in _context.Local on e.LocalId equals l.Id select new { e,l};
+            var eventos = evento.ToList();
+            if (eventos == null)
+                        {
+                              return NotFound();
+                        }
+            return Ok(eventos); 
         }
 
         // GET: api/Eventos/5
