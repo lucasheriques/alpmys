@@ -24,7 +24,21 @@ namespace RestfulApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvento()
         {
-            var evento = from e in _context.Evento join l in _context.Local on e.LocalId equals l.Id select new { e,l};
+            var evento = from e in _context.Evento join l in _context.Local on e.LocalId equals l.Id select new
+            {
+                id = e.Id,
+                nome = e.Nome,
+                descricao = e.Descricao,
+                data=e.Data,
+                duracao=e.Duracao,
+                linkImagem=e.LinkImagem,
+                linkPagina=e.LinkPagina,
+                usuarioId=e.UsuarioId,
+                localId=e.LocalId,
+                ingressos=e.Ingressos,
+                local=e.Local
+
+            };
             var eventos = evento.ToList();
             if (eventos == null)
                         {
