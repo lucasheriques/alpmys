@@ -28,7 +28,7 @@ namespace RestfulApi.Models
 
 
         public int UsuarioId { get; set; }
-        public Usuario Organizador;
+        public Usuario Organizador { get; set; }
 
         public int LocalId { get; set; }
         public Local Local { get; set; }

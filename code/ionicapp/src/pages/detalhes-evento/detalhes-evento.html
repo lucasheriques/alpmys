@@ -17,7 +17,7 @@
   <ion-card>
     <img src="{{evento.linkImagem}}" />
     <ion-card-header>
-        {{evento.nome}}
+      {{evento.nome}}
     </ion-card-header>
     <ion-card-content>
       <p>{{evento.local.nome}}-{{evento.local.cidade}},{{evento.local.uf}}
@@ -50,7 +50,14 @@
       <ion-card-title>Descricao</ion-card-title>
       <p>{{evento.descricao}}</p>
       <ion-card-title>Organizador</ion-card-title>
+      <p>{{evento.organizador.nome}}
+        <br>{{evento.organizador.email}}
+        <br>{{evento.organizador.celular}}</p>
       <ion-card-title>Local</ion-card-title>
+      <p>{{evento.local.nome}}
+        <br>{{evento.local.descricao}}
+        <br>{{evento.local.rua}},{{evento.local.numero}},
+        <br>{{evento.local.cidade}},{{evento.local.uf}}</p>
     </ion-card-content>
   </ion-card>
 
