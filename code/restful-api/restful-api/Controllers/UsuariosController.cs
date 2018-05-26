@@ -24,6 +24,7 @@ namespace RestfulApi.Controllers
         [HttpGet]
         public IEnumerable<Usuario> GetUsuario()
         {
+
             return _context.Usuario;
         }
 
@@ -45,7 +46,23 @@ namespace RestfulApi.Controllers
 
             return Ok(usuario);
         }
+        [HttpGet("{id}/eventos")]
+        public async Task<IActionResult> GetFilmesCinema([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var eventos = _context.Evento.Where(e => e.UsuarioId == id);
+
+            if (eventos == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(eventos);
+        }
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)

@@ -26,12 +26,7 @@ namespace RestfulApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+           
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -47,7 +42,14 @@ namespace RestfulApi
             app.UseCors("MyPolicy");
 
             app.UseStaticFiles();
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowCredentials();
+                builder.AllowAnyOrigin();
 
+            });
             app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;

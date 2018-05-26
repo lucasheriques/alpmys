@@ -22,6 +22,15 @@ export class RestProvider {
       });
     });
   }
+  getMeusEventos(id) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/Usuarios/'+id+'Eventos').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
   addEventos(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/Eventos', JSON.stringify(data))

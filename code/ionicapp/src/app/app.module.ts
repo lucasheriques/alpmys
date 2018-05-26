@@ -11,13 +11,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { DetalhesEventoPage } from '../pages/detalhes-evento/detalhes-evento';
+import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    DetalhesEventoPage
+    DetalhesEventoPage,
+    MeusEventosPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { DetalhesEventoPage } from '../pages/detalhes-evento/detalhes-evento';
     MyApp,
     HomePage,
     ListPage,
-    DetalhesEventoPage   
+    DetalhesEventoPage,
+    MeusEventosPage  
   ],
   providers: [
     StatusBar,

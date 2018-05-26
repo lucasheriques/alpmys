@@ -1,0 +1,45 @@
+<!--
+  Generated template for the MeusEventosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Meus Eventos</ion-title>
+      </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngFor="let evento of eventos">
+        <button ion-item (click)="itemTapped($event, evento)">
+          <img src="{{evento.linkImagem}}" />
+          <ion-card-content>
+            <ion-card-title>
+              {{evento.nome}}
+            </ion-card-title>
+            <p>{{evento.local.nome}}</p>
+            <ion-row>
+              <ion-col>
+                {{evento.data}}
+              </ion-col>
+              <ion-col>
+                {{evento.local.cidade}}
+              </ion-col>
+              <ion-col>
+                {{evento.local.uf}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </button>
+      </ion-card>
+      <ion-fab right bottom>
+          <button ion-fab ><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+</ion-content>
