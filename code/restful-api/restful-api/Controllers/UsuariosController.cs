@@ -36,26 +36,37 @@ namespace RestfulApi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var evento = from e in _context.Evento
+                         join l in _context.Local on e.LocalId equals l.Id
+                         where e.UsuarioId == id
+                         select new
+                         {
+                             id = e.Id,
+                             nome = e.Nome,
+                             descricao = e.Descricao,
+                             data = e.Data,
+                             duracao = e.Duracao,
+                             linkImagem = e.LinkImagem,
+                             linkPagina = e.LinkPagina,
+                             usuarioId = e.UsuarioId,
+                             localId = e.LocalId,
+                             ingressos = e.Ingressos,
+                             local = e.Local
+                         };
+            var usuarioEvento = from u in _context.Usuario
+                                where u.Id == id
+                                select new
+                                {
+                                    id = u.Id,
+                                    nome = u.Nome,
+                                    email = u.Email,
+                                    senha = u.Senha,
+                                    celular = u.Celular,
+                                    eventos = evento,
+                                    compras = u.Compras
 
-            var usuario = await _context.Usuario.SingleOrDefaultAsync(m => m.Id == id);
-
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(usuario);
-        }
-        [HttpGet("{id}/eventos")]
-        public async Task<IActionResult> GetFilmesCinema([FromRoute] long id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var eventos = _context.Evento.Where(e => e.UsuarioId == id);
-
+                                };
+            var eventos = usuarioEvento.ToList()[0];
             if (eventos == null)
             {
                 return NotFound();

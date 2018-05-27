@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { DetalhesEventoPage } from '../detalhes-evento/detalhes-evento';
+import { CadastrarEventoPage } from '../cadastrar-evento/cadastrar-evento';
 /**
  * Generated class for the MeusEventosPage page.
  *
@@ -14,16 +15,17 @@ import { DetalhesEventoPage } from '../detalhes-evento/detalhes-evento';
   templateUrl: 'meus-eventos.html',
 })
 export class MeusEventosPage {
-  eventos:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public restProvider: RestProvider) {
-  this.getEventos();
+  usuario: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
+    this.getUsuario(1);
+    console.log("usuario nome"+this.usuario.nome)
   }
-  getEventos() {
-    this.restProvider.getEventos()
-    .then(data => {
-      this.eventos = data;
-      console.log(this.eventos);
-    });
+  getUsuario(id) {
+    this.restProvider.getUsuario(id)
+      .then(data => {
+        this.usuario = data;
+        console.log(this.usuario);
+      });
   }
   itemTapped(event, evento) {
     // That's right, we're pushing to ourselves!
@@ -31,9 +33,14 @@ export class MeusEventosPage {
       evento: evento
     });
   }
+  addEvento(event) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(CadastrarEventoPage, {
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeusEventosPage');
   }
-  
+
 
 }

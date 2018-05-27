@@ -17,7 +17,8 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let evento of eventos">
+  
+   <!-- <ion-card *ngFor="let evento of usuario.evento">
         <button ion-item (click)="itemTapped($event, evento)">
           <img src="{{evento.linkImagem}}" />
           <ion-card-content>
@@ -40,6 +41,6 @@
         </button>
       </ion-card>
       <ion-fab right bottom>
-          <button ion-fab ><ion-icon name="add"></ion-icon></button>
-        </ion-fab>
+          <button ion-fab (click)="addEvento($event)" ><ion-icon name="add"></ion-icon></button>
+        </ion-fab>-->
 </ion-content>

@@ -12,6 +12,7 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { DetalhesEventoPage } from '../pages/detalhes-evento/detalhes-evento';
 import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
+import { CadastrarEventoPage } from '../pages/cadastrar-evento/cadastrar-evento';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
     HomePage,
     ListPage,
     DetalhesEventoPage,
-    MeusEventosPage
+    MeusEventosPage,
+    CadastrarEventoPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
     HomePage,
     ListPage,
     DetalhesEventoPage,
-    MeusEventosPage  
+    MeusEventosPage,
+    CadastrarEventoPage  
   ],
   providers: [
     StatusBar,

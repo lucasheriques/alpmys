@@ -1,0 +1,93 @@
+<!--
+  Generated template for the CadastrarEventoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CadastrarEvento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-slides pager>
+
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Nome Evento</ion-label>
+          <ion-input type="text"></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Descricao</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Data</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY h:mm A" pickerFormat="DD-MM-YYYY HH:mm A" [(ngModel)]="evento.data"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Duração</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Link da imagem</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>link da página</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+
+
+    </ion-slide>
+
+    <ion-slide>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Nome Local</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Descricao</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Cep</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Rua</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Numero</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Complemento</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Cidade</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>UF</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+
+    <ion-slide style="background-color: red">
+      <h2>Slide 3</h2>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

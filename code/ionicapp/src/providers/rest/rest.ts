@@ -22,9 +22,9 @@ export class RestProvider {
       });
     });
   }
-  getMeusEventos(id) {
+  getUsuario(id) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/Usuarios/'+id+'Eventos').subscribe(data => {
+      this.http.get(this.apiUrl+'/Usuarios/'+id).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
