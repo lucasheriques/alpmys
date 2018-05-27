@@ -14,80 +14,82 @@
 
 
 <ion-content padding>
-  <ion-slides pager>
+  <form (ngSubmit)="postEvento()">
+    <ion-slides pager>
+      <ion-slide>
 
-    <ion-slide>
-      <ion-list>
         <ion-item>
           <ion-label floating>Nome Evento</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.nome" name="nome" type="text"></ion-input>
 
         </ion-item>
         <ion-item>
           <ion-label floating>Descricao</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.descricao" name="descricao" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Data</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY h:mm A" pickerFormat="DD-MM-YYYY HH:mm A" [(ngModel)]="evento.data"></ion-datetime>
+          <ion-datetime [(ngModel)]="evento.data" name="data" displayFormat="DD/MM/YYYY h:mm " pickerFormat="DD-MM-YYYY HH:mm A"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label floating>Duração</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.duracao" name="duracao" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Link da imagem</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.linkImagem" name="linkImagem" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>link da página</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.linkPagina" name="linkPagina" type="text"></ion-input>
         </ion-item>
-      </ion-list>
-
-
-    </ion-slide>
-
-    <ion-slide>
-      <ion-list>
+      </ion-slide>
+      <ion-slide>
         <ion-item>
           <ion-label floating>Nome Local</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.nome" name="nomelocal" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Descricao</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.descricao" name="descricaoLocal" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Nome Local</ion-label>
+          <ion-input [(ngModel)]="evento.local.nome" name="nomelocal" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Cep</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.cep" name="cep" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Rua</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.rua" name="rua" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Numero</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-label floating>Número</ion-label>
+          <ion-input [(ngModel)]="evento.local.numero" name="numero" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Complemento</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.complemento" name="complemento" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Cidade</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="evento.local.cidade" name="cidade" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>UF</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-label floating>Uf</ion-label>
+          <ion-input [(ngModel)]="evento.local.uf" name="uf" type="text"></ion-input>
         </ion-item>
-      </ion-list>
-    </ion-slide>
 
-    <ion-slide style="background-color: red">
-      <h2>Slide 3</h2>
-    </ion-slide>
-
-  </ion-slides>
+      </ion-slide>
+      <ion-slide>
+        <ion-fab top right bottom>
+          <button ion-fab type="submit">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
+      </ion-slide>
+    </ion-slides>
+  </form>
 </ion-content>
