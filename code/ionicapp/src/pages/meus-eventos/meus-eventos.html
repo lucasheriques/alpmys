@@ -19,7 +19,7 @@
 <ion-content padding>
 
   <ion-card *ngFor="let evento of usuario?.eventos">
-    <button ion-item (click)="itemTapped($event, usuario,evento.id)">
+    <button ion-item (click)="itemTapped($event, usuario,evento)">
       <img src="{{evento.linkImagem}}" />
       <ion-card-content>
         <ion-card-title>

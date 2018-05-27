@@ -27,10 +27,10 @@ export class MeusEventosPage {
         console.log(this.usuario);
       });
   }
-  itemTapped(event, usuario,id) {
+  itemTapped(event, usuario,evento) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(DetalhesMeusEventoPage, {
-      usuario: usuario,id:id
+      usuario: usuario,evento:evento
     });
   }
   addEvento(event) {

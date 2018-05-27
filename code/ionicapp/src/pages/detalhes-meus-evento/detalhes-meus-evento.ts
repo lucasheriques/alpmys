@@ -14,12 +14,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DetalhesMeusEventoPage {
   usuario:any
-  idEvento:any;
+  evento:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.usuario=navParams.get('usuario');
-    this.idEvento=navParams.get('id');
-    this.idEvento--;
-    console.log("i recebido"+this.idEvento);
+    this.evento=navParams.get('evento');
   }
 
   ionViewDidLoad() {

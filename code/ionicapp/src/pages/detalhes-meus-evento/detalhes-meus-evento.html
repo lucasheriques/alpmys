@@ -7,20 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Detalhes Evento</ion-title>
+    <ion-title>{{evento.nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content *ngIf="usuario" padding>
+<ion-content *ngIf="evento" padding>
   <ion-card>
-    <img src="{{usuario.eventos[idEvento].linkImagem}}" />
-    <ion-card-header>
-      {{usuario.eventos[idEvento].nome}}
+    <img src="{{evento.linkImagem}}" />
+    <ion-card-header *ngIf="evento">
+      {{evento.nome}}
     </ion-card-header>
     <ion-card-content>
-        <p>{{usuario.eventos[idEvento].local.nome}}-{{usuario.eventos[idEvento].local.cidade}},{{usuario.eventos[idEvento].local.uf}}
-          <br> {{usuario.eventos[idEvento].data}}
+        <p>{{evento.local.nome}}-{{evento.local.cidade}},{{evento.local.uf}}
+          <br> {{evento.data}}
         </p> 
         <div>
             <h2>Ingressos</h2>
@@ -47,16 +47,16 @@
             <button ion-button>comprar ingresso</button>
           </div>     
           <ion-card-title>Descricao</ion-card-title>
-          <p>{{usuario.eventos[idEvento].descricao}}</p>
+          <p>{{evento.descricao}}</p>
           <ion-card-title>Organizador</ion-card-title>
-          <p>{{usuario.nome}}
+          <p *ngIf="usuario">{{usuario.nome}}
             <br>{{usuario.email}}
             <br>{{usuario.celular}}</p>
           <ion-card-title>Local</ion-card-title>
-          <p>{{usuario.eventos[idEvento].local.nome}}
-              <br>{{usuario.eventos[idEvento].local.descricao}}
-              <br>{{usuario.eventos[idEvento].local.rua}},{{usuario.eventos[idEvento].local.numero}},
-              <br>{{usuario.eventos[idEvento].local.cidade}},{{usuario.eventos[idEvento].local.uf}}</p>
+          <p>{{evento.local.nome}}
+              <br>{{evento.local.descricao}}
+              <br>{{evento.local.rua}},{{evento.local.numero}},
+              <br>{{evento.local.cidade}},{{evento.local.uf}}</p>
       </ion-card-content>
   </ion-card>
 </ion-content>
