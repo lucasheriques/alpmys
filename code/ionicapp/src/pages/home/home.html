@@ -8,13 +8,30 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
-      <button ion-item *ngFor="let evento of eventos">
-        <img  width="80" height="80"src="{{evento.linkImagem}}"/>
-        <p>{{evento.nome}}<br><!{{evento.local.nome}}<br{{evento.data}}{{evento.local.endereco.cidade}}></p>
-      
+  <ion-list>
 
+    <ion-card *ngFor="let evento of eventos">
+      <button ion-item (click)="itemTapped($event, evento)">
+        <img src="{{evento.linkImagem}}" />
+        <ion-card-content>
+          <ion-card-title>
+            {{evento.nome}}
+          </ion-card-title>
+          <p>{{evento.local.nome}}</p>
+          <ion-row>
+            <ion-col>
+              {{evento.data}}
+            </ion-col>
+            <ion-col>
+              {{evento.local.cidade}}
+            </ion-col>
+            <ion-col>
+              {{evento.local.uf}}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
       </button>
-    </ion-list>
-  </ion-content>
-  
+    </ion-card>
+
+  </ion-list>
+</ion-content>
