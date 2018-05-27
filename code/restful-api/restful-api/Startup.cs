@@ -33,7 +33,10 @@ namespace RestfulApi
             });
             var connectionString = Configuration.GetConnectionString("AlpmysContext");
         	services.AddDbContext<AlpmysContext>(options => options.UseMySQL(connectionString));
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.DateFormatString = "mm/dd/yy, HH:mm";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

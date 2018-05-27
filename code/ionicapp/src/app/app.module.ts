@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DetalhesEventoPage } from '../pages/detalhes-evento/detalhes-evento';
 import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
 import { CadastrarEventoPage } from '../pages/cadastrar-evento/cadastrar-evento';
+import { DetalhesMeusEventoPage } from '../pages/detalhes-meus-evento/detalhes-meus-evento';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CadastrarEventoPage } from '../pages/cadastrar-evento/cadastrar-evento'
     ListPage,
     DetalhesEventoPage,
     MeusEventosPage,
-    CadastrarEventoPage
+    CadastrarEventoPage,
+    DetalhesMeusEventoPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { CadastrarEventoPage } from '../pages/cadastrar-evento/cadastrar-evento'
     ListPage,
     DetalhesEventoPage,
     MeusEventosPage,
-    CadastrarEventoPage  
+    CadastrarEventoPage,
+    DetalhesMeusEventoPage  
   ],
   providers: [
     StatusBar,

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { DetalhesEventoPage } from '../detalhes-evento/detalhes-evento';
 import { CadastrarEventoPage } from '../cadastrar-evento/cadastrar-evento';
+import { DetalhesMeusEventoPage } from '../detalhes-meus-evento/detalhes-meus-evento';
 /**
  * Generated class for the MeusEventosPage page.
  *
@@ -18,7 +19,6 @@ export class MeusEventosPage {
   usuario: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
     this.getUsuario(1);
-    console.log("usuario nome"+this.usuario.nome)
   }
   getUsuario(id) {
     this.restProvider.getUsuario(id)
@@ -27,10 +27,10 @@ export class MeusEventosPage {
         console.log(this.usuario);
       });
   }
-  itemTapped(event, evento) {
+  itemTapped(event, usuario,id) {
     // That's right, we're pushing to ourselves!
-    this.navCtrl.push(DetalhesEventoPage, {
-      evento: evento
+    this.navCtrl.push(DetalhesMeusEventoPage, {
+      usuario: usuario,id:id
     });
   }
   addEvento(event) {

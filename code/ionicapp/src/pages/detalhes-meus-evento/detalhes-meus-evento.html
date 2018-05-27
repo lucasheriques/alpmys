@@ -1,0 +1,62 @@
+<!--
+  Generated template for the DetalhesMeusEventoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalhes Evento</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content *ngIf="usuario" padding>
+  <ion-card>
+    <img src="{{usuario.eventos[idEvento].linkImagem}}" />
+    <ion-card-header>
+      {{usuario.eventos[idEvento].nome}}
+    </ion-card-header>
+    <ion-card-content>
+        <p>{{usuario.eventos[idEvento].local.nome}}-{{usuario.eventos[idEvento].local.cidade}},{{usuario.eventos[idEvento].local.uf}}
+          <br> {{usuario.eventos[idEvento].data}}
+        </p> 
+        <div>
+            <h2>Ingressos</h2>
+            <ion-row>
+              <ion-col>
+                Ingresso
+              </ion-col>
+              <ion-col>
+                Valor
+              </ion-col>
+            </ion-row>
+            <ion-list>
+              <button ion-item>
+                <ion-row>
+                  <ion-col>
+                    Ingresso
+                  </ion-col>
+                  <ion-col>
+                    Valor
+                  </ion-col>
+                </ion-row>
+              </button>
+            </ion-list>
+            <button ion-button>comprar ingresso</button>
+          </div>     
+          <ion-card-title>Descricao</ion-card-title>
+          <p>{{usuario.eventos[idEvento].descricao}}</p>
+          <ion-card-title>Organizador</ion-card-title>
+          <p>{{usuario.nome}}
+            <br>{{usuario.email}}
+            <br>{{usuario.celular}}</p>
+          <ion-card-title>Local</ion-card-title>
+          <p>{{usuario.eventos[idEvento].local.nome}}
+              <br>{{usuario.eventos[idEvento].local.descricao}}
+              <br>{{usuario.eventos[idEvento].local.rua}},{{usuario.eventos[idEvento].local.numero}},
+              <br>{{usuario.eventos[idEvento].local.cidade}},{{usuario.eventos[idEvento].local.uf}}</p>
+      </ion-card-content>
+  </ion-card>
+</ion-content>
