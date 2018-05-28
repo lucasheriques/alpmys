@@ -9,22 +9,22 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'http://localhost:64524/api';
+  apiUrl = 'http://192.168.56.1:45455/api';
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
-  getEventos() {
+  deleteEvento(id) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/Eventos').subscribe(data => {
+      this.http.delete(this.apiUrl+'/Eventos/'+id).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
       });
     });
   }
-  getUsuario(id) {
+  getEventos() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/Usuarios/'+id).subscribe(data => {
+      this.http.get(this.apiUrl+'/Eventos').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -43,4 +43,14 @@ export class RestProvider {
         });
     });
   }
+  getUsuario(id) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/Usuarios/'+id).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+  
 }

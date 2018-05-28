@@ -14,19 +14,28 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'cadastrar-evento.html',
 })
 export class CadastrarEventoPage {
-  evento = { nome: '', descricao: '', data: '' ,duracao:'',linkImagem:'',linkPagina:'',local:{nome:'',descricao:'',cep:'',rua:'',numero:'',complemento:'',cidade:'',uf:''},usuarioId:'1'};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public restProvider: RestProvider) {
+  evento = { nome: '', descricao: '', data: '', duracao: '', linkImagem: '', linkPagina: '', local: { nome: '', descricao: '', cep: '', rua: '', numero: '', complemento: '', cidade: '', uf: '' }, usuarioId: '1', ingressos: [] };
+  quantidade;
+  ingresso = { tipoIngreso: '', disponivel: 'true', valor: '' };
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastrarEventoPage');
   }
-  postEvento(){
-      this.restProvider.postEventos(this.evento).then((result) => {
-        console.log(result);
-      }, (err) => {
-        console.log(err);
-      });
-    
+  postEvento() {
+    this.addIngressos();
+    this.restProvider.postEventos(this.evento).then((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
+  addIngressos() {
+    for (var i = 0; i < this.quantidade; i++) {
+      this.evento.ingressos[i] = this.ingresso;
+
+    }
   }
 }

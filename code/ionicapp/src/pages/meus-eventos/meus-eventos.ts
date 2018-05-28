@@ -27,6 +27,13 @@ export class MeusEventosPage {
         console.log(this.usuario);
       });
   }
+  deleteEvento(id) {
+    this.restProvider.deleteEvento(id)
+    .then(data => {
+      console.log(data);
+      this.getUsuario(1);
+    });
+  }
   itemTapped(event, usuario,evento) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(DetalhesMeusEventoPage, {

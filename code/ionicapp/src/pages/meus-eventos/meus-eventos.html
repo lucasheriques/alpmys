@@ -39,6 +39,12 @@
         </ion-row>
       </ion-card-content>
     </button>
+    <button ion-button>
+        <ion-icon name="trash" (click)="deleteEvento(evento.id)"></ion-icon>
+      </button>
+      <button ion-button>
+          <ion-icon name="create"></ion-icon>
+      </button>
   </ion-card>
   <ion-fab right bottom>
     <button ion-fab (click)="addEvento($event)">
