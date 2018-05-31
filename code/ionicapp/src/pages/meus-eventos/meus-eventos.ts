@@ -44,6 +44,7 @@ export class MeusEventosPage {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(CadastrarEventoPage, {
     });
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeusEventosPage');

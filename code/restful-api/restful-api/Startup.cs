@@ -35,7 +35,7 @@ namespace RestfulApi
         	services.AddDbContext<AlpmysContext>(options => options.UseMySQL(connectionString));
             services.AddMvc().AddJsonOptions(options =>
             {
-                options.SerializerSettings.DateFormatString = "mm/dd/yy, HH:mm";
+                options.SerializerSettings.DateFormatString = "dd/MM/yy, HH:mm";
             });
         }
 

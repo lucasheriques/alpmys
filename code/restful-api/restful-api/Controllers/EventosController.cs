@@ -24,28 +24,40 @@ namespace RestfulApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvento()
         {
-            var evento = from e in _context.Evento join l in _context.Local on e.LocalId equals l.Id join u in _context.Usuario on e.UsuarioId equals u.Id select new
-            {
-                organizador = e.Organizador,
-
-                id = e.Id,
-                nome = e.Nome,
-                descricao = e.Descricao,
-                data=e.Data,
-                duracao=e.Duracao,
-                linkImagem=e.LinkImagem,
-                linkPagina=e.LinkPagina,
-                usuarioId=e.UsuarioId,
-                localId=e.LocalId,
-                ingressos=e.Ingressos,
-                local=e.Local
-            };
+            var evento = from e in _context.Evento
+                         join l in _context.Local on e.LocalId equals l.Id
+                         join u in _context.Usuario on e.UsuarioId equals u.Id
+                         select new
+                         {
+                             organizador = e.Organizador,
+                             id = e.Id,
+                             nome = e.Nome,
+                             descricao = e.Descricao,
+                             data = e.Data,
+                             duracao = e.Duracao,
+                             tipoIngressos = from i in _context.Ingresso
+                                             where i.Disponivel == true && e.Id == i.EventoId
+                                             group i by i.TipoIngreso into t
+                                             select new
+                                             {
+                                                 EventoId = t.First().EventoId,
+                                                 Valor = t.First().Valor,
+                                                 TipoIngresso = t.Key,
+                                                 Quantidade = t.Count()
+                                             },
+                             linkImagem = e.LinkImagem,
+                             linkPagina = e.LinkPagina,
+                             usuarioId = e.UsuarioId,
+                             localId = e.LocalId,
+                             ingressos = e.Ingressos,
+                             local = e.Local
+                         };
             var eventos = evento.ToList();
             if (eventos == null)
-                        {
-                              return NotFound();
-                        }
-            return Ok(eventos); 
+            {
+                return NotFound();
+            }
+            return Ok(eventos);
         }
 
         // GET: api/Eventos/5

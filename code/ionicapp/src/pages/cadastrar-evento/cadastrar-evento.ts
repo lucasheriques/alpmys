@@ -27,6 +27,7 @@ export class CadastrarEventoPage {
     this.addIngressos();
     this.restProvider.postEventos(this.evento).then((result) => {
       console.log(result);
+      this.navCtrl.pop();
     }, (err) => {
       console.log(err);
     });

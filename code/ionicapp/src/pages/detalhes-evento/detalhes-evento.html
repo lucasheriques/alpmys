@@ -33,19 +33,22 @@
             Valor
           </ion-col>
         </ion-row>
-        <ion-list>
-          <button ion-item>
-            <ion-row>
-              <ion-col>
-                Ingresso
-              </ion-col>
-              <ion-col>
-                Valor
-              </ion-col>
-            </ion-row>
+        <ion-list >
+          <button ion-item *ngFor="let ingresso of evento.tipoIngressos">
+              <ion-row>
+                  <ion-col>
+                    {{ingresso.tipoIngresso}}
+                  </ion-col>
+                  <ion-col>
+                    {{ingresso.valor}}
+                  </ion-col>
+                  <ion-col>
+                      <ion-icon name="cart"></ion-icon>
+                    </ion-col>
+                </ion-row>
           </button>
         </ion-list>
-        <button ion-button>comprar ingresso</button>
+
       </div>
       <ion-card-title>Descricao</ion-card-title>
       <p>{{evento.descricao}}</p>

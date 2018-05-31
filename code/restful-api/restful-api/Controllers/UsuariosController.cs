@@ -46,6 +46,16 @@ namespace RestfulApi.Controllers
                              descricao = e.Descricao,
                              data = e.Data,
                              duracao = e.Duracao,
+                             tipoIngressos = from i in _context.Ingresso
+                                             where i.Disponivel == true && e.Id==i.EventoId
+                                             group i by i.TipoIngreso into t
+                                             select new
+                                             {
+                                                 EventoId = t.First().EventoId,
+                                                 Valor = t.First().Valor,
+                                                 TipoIngresso = t.Key,
+                                                 Quantidade = t.Count()
+                                             },
                              linkImagem = e.LinkImagem,
                              linkPagina = e.LinkPagina,
                              usuarioId = e.UsuarioId,
