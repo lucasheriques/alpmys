@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
-
     <ion-card *ngFor="let evento of eventos">
       <button ion-item (click)="itemTapped($event, evento)">
         <img src="{{evento.linkImagem}}" />

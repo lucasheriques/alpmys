@@ -18,6 +18,10 @@ export class CadastrarEventoPage {
   quantidade;
   ingresso = { tipoIngreso: '', disponivel: 'true', valor: '' };
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
+    console.log(navParams.get('evento'));
+    if(navParams.get('evento')!=null){
+      this.evento=navParams.get('evento');
+    }
   }
 
   ionViewDidLoad() {
