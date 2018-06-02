@@ -16,12 +16,15 @@ import { RestProvider } from '../../providers/rest/rest';
 export class CadastrarEventoPage {
   evento = { nome: '', descricao: '', data: '', duracao: '', linkImagem: '', linkPagina: '', local: { nome: '', descricao: '', cep: '', rua: '', numero: '', complemento: '', cidade: '', uf: '' }, usuarioId: '1', ingressos: [] };
   quantidade;
+  inputs:any;
   ingresso = { tipoIngreso: '', disponivel: 'true', valor: '' };
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
     console.log(navParams.get('evento'));
     if(navParams.get('evento')!=null){
       this.evento=navParams.get('evento');
     }
+    this.inputs = [{ tipoIngresso: "Tipo Ingresso", quantidade: "Quantidade", valor: "Valor" }];
+
   }
 
   ionViewDidLoad() {
@@ -43,4 +46,7 @@ export class CadastrarEventoPage {
 
     }
   }
+  addCampo() {
+    this.inputs.push({ tipoIngresso: "Tipo Ingresso", quantidade: "Quantidade", valor: "Valor" });
+}
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { DetalhesEventoPage } from '../detalhes-evento/detalhes-evento';
 import { CadastrarEventoPage } from '../cadastrar-evento/cadastrar-evento';
@@ -19,9 +19,10 @@ export class MeusEventosPage {
   usuarioApi: any;
   usuario: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider, public alertCtrl: AlertController) {
-    this.getUsuario(1);
+    
   }
   getUsuario(id) {
+
     this.restProvider.getUsuario(id)
       .then(data => {
         this.usuarioApi = data;
@@ -49,6 +50,7 @@ export class MeusEventosPage {
     });
 
   }
+  
   editEvento(evento) {
     this.navCtrl.push(CadastrarEventoPage, {
       evento: evento, edit: true
@@ -78,6 +80,10 @@ export class MeusEventosPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeusEventosPage');
+
+  }
+  ionViewDidEnter() {
+    this.getUsuario(1);
   }
   initializeItems() {
     this.usuario = this.usuarioApi.eventos;
