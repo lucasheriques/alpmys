@@ -10,7 +10,7 @@ import { ToastController, LoadingController } from 'ionic-angular';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'http://192.168.1.9:45458/api';
+  apiUrl = 'http://192.168.1.9:45457/api';
   constructor(public http: HttpClient, private toastCtrl: ToastController,public loadingCtrl: LoadingController) {
     console.log('Hello RestProvider Provider');
   }
