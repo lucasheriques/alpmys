@@ -17,9 +17,9 @@
 
 
 <ion-content padding>
-
-  <ion-card *ngFor="let evento of usuario?.eventos">
-    <button ion-item (click)="itemTapped($event, usuario,evento)">
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-card *ngFor="let evento of usuario">
+    <button ion-item (click)="itemTapped($event, usuarioApi,evento)">
       <img src="{{evento.linkImagem}}" />
       <ion-card-content>
         <ion-card-title>
@@ -39,9 +39,15 @@
         </ion-row>
       </ion-card-content>
     </button>
+    <button ion-button>
+        <ion-icon name="trash" (click)=" showConfirm(evento.id)"></ion-icon>
+      </button>
+      <button ion-button>
+          <ion-icon name="create" (click)="editEvento(evento)"></ion-icon>
+      </button>
   </ion-card>
   <ion-fab right bottom>
-    <button ion-fab (click)="addEvento($event)">
+    <button ion-fab (click)="addEvento()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
