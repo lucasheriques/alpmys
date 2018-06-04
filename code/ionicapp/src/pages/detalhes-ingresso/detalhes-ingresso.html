@@ -7,12 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>DetalhesIngresso</ion-title>
+    <ion-title>Pedido: id paypal</ion-title>
+    <p *ngIf="compra">{{compra.dataCompra}}</p>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content *ngIf="compra" padding>
+  <ion-card>
+    <img src="{{compra.ingresso.evento.linkImagem}}" />
+    <ion-card-header>
+      {{compra.ingresso.evento.nome}}
+    </ion-card-header>
 
-<ion-content padding>
-
+    <ion-card-content>
+      <p>{{compra.ingresso.evento.local.nome}}-{{compra.ingresso.evento.local.cidade}}-{{compra.ingresso.evento.local.uf}}</p>
+      <p>{{compra.ingresso.evento.data}}</p>
+      <p>Ingresso: {{compra.ingresso.tipoIngreso}}   valor:{{compra.valor}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

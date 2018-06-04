@@ -13,8 +13,9 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'detalhes-ingresso.html',
 })
 export class DetalhesIngressoPage {
-
+  compra:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.compra=navParams.get('compra');
   }
 
   ionViewDidLoad() {
