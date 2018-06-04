@@ -11,7 +11,7 @@ import { ToastController, LoadingController } from 'ionic-angular';
 @Injectable()
 export class RestProvider {
   apiUrl = 'http://192.168.1.9:45457/api';
-  constructor(public http: HttpClient, private toastCtrl: ToastController,public loadingCtrl: LoadingController) {
+  constructor(public http: HttpClient, private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello RestProvider Provider');
   }
   deleteEvento(id) {
@@ -56,7 +56,7 @@ export class RestProvider {
           this.showToast("Evento criado com sucesso");
         }, (err) => {
           loader.dismiss();
-          this.showToast("Erro ao tentar criar um evento"); 
+          this.showToast("Erro ao tentar criar um evento");
           reject(err);
 
         });
@@ -78,7 +78,23 @@ export class RestProvider {
       });
     });
   }
-  showToast(message){
+  getEventoTipoIngresso(id, tipoIngresso) {
+    let loader = this.loadingCtrl.create({
+      content: "Carregando... Por favor Espere "
+    });
+    loader.present();
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/Eventos/' + id + "/" + tipoIngresso).subscribe(data => {
+        resolve(data);
+        loader.dismiss();
+      }, err => {
+        console.log(err);
+        loader.dismiss();
+        this.showToast("Falha ao conectar com Api.Por favor tente mais tarde");
+      });
+    });
+  }
+  showToast(message) {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,
@@ -86,5 +102,25 @@ export class RestProvider {
     });
     toast.present();
   }
+  postCompra(data) {
+    let loader = this.loadingCtrl.create({
+      content: "Enviando...Por favor Espere "
+    });
+    loader.present();
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/Compras', JSON.stringify(data), {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      })
+        .subscribe(res => {
+          loader.dismiss();
+          resolve(res);
+          this.showToast("Compra efetuada com sucesso");
+        }, (err) => {
+          loader.dismiss();
+          this.showToast("Erro ao tentar comprar");
+          reject(err);
 
+        });
+    });
+  }
 }

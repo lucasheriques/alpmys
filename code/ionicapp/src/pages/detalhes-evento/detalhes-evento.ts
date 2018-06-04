@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+import { RestProvider } from '../../providers/rest/rest';
 /**
  * Generated class for the DetalhesEventoPage page.
  *
@@ -15,15 +16,19 @@ import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal
 })
 export class DetalhesEventoPage {
   evento: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private payPal: PayPal) {
+  ingresso:any;
+  compra = { valor: '',dataCompra:'',ingressoId:'',usuarioId:''};
+  constructor(public navCtrl: NavController, public navParams: NavParams,private payPal: PayPal,public restProvider:RestProvider) {
     this.evento = navParams.get('evento');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalhesEventoPage');
   }
-  comprar(valor) {
-    console.log(valor);
+
+  comprar(ingresso) {
+    this.getEventoTipoIngresso(this.evento.id,ingresso.tipoIngresso);
+    console.log(ingresso.valor);
     this.payPal.init({
       PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
       PayPalEnvironmentSandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R'
@@ -33,7 +38,7 @@ export class DetalhesEventoPage {
         // Only needed if you get an "Internal Service Error" after PayPal login!
         //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
       })).then(() => {
-        let payment = new PayPalPayment(valor, 'BRL', 'Description', 'sale');
+        let payment = new PayPalPayment(ingresso.valor, 'BRL', 'Description', 'sale');
         this.payPal.renderSinglePaymentUI(payment).then((response) => {
           console.log("Pagou");
           console.log("Response id" + response.response.id + "\nresponse state" + response.response.state + "\ncliente plataform" + response.client.plataform);
@@ -65,6 +70,28 @@ export class DetalhesEventoPage {
       });
     }, () => {
       // Error in initialization, maybe PayPal isn't supported or something else
+    });
+    console.log("Passou");
+  }
+  postCompra(compra) {
+    this.restProvider.postCompra(compra).then((result) => {
+      console.log(result);
+      this.navCtrl.pop();
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
+  getEventoTipoIngresso(id,tipoIngresso) {
+    this.restProvider.getEventoTipoIngresso(id,tipoIngresso)
+    .then(data => {
+      this.ingresso = data;
+      this.compra.ingressoId=this.ingresso.id;
+      this.compra.dataCompra='2018-06-03T23:23:01.466Z';
+      this.compra.valor=this.ingresso.valor;
+      this.compra.usuarioId='1';
+      console.log("tipo ingresso\t"+this.ingresso.tipoIngreso+" valor\t"+this.ingresso.valor+" id\t"+this.ingresso.id);
+      this.postCompra(this.compra);
     });
   }
 }
