@@ -16,9 +16,9 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class DetalhesEventoPage {
   evento: any;
-  ingresso:any;
-  compra = { valor: '',dataCompra:'',ingressoId:'',usuarioId:''};
-  constructor(public navCtrl: NavController, public navParams: NavParams,private payPal: PayPal,public restProvider:RestProvider) {
+  ingresso: any;
+  compra = { valor: '', dataCompra: '', ingressoId: '', usuarioId: '' };
+  constructor(public navCtrl: NavController, public navParams: NavParams, private payPal: PayPal, public restProvider: RestProvider) {
     this.evento = navParams.get('evento');
   }
 
@@ -27,7 +27,7 @@ export class DetalhesEventoPage {
   }
 
   comprar(ingresso) {
-    this.getEventoTipoIngresso(this.evento.id,ingresso.tipoIngresso);
+    this.getEventoTipoIngresso(this.evento.id, ingresso.tipoIngresso);
     console.log(ingresso.valor);
     this.payPal.init({
       PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
@@ -42,6 +42,11 @@ export class DetalhesEventoPage {
         this.payPal.renderSinglePaymentUI(payment).then((response) => {
           console.log("Pagou");
           console.log("Response id" + response.response.id + "\nresponse state" + response.response.state + "\ncliente plataform" + response.client.plataform);
+          this.compra.ingressoId = this.ingresso.id;
+          this.compra.dataCompra = '2018-06-03T23:23:01.466Z';
+          this.compra.valor = this.ingresso.valor;
+          this.compra.usuarioId = '1';
+          this.postCompra(this.compra);
           // Successfully paid
 
           // Example sandbox response
@@ -82,16 +87,11 @@ export class DetalhesEventoPage {
     });
 
   }
-  getEventoTipoIngresso(id,tipoIngresso) {
-    this.restProvider.getEventoTipoIngresso(id,tipoIngresso)
-    .then(data => {
-      this.ingresso = data;
-      this.compra.ingressoId=this.ingresso.id;
-      this.compra.dataCompra='2018-06-03T23:23:01.466Z';
-      this.compra.valor=this.ingresso.valor;
-      this.compra.usuarioId='1';
-      console.log("tipo ingresso\t"+this.ingresso.tipoIngreso+" valor\t"+this.ingresso.valor+" id\t"+this.ingresso.id);
-      this.postCompra(this.compra);
-    });
+  getEventoTipoIngresso(id, tipoIngresso) {
+    this.restProvider.getEventoTipoIngresso(id, tipoIngresso)
+      .then(data => {
+        this.ingresso = data;
+        console.log("tipo ingresso\t" + this.ingresso.tipoIngreso + " valor\t" + this.ingresso.valor + " id\t" + this.ingresso.id);
+      });
   }
 }
