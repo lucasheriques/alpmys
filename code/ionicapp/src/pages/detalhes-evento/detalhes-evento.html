@@ -34,7 +34,7 @@
           </ion-col>
         </ion-row>
         <ion-list >
-          <button ion-item *ngFor="let ingresso of evento.tipoIngressos" (click)="comprar(ingresso)">
+          <button ion-item *ngFor="let ingresso of evento.tipoIngressos" (click)="getEventoTipoIngresso(this.evento.id, ingresso.tipoIngresso)">
               <ion-row>
                   <ion-col>
                     

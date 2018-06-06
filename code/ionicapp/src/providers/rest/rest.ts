@@ -10,7 +10,7 @@ import { ToastController, LoadingController } from 'ionic-angular';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'http://192.168.1.9:45457/api';
+  apiUrl = 'http://192.168.1.5:45457/api';
   constructor(public http: HttpClient, private toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello RestProvider Provider');
   }
@@ -121,6 +121,26 @@ export class RestProvider {
           reject(err);
 
         });
+    });
+  }
+  getIngresso(id) {
+
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/Ingressos'+id).subscribe(data => {
+        resolve(data);
+      }, err => {
+        this.showToast("Falha ao conectar com Api.Por favor tente mais tarde");
+        console.log(err);
+      });
+    });
+  }
+    editIngresso(id,data) {
+    return new Promise(resolve => {
+      this.http.put(this.apiUrl+'/Ingresso/'+id, data).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
     });
   }
 }
