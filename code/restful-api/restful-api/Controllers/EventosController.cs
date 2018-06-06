@@ -81,22 +81,26 @@ namespace RestfulApi.Controllers
         [HttpGet("{id}/{tipoIngresso}")]
         public async Task<IActionResult> GetEventoTipoIngresso([FromRoute] int id, [FromRoute] string tipoIngresso)
         {
-            var ingresso = from e in _context.Evento
-                         join i in _context.Ingresso on e.Id equals i.EventoId where e.Id==id && i.TipoIngreso==tipoIngresso
-                         select new
-                         {        
-                             id=i.Id,
-                             disponivel=i.Disponivel,
-                             tipoIngreso=i.TipoIngreso,
-                             valor=i.Valor,
-                             eventoId=i.EventoId
-                         };
-            var eventos = ingresso.ToList();
-            if (eventos == null)
+            var ingressos = (from i in _context.Ingresso
+                             where i.EventoId == id && i.TipoIngreso == tipoIngresso && i.Disponivel == true
+                             select i);
+
+            Ingresso ingresso = ingressos.ToList()[0];
+            if (ingresso == null)
             {
                 return NotFound();
             }
-            return Ok(eventos[0]);
+            ingresso.Disponivel = false;
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return Ok(ingresso);
         }
 
         // PUT: api/Eventos/5
