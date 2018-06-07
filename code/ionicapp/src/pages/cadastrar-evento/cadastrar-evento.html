@@ -16,90 +16,158 @@
 
 <ion-content padding>
 
-  <form (ngSubmit)="postEvento()">
+  <form (ngSubmit)="postEvento()" [formGroup]="eventoForm" novalidate>
     <ion-slides pager>
       <ion-slide>
         <ion-list>
           <ion-item>
-            <ion-label floating>Nome Evento</ion-label>
-            <ion-input [(ngModel)]="evento.nome" name="nome" type="text"></ion-input>
+            <ion-label floating>Nome Evento*</ion-label>
+            <ion-input [(ngModel)]="evento.nome" name="nome" type="text" formControlName="nome" maxLength="50" required [class.error1]="!eventoForm.controls.nome.valid && eventoForm.controls.nome.dirty"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('nome').hasError('minlength') ||  eventoForm.get('nome').hasError('maxlength') || eventoForm.get('nome').hasError('pattern') || eventoForm.get('nome').hasError('required') ) &&  eventoForm.get('nome').touched">
+            <div class="error" *ngIf=" eventoForm.get('nome').hasError('required') &&  eventoForm.get('nome').touched">
+              Por favor coloque um nome para o evento
+            </div>
           </ion-item>
           <ion-item>
             <ion-label floating>Descricao</ion-label>
-            <ion-input [(ngModel)]="evento.descricao" name="descricao" type="text"></ion-input>
+            <ion-input [(ngModel)]="evento.descricao" name="descricao" type="text" formControlName="descricao" required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Data</ion-label>
-            <ion-datetime [(ngModel)]="evento.data" name="data" displayFormat="DD/MM/YYYY h:mm " pickerFormat="DD-MM-YYYY HH:mm A"></ion-datetime>
+            <ion-label>Data*</ion-label>
+            <ion-datetime [(ngModel)]="evento.data" name="data" displayFormat="DD/MMM/YYYY HH:mm " pickerFormat="DD-MM-YYYY HH:mm" formControlName="data"
+              min="2018-06-08" max="2021" required></ion-datetime>
           </ion-item>
           <ion-item>
             <ion-label floating>Duração</ion-label>
-            <ion-input [(ngModel)]="evento.duracao" name="duracao" type="text"></ion-input>
+            <ion-input [(ngModel)]="evento.duracao" name="duracao" type="text" formControlName="duracao" maxLength="10"></ion-input>
           </ion-item>
+
           <ion-item>
-            <ion-label floating>Link da imagem</ion-label>
-            <ion-input [(ngModel)]="evento.linkImagem" name="linkImagem" type="url"></ion-input>
+            <ion-label floating>Link da imagem*</ion-label>
+            <ion-input [(ngModel)]="evento.linkImagem" name="linkImagem" type="url" formControlName="linkImagem" required></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('linkImagem').hasError('minlength') ||  eventoForm.get('linkImagem').hasError('maxlength') || eventoForm.get('linkImagem').hasError('pattern') || eventoForm.get('linkImagem').hasError('required') ) &&  eventoForm.get('linkImagem').touched">
+            <div class="error" *ngIf=" eventoForm.get('linkImagem').hasError('required') &&  eventoForm.get('linkImagem').touched">
+              Por favor coloque uma link da Imagem
+            </div>
+            <div class="error" *ngIf=" eventoForm.get('linkImagem').hasError('pattern') &&  eventoForm.get('linkImagem').touched">
+              Link da Imagem Invalido
+            </div>
           </ion-item>
           <ion-item>
             <ion-label floating>link da página</ion-label>
-            <ion-input [(ngModel)]="evento.linkPagina" name="linkPagina" type="url"></ion-input>
+            <ion-input [(ngModel)]="evento.linkPagina" name="linkPagina" type="url" formControlName="linkPagina"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('linkPagina').hasError('minlength') ||  eventoForm.get('linkPagina').hasError('maxlength') || eventoForm.get('linkPagina').hasError('pattern') || eventoForm.get('linkPagina').hasError('required') ) &&  eventoForm.get('linkPagina').touched">
+            <div class="error" *ngIf=" eventoForm.get('linkPagina').hasError('pattern') &&  eventoForm.get('linkPagina').touched">
+              Link da Imagem Inválido
+            </div>
           </ion-item>
         </ion-list>
       </ion-slide>
-      <ion-slide>
+      <ion-slide formGroupName="local">
         <ion-list>
           <ion-item>
-            <ion-label floating>Nome Local</ion-label>
-            <ion-input [(ngModel)]="evento.local.nome" name="nomelocal" type="text"></ion-input>
+            <ion-label floating>Nome Local*</ion-label>
+            <ion-input [(ngModel)]="evento.local.nome" name="nomelocal" type="text" formControlName="nome" maxLength="50"></ion-input>
           </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('nome').hasError('minlength') ||  eventoForm.get('local').get('nome').hasError('maxlength') || eventoForm.get('local').get('nome').hasError('pattern') || eventoForm.get('local').get('nome').hasError('required') ) &&  eventoForm.get('local').get('nome').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('nome').hasError('required') &&  eventoForm.get('local').get('nome').touched">
+              Por favor coloque um nome
+            </div>
+          </ion-item>
+
           <ion-item>
             <ion-label floating>Descricao</ion-label>
-            <ion-input [(ngModel)]="evento.local.descricao" name="descricaoLocal" type="text"></ion-input>
+            <ion-input [(ngModel)]="evento.local.descricao" name="descricaoLocal" type="text" formControlName="descricao"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label floating>Cep</ion-label>
-            <ion-input [(ngModel)]="evento.local.cep" name="cep" type="number"></ion-input>
+            <ion-label floating>Cep*</ion-label>
+            <ion-input [(ngModel)]="evento.local.cep" name="cep" type="number" formControlName="cep" maxLength="8"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('cep').hasError('minlength') ||  eventoForm.get('local').get('cep').hasError('maxlength') || eventoForm.get('local').get('cep').hasError('pattern') || eventoForm.get('local').get('cep').hasError('required') ) &&  eventoForm.get('local').get('cep').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('cep').hasError('required') &&  eventoForm.get('local').get('cep').touched">
+              Por favor coloque um cep
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>Rua*</ion-label>
+            <ion-input [(ngModel)]="evento.local.rua" name="rua" type="text" formControlName="rua" maxLength="50"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('rua').hasError('minlength') ||  eventoForm.get('local').get('rua').hasError('maxlength') || eventoForm.get('local').get('rua').hasError('pattern') || eventoForm.get('local').get('rua').hasError('required') ) &&  eventoForm.get('local').get('rua').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('rua').hasError('required') &&  eventoForm.get('local').get('rua').touched">
+              Por favor coloque uma rua
+            </div>
           </ion-item>
           <ion-item>
-            <ion-label floating>Rua</ion-label>
-            <ion-input [(ngModel)]="evento.local.rua" name="rua" type="text"></ion-input>
+            <ion-label floating>Número*</ion-label>
+            <ion-input [(ngModel)]="evento.local.numero" name="numero" type="number" formControlName="numero" maxLength="9"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label floating>Número</ion-label>
-            <ion-input [(ngModel)]="evento.local.numero" name="numero" type="number"></ion-input>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('numero').hasError('minlength') ||  eventoForm.get('local').get('numero').hasError('maxlength') || eventoForm.get('local').get('numero').hasError('pattern') || eventoForm.get('local').get('numero').hasError('required') ) &&  eventoForm.get('local').get('numero').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('numero').hasError('required') &&  eventoForm.get('local').get('numero').touched">
+              Por favor coloque um número
+            </div>
           </ion-item>
           <ion-item>
             <ion-label floating>Complemento</ion-label>
-            <ion-input [(ngModel)]="evento.local.complemento" name="complemento" type="text"></ion-input>
+            <ion-input [(ngModel)]="evento.local.complemento" name="complemento" type="text" formControlName="complemento"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label floating>Cidade</ion-label>
-            <ion-input [(ngModel)]="evento.local.cidade" name="cidade" type="text"></ion-input>
+            <ion-label floating>Cidade*</ion-label>
+            <ion-input [(ngModel)]="evento.local.cidade" name="cidade" type="text" formControlName="cidade" maxLength="40"></ion-input>
           </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('cidade').hasError('minlength') ||  eventoForm.get('local').get('cidade').hasError('maxlength') || eventoForm.get('local').get('cidade').hasError('pattern') || eventoForm.get('local').get('cidade').hasError('required') ) &&  eventoForm.get('local').get('cidade').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('cidade').hasError('required') &&  eventoForm.get('local').get('cidade').touched">
+              Por favor coloque uma cidade
+            </div>
+          </ion-item>
+
           <ion-item>
-            <ion-label floating>Uf</ion-label>
-            <ion-input [(ngModel)]="evento.local.uf" name="uf" type="text"></ion-input>
+            <ion-label floating>Uf*</ion-label>
+            <ion-input [(ngModel)]="evento.local.uf" name="uf" type="text" formControlName="uf" maxLength="2"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('local').get('uf').hasError('minlength') ||  eventoForm.get('local').get('uf').hasError('maxlength') || eventoForm.get('local').get('uf').hasError('pattern') || eventoForm.get('local').get('uf').hasError('required') ) &&  eventoForm.get('local').get('uf').touched">
+            <div class="error" *ngIf=" eventoForm.get('local').get('uf').hasError('required') &&  eventoForm.get('local').get('uf').touched">
+              Por favor coloque uma UF
+            </div>
           </ion-item>
         </ion-list>
       </ion-slide>
-      <ion-slide>
+      <ion-slide formGroupName="ingressos">
         <ion-fab top right>
-          <button ion-fab type="submit">
+          <button ion-fab type="submit" [disabled]="eventoForm.invalid">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-fab>
         <ion-list *ngFor="let item of inputs">
           <ion-item>
-            <ion-label floating>Tipo Ingresso</ion-label>
-            <ion-input [(ngModel)]="item.tipoIngresso" name="tipoIngreso" type="text"></ion-input>
+            <ion-label floating>Tipo Ingresso*</ion-label>
+            <ion-input [(ngModel)]="item.tipoIngresso" name="tipoIngreso" type="text" formControlName="tipoIngreso" maxLength="40"></ion-input>
+          </ion-item>
+           <ion-item no-lines *ngIf="( eventoForm.get('ingressos').get('tipoIngreso').hasError('minlength') ||  eventoForm.get('ingressos').get('tipoIngreso').hasError('maxlength') || eventoForm.get('ingressos').get('tipoIngreso').hasError('pattern') || eventoForm.get('ingressos').get('tipoIngreso').hasError('required') ) &&  eventoForm.get('ingressos').get('tipoIngreso').touched">
+            <div class="error" *ngIf=" eventoForm.get('ingressos').get('tipoIngreso').hasError('required') &&  eventoForm.get('ingressos').get('tipoIngreso').touched">
+              Por favor coloque um tipo de Ingresso
+            </div>
           </ion-item>
           <ion-item>
-            <ion-label floating>Quantidade</ion-label>
-            <ion-input [(ngModel)]="item.quantidade" name="quantidade" type="text"></ion-input>
+            <ion-label floating>Quantidade*</ion-label>
+            <ion-input [(ngModel)]="item.quantidade" name="quantidade" type="number" formControlName="quantidade" maxLength="10"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('ingressos').get('quantidade').hasError('minlength') ||  eventoForm.get('ingressos').get('quantidade').hasError('maxlength') || eventoForm.get('ingressos').get('quantidade').hasError('pattern') || eventoForm.get('ingressos').get('quantidade').hasError('required') ) &&  eventoForm.get('ingressos').get('quantidade').touched">
+            <div class="error" *ngIf=" eventoForm.get('ingressos').get('quantidade').hasError('required') &&  eventoForm.get('ingressos').get('quantidade').touched">
+              Por favor coloque uma quantidade
+            </div>
           </ion-item>
           <ion-item>
-            <ion-label floating>valor</ion-label>
-            <ion-input [(ngModel)]="item.valor" name="valor" type="text"></ion-input>
+            <ion-label floating>Valor*</ion-label>
+            <ion-input [(ngModel)]="item.valor" name="valor" type="number" formControlName="valor" maxLength="10"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( eventoForm.get('ingressos').get('valor').hasError('minlength') ||  eventoForm.get('ingressos').get('valor').hasError('maxlength') || eventoForm.get('ingressos').get('valor').hasError('pattern') || eventoForm.get('ingressos').get('valor').hasError('required') ) &&  eventoForm.get('ingressos').get('valor').touched">
+            <div class="error" *ngIf=" eventoForm.get('ingressos').get('valor').hasError('required') &&  eventoForm.get('ingressos').get('valor').touched">
+              Por favor coloque um valor
+            </div>
           </ion-item>
         </ion-list>
         <button ion-fab mini type="button" (click)="addCampo()">

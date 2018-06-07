@@ -24,9 +24,10 @@ namespace RestfulApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvento()
         {
+            DateTime data = DateTime.Now;
             var evento = from e in _context.Evento
                          join l in _context.Local on e.LocalId equals l.Id
-                         join u in _context.Usuario on e.UsuarioId equals u.Id
+                         join u in _context.Usuario on e.UsuarioId equals u.Id where e.Data>data
                          select new
                          {
                              organizador = e.Organizador,
