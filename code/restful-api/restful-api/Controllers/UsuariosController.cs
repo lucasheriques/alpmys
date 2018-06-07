@@ -47,7 +47,7 @@ namespace RestfulApi.Controllers
                              data = e.Data,
                              duracao = e.Duracao,
                              tipoIngressos = from i in _context.Ingresso
-                                             where i.Disponivel == true && e.Id==i.EventoId
+                                             where i.Disponivel == true && e.Id == i.EventoId
                                              group i by i.TipoIngreso into t
                                              select new
                                              {
@@ -60,8 +60,52 @@ namespace RestfulApi.Controllers
                              linkPagina = e.LinkPagina,
                              usuarioId = e.UsuarioId,
                              localId = e.LocalId,
-                             ingressos = e.Ingressos,
                              local = e.Local
+                         };
+            var compra = from c in _context.Compra
+                         select new
+                         {
+                             id = c.Id,
+                             valor = c.Valor,
+                             dataCompra = c.DataCompra,
+                             ingressoId = c.IngressoId,
+                             ingresso = (from i in _context.Ingresso
+                                         where c.IngressoId == i.Id
+                                         select new
+                                         {
+                                             id = i.Id,
+                                             tipoIngreso = i.TipoIngreso,
+                                             valor = i.Valor,
+                                             eventoId = i.EventoId,
+                                             evento = (from e in _context.Evento
+                                                       where i.EventoId == e.Id
+                                                       select new
+                                                       {
+                                                           id = e.Id,
+                                                           nome = e.Nome,
+                                                           descricao = e.Descricao,
+                                                           data = e.Data,
+                                                           duracao = e.Duracao,
+                                                           linkImagem = e.LinkImagem,
+                                                           linkPagina = e.LinkPagina,
+                                                           localId = e.LocalId,
+                                                           local = (from l in _context.Local
+                                                                    where e.LocalId == l.Id
+                                                                    select new
+                                                                    {
+                                                                        nome = l.Nome,
+                                                                        descricao = l.Descricao,
+                                                                        cep = l.Cep,
+                                                                        rua = l.Rua,
+                                                                        numero = l.Numero,
+                                                                        complemento = l.Complemento,
+                                                                        cidade = l.Cidade,
+                                                                        uf = l.Uf
+                                                                    }).ToList()[0],
+                                                       }).ToList()[0],
+                                         }).ToList()[0]
+
+
                          };
             var usuarioEvento = from u in _context.Usuario
                                 where u.Id == id
@@ -73,7 +117,7 @@ namespace RestfulApi.Controllers
                                     senha = u.Senha,
                                     celular = u.Celular,
                                     eventos = evento,
-                                    compras = u.Compras
+                                    compras = compra
 
                                 };
             var eventos = usuarioEvento.ToList()[0];

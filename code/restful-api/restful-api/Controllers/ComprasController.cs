@@ -35,15 +35,27 @@ namespace RestfulApi.Controllers
             {
                 return BadRequest(ModelState);
             }
+      
+            var compra = from c in _context.Compra join i in _context.Ingresso on c.IngressoId equals i.Id join u in _context.Usuario on c.UsuarioId equals u.Id
+                                select new
+                                {
+                                    id = c.Id,
+                                    valor=c.Valor,
+                                    dataCompra=c.DataCompra,
+                                    ingressoId=c.IngressoId,
+                                    ingresso= c.Ingresso,
+                                    usuarioId=c.UsuarioId,
+                                    usuario=c.Usuario
+                                    
 
-            var compra = await _context.Compra.SingleOrDefaultAsync(m => m.Id == id);
-
-            if (compra == null)
+                                };
+            var compras = compra.ToList()[0];
+            if (compras == null)
             {
                 return NotFound();
             }
 
-            return Ok(compra);
+            return Ok(compras);
         }
 
         // PUT: api/Compras/5

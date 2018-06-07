@@ -14,6 +14,9 @@ import { DetalhesEventoPage } from '../pages/detalhes-evento/detalhes-evento';
 import { MeusEventosPage } from '../pages/meus-eventos/meus-eventos';
 import { CadastrarEventoPage } from '../pages/cadastrar-evento/cadastrar-evento';
 import { DetalhesMeusEventoPage } from '../pages/detalhes-meus-evento/detalhes-meus-evento';
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
+import { IngressosPage } from '../pages/ingressos/ingressos';
+import { DetalhesIngressoPage } from '../pages/detalhes-ingresso/detalhes-ingresso';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { DetalhesMeusEventoPage } from '../pages/detalhes-meus-evento/detalhes-m
     DetalhesEventoPage,
     MeusEventosPage,
     CadastrarEventoPage,
-    DetalhesMeusEventoPage
+    DetalhesMeusEventoPage,
+    IngressosPage,
+    DetalhesIngressoPage
   ],
   imports: [
     BrowserModule,
@@ -38,13 +43,16 @@ import { DetalhesMeusEventoPage } from '../pages/detalhes-meus-evento/detalhes-m
     DetalhesEventoPage,
     MeusEventosPage,
     CadastrarEventoPage,
-    DetalhesMeusEventoPage  
+    DetalhesMeusEventoPage,
+    IngressosPage,
+    DetalhesIngressoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider
+    RestProvider,
+    PayPal
   ]
 })
 export class AppModule {}
