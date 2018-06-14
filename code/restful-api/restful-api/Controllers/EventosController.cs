@@ -27,7 +27,8 @@ namespace RestfulApi.Controllers
             DateTime data = DateTime.Now;
             var evento = from e in _context.Evento
                          join l in _context.Local on e.LocalId equals l.Id
-                         join u in _context.Usuario on e.UsuarioId equals u.Id where e.Data>data
+                         join u in _context.Usuario on e.UsuarioId equals u.Id
+                         where e.Data > data
                          select new
                          {
                              organizador = e.Organizador,
@@ -78,6 +79,52 @@ namespace RestfulApi.Controllers
             }
 
             return Ok(evento);
+        }
+        [HttpGet("{id}/Compras")]
+        public async Task<IActionResult> GetEventoCompras([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var compras = from c in _context.Compra
+                          join i in _context.Ingresso on c.IngressoId equals i.Id
+                          join u in _context.Usuario on c.UsuarioId equals u.Id
+                          join e in _context.Evento on i.EventoId equals e.Id
+                          where e.Id == id
+                          select new
+                          {
+                              id = c.Id,
+                              ingressoId = c.IngressoId,
+                              ingresso = (from i in _context.Ingresso
+                                         where i.Id == c.IngressoId
+                                         select new
+                                         {
+                                             id = i.Id,
+                                             tipoIngreso = i.TipoIngreso,
+                                             valor = i.Valor,
+
+                                         }).ToList()[0],
+                              usuarioId = c.UsuarioId,
+                              usuario = (from u in _context.Usuario
+                                        where u.Id == c.UsuarioId
+                                        select new
+                                        {
+                                            u.Id,
+                                            u.Nome,
+                                            u.Email,
+                                            u.Celular
+                                        }).ToList()[0],
+                              valor = c.Valor,
+                          };
+
+            if (compras == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(compras);
         }
         [HttpGet("{id}/{tipoIngresso}")]
         public async Task<IActionResult> GetEventoTipoIngresso([FromRoute] int id, [FromRoute] string tipoIngresso)

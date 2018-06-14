@@ -62,7 +62,7 @@ namespace RestfulApi.Controllers
                              localId = e.LocalId,
                              local = e.Local
                          };
-            var compra = from c in _context.Compra
+            var compra = from c in _context.Compra where c.UsuarioId==id
                          select new
                          {
                              id = c.Id,

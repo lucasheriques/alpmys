@@ -143,4 +143,15 @@ export class RestProvider {
       });
     });
   }
+  getComprasEvento(id) {
+
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/Eventos/'+id+"/Compras").subscribe(data => {
+        resolve(data);
+      }, err => {
+        this.showToast("Falha ao conectar com Api.Por favor tente mais tarde");
+        console.log(err);
+      });
+    });
+  }
 }

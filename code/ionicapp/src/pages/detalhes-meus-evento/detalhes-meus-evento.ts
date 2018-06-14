@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { EventoComprasPage } from '../evento-compras/evento-compras';
 
 /**
  * Generated class for the DetalhesMeusEventoPage page.
@@ -22,6 +23,13 @@ export class DetalhesMeusEventoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalhesMeusEventoPage');
+  }
+  comprasEvento() {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(EventoComprasPage, {
+      id:this.evento.id
+    });
+
   }
 
 }

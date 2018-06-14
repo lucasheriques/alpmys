@@ -34,7 +34,7 @@
         </ion-row>
         <ion-list>
 
-          <button ion-item *ngFor="let ingresso of evento.tipoIngressos">
+          <ion-item *ngFor="let ingresso of evento.tipoIngressos">
             <ion-row>
               <ion-col>
                 {{ingresso.tipoIngresso}}
@@ -46,9 +46,11 @@
                 <ion-icon name="cart"></ion-icon>
               </ion-col>
             </ion-row>
-          </button>
+          </ion-item>
         </ion-list>
+        <button ion-button (click)="comprasEvento()">Vendas</button>
       </div>
+      
       <ion-card-title>Descricao</ion-card-title>
       <p>{{evento.descricao}}</p>
       <ion-card-title>Organizador</ion-card-title>
