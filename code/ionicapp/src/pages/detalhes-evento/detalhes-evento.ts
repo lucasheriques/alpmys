@@ -39,7 +39,7 @@ export class DetalhesEventoPage {
       })).then(() => {
         let payment = new PayPalPayment(ingresso.valor, 'BRL', 'Description', 'sale');
         this.payPal.renderSinglePaymentUI(payment).then((response) => {
-          console.log("Response id" + response.response.id + "\nresponse state" + response.response.state + "\ncliente plataform" + response.client.plataform);
+          console.log("Response id" + response.response.id + "\nresponse state" + response.response.state + "\ncliente plataform" + response.client.plataform+" create Time "+response.response.create_time);
           this.compra.ingressoId = ingresso.id;
           this.compra.dataCompra = response.create_time;
           this.compra.valor = ingresso.valor;

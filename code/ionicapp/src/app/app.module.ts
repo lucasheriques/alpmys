@@ -17,6 +17,7 @@ import { DetalhesMeusEventoPage } from '../pages/detalhes-meus-evento/detalhes-m
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal';
 import { IngressosPage } from '../pages/ingressos/ingressos';
 import { DetalhesIngressoPage } from '../pages/detalhes-ingresso/detalhes-ingresso';
+import { EventoComprasPage } from '../pages/evento-compras/evento-compras';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DetalhesIngressoPage } from '../pages/detalhes-ingresso/detalhes-ingres
     CadastrarEventoPage,
     DetalhesMeusEventoPage,
     IngressosPage,
-    DetalhesIngressoPage
+    DetalhesIngressoPage,
+    EventoComprasPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { DetalhesIngressoPage } from '../pages/detalhes-ingresso/detalhes-ingres
     CadastrarEventoPage,
     DetalhesMeusEventoPage,
     IngressosPage,
-    DetalhesIngressoPage
+    DetalhesIngressoPage,
+    EventoComprasPage
   ],
   providers: [
     StatusBar,
